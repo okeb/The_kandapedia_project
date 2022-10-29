@@ -77,3 +77,6 @@ end
 gem "sassc-rails", "~> 2.1"
 
 gem "rodauth-rails", "~> 1.6"
+
+gem "rotp", "~> 6.2"
+gem "rqrcode", "~> 2.1"

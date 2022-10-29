@@ -10,6 +10,12 @@
                   rodauth.logout_path,
                   data: { turbo_method: :question},
                   class: "btn btn--dark navbar__right" %>
+    <div style="width:7px"></div>
+
+    <%= link_to "2FA",
+                  rodauth.two_factor_manage_path,
+                  class: "btn btn--dark"%>
+
   <% else %>
     <%= link_to "S'inscrire",
                   rodauth.create_account_path,
