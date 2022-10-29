@@ -3,4 +3,5 @@ class Account < ApplicationRecord
   enum :status, unverified: 1, verified: 2, closed: 3
 
   has_many :questions
+  has_one :profile
 end

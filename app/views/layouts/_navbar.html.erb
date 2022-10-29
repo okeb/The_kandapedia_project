@@ -4,7 +4,7 @@
   </div>
   <% if rodauth.logged_in? %>
     <div class="navbar__name">
-      <%= current_account ? current_account.email.split("@")[0] : "" %>
+      <%= current_account ? current_account.profile.lastname : "" %>
     </div>
     <%= button_to "Deconnexion",
                   rodauth.logout_path,
