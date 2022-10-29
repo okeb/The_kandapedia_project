@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[ show edit update destroy ]
+  before_action -> { rodauth.require_authentication }, except: %i[ index show ]
+  before_action :set_question, only: %i[ edit update destroy ]
 
   # GET /questions or /questions.json
   def index
@@ -8,6 +9,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
+    @question = Question.find(params[:id])
   end
 
   # GET /questions/new
@@ -21,7 +23,7 @@ class QuestionsController < ApplicationController
 
   # POST /questions or /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = current_account.questions.build(question_params)
 
     respond_to do |format|
       if @question.save
@@ -60,7 +62,7 @@ class QuestionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = Question.find(params[:id])
+      @question = current_account.questions.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -1,0 +1,24 @@
+<header class="navbar">
+  <div class="navbar__brand">
+    <a href="<%= root_path %>" class="">Kandapedia</a>
+  </div>
+  <% if rodauth.logged_in? %>
+    <div class="navbar__name">
+      <%= current_account ? current_account.email.split("@")[0] : "" %>
+    </div>
+    <%= button_to "Deconnexion",
+                  rodauth.logout_path,
+                  data: { turbo_method: :question},
+                  class: "btn btn--dark navbar__right" %>
+  <% else %>
+    <%= link_to "S'inscrire",
+                  rodauth.create_account_path,
+                  class: "btn btn--dark navbar__right" %>
+    
+    <div style="width:7px"></div>
+    
+    <%= link_to "Connexion",
+                  rodauth.login_path,
+                  class: "btn btn--dark" %>
+  <% end %>
+</header>
