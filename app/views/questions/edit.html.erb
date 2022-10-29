@@ -1,0 +1,11 @@
+<h1>Editing question</h1>
+<%= turbo_frame_tag dom_id(@question, "edit") do %>
+  <%= render "form", question: @question %>
+<% end %>
+
+<br>
+
+<div>
+  <%= link_to "Show this question", @question %> |
+  <%= link_to "Back to questions", questions_path %>
+</div>

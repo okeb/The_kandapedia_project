@@ -1,0 +1,44 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+
+  &__group {
+    flex: 1;
+  }
+
+  &__actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    gap: var(--space-xs);
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-2xs) var(--space-xs);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    outline: none;
+    transition: box-shadow 250ms;
+
+    &:focus {
+      box-shadow: 0 0 0 2px var(--color-glint);
+    }
+
+    &--invalid {
+      border-color: var(--color-primary);
+    }
+
+    &::placeholder {
+      color: lightgrey;
+      font-style: italic;
+    }
+  }
+
+  & label {
+    margin-right: var(--space-s);
+  }
+}
