@@ -138,8 +138,8 @@ class RodauthMain < Rodauth::Rails::Auth
     # verify_login_change_deadline_interval Hash[days: 2]
     # remember_deadline_interval Hash[days: 30]
 
-    auto_add_recovery_code? true
-    auto_remove_recovery_code? true
+    auto_add_recovery_codes? true
+    auto_remove_recovery_codes? true
 
     after_otp_setup do
       set_notice_now_flash "#{otp_setup_notice_flash}, Please make note of your recovery codes"

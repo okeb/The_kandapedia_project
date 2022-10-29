@@ -1,0 +1,10 @@
+<% if rodauth.recovery_codes.any? %>
+  Copy these  recovery codes to a safe location.
+  You can download then <%= link_to "here", "daata, #{rodauth.recovery_codes.join("\n")}", download: "kandapedia-recovery-codes.txt" %>
+  <pre id="recovery-codes"><%= rodauth.recovery_codes.map { |s| h(s) }.join("\n\n") %></pre>
+<% end %>
+
+<% if rodauth.can_add_recovery_codes? %>
+  <%== rodauth.add_recovery_codes_heading %>
+  <%= render template: "rodauth/recovery_codes", layout: false %>
+<% end %>
