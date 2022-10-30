@@ -6,15 +6,17 @@
     <p><%= rodauth.otp_secret_label %>: <%= rodauth.otp_user_key %></p>
     <p><%= rodauth.otp_provisioning_uri_label %>: <%= rodauth.otp_provisioning_uri %></p>
   </div>
+  <div style="height:30px"></div>
 
   <div class="container" style="display:flex">
     <div class="col-lg-6 col-lg">
       <div class="form-group mb-3" style="width:260px">
-        <p><%== rodauth.otp_qr_code %></p>
+        <p style="padding:var(--space-l)"><%= rodauth.otp_qr_code.html_safe %></p>
       </div>
     </div>
 
     <div class="col-lg-6 col-lg">
+    <div style="height:30px"></div>
       <% if rodauth.two_factor_modifications_require_password? %>
         <div class="form-group mb-3">
           <%= form.label "password", rodauth.password_label, class: "form-label" %>
