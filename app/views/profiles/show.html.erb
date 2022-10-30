@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="mx-16 grid grid-cols-4 mb-36">
+    <div class="span-1 rounded-lg">
+
+      <div class="flex justify-center mt-16 items-center">
+        <h2 style="font-size:var(--font-size-3xl); color:var(--color-text-header); padding-bottom:var(--space-m)"><%= @profile.lastname.capitalize %></h2>
+      </div>
+
+      <p class=""><%= @profile.job %></p>
+      <p class=""><%= @profile.bio %></p>
+      <% if @profile.id != current_account.profile.id %>
+      <% end %>
+    </div>
+  </div>
+
+  <div style="padding-top:var(--space-m)">
+    <% if current_account.id === @profile.account_id %>
+      <div class="mr-6 mb-6 flex items-center">
+        <%#= link_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
+        <%= link_to "Modifier le profil", edit_profile_path(@profile), class: "btn btn--primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

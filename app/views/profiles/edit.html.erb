@@ -1,0 +1,29 @@
+<div class="container">
+  <%= form_for(@profile, class: "px-8") do |f| %>
+
+    <div style="padding-bottom:var(--space-m)">
+        <h4><%= current_account.email %></h4>
+    </div>
+
+    <div class="my-5 field">
+      <%= f.label :firstname %><br>
+      <%= f.text_field :firstname, value: @profile.firstname %>
+    </div>
+    <div class="my-5 field">
+      <%= f.label :lastname %><br>
+      <%= f.text_field :lastname, value: @profile.lastname %>
+    </div>
+    <div class="my-5 field">
+      <%= f.label :job %><br>
+      <%= f.text_field :job, value: @profile.job %>
+    </div>
+    <div class="my-5 field">
+      <%= f.label :bio %><br>
+      <%= f.text_area :bio, value: @profile.bio %>
+    </div>
+    <div style="padding-top:var(--space-m)">
+      <%= f.submit "Modifier", class: "btn btn--primary" %>
+    </div>
+  <% end %>
+
+</div>

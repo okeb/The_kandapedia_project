@@ -10,6 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
+    
     <!--
       If using a TypeScript entrypoint file:
         vite_typescript_tag 'application'
@@ -34,6 +35,6 @@
     <% end %>
     <%= yield %>
 
-    <ninja-keys data-controller="command-palette" class="dark" placeholder="<%= t("command_palette.placeholder") %>"></ninja-keys>
+    <ninja-keys data-controller="command-palette" placeholder="<%= t("command_palette.placeholder") %>"></ninja-keys>
   </body>
 </html>
