@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_235839) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_111658) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -77,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_235839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id", null: false
+    t.binary "uuid", limit: 16
     t.index ["account_id"], name: "index_questions_on_account_id"
   end
 
