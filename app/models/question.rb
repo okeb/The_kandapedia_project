@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   belongs_to :account
 
   after_create :create_slug
-  before_create :update_slug
+  before_update :update_slug
 
   def to_param
     slug

@@ -1,12 +1,32 @@
 <style>
- input::placeholder {
-  color: blue;
-  font-size: 1.5em;
+input, h1.title {
+  font-size:2.3rem;
+  font-weight:bold;
+  letter-spacing:.5;
+  background-color:transparent;
+  border:transparent;
+  display:block;
+  outline:none;
+  padding-bottom:10px;
 }
-Copy to Clipboard
+.editable:empty:before {
+  content: attr(data-placeholder);
+  color: lightgray;
+  font-style:italic;
+}
+}
+ input::placeholder {
+  color: lightgray;
+  font-style:italic;
+}
 
 </style>
-<h1 contenteditable data-controller="editable">
-  <%= (@question.title != "")? @question.title : "Sans titre" %>
-</h1>
-  <%= link_to @question.title || t("untitled"), question_url(@question), data: {turbo_frame: "_top"} %>
+<%= form_with model: @question, data: { controller: "editable" } do |f| %>
+  <h1 contenteditable
+      data-editable-target="content"
+      data-action="keyup->editable#changed"
+      data-placeholder="<%= t("untitled") %>"
+      class="title editable"><%= @question.title %></h1>
+  <%= f.hidden_field :title, data: { editable_target: "input"} %>
+<% end %>
+/* <%= link_to @question.title || t("untitled"), question_url(@question) %> */
