@@ -4,8 +4,7 @@
 
   <div id="<%= dom_id question %>">
     <p>
-      <strong>Topic:</strong>
-      <%= question.topic %>
+      <%= question.title %>
     </p>
   
     <h1><%= link_to question.body, question_path(question) %></h1>
