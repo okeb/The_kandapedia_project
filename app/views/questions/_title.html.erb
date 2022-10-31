@@ -1,0 +1,12 @@
+<style>
+ input::placeholder {
+  color: blue;
+  font-size: 1.5em;
+}
+Copy to Clipboard
+
+</style>
+<h1 contenteditable data-controller="editable">
+  <%= (@question.title != "")? @question.title : "Sans titre" %>
+</h1>
+  <%= link_to @question.title || t("untitled"), question_url(@question), data: {turbo_frame: "_top"} %>

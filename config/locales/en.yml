@@ -33,3 +33,4 @@ en:
   hello: "Hello world"
   command_palette:
     placeholder: "Tapez votre recherche..."
+    untitled: "Nouvelle question"
