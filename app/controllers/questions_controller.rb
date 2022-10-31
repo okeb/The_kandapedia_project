@@ -4,12 +4,14 @@ class QuestionsController < ApplicationController
 
   # GET /questions or /questions.json
   def index
-    @questions = Question.all
+    @questions = Question.includes(:account)
+    @profiles = Profile.all
   end
 
   # GET /questions/1 or /questions/1.json
   def show
     @question = Question.find(params[:id])
+    @profile = Profile.find_by(account_id: @question.account_id)
   end
 
   # GET /questions/new
