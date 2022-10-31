@@ -82,3 +82,5 @@ gem "rotp", "~> 6.2"
 gem "rqrcode", "~> 2.1"
 
 gem "mysql-binuuid-rails", "~> 1.3"
+
+#gem "activeuuid", "~> 0.6.1"
