@@ -7,5 +7,8 @@ import { application } from "./application"
 import CommandPaletteController from "./command_palette_controller"
 application.register("command-palette", CommandPaletteController)
 
+import EditableController from "./editable_controller"
+application.register("editable", EditableController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

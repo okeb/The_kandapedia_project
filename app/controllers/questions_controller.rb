@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index show ]
   before_action :set_question, only: %i[ edit update destroy ]
+  before_action :find_question_by_slug, only: %i[ show create edit update ]
 
   # GET /questions or /questions.json
   def index
@@ -10,7 +11,6 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
-    @question = Question.find(params[:id])
     @profile = Profile.find_by(account_id: @question.account_id)
   end
 
@@ -62,13 +62,17 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+    def find_question_by_slug
+      @question = Question.find_by(slug: params[:id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = current_account.questions.find(params[:id])
+      @question = current_account.questions.find_by(slug: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:topic, :body, :note, :is_published)
+      params.require(:question).permit(:title, :body)
     end
 end

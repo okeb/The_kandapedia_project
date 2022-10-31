@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_31_111658) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_185110) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111658) do
     t.integer "status", default: 1, null: false
     t.string "email", null: false
     t.string "password_hash"
+    t.integer "questions_count", default: 0, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -70,15 +71,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111658) do
   end
 
   create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "topic"
+    t.binary "uuid", limit: 16
+    t.string "title"
+    t.string "slug"
     t.text "body"
     t.integer "note", default: 0
+    t.integer "views_count", default: 0
+    t.integer "position"
     t.boolean "is_published", default: false
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "account_id", null: false
-    t.binary "uuid", limit: 16
     t.index ["account_id"], name: "index_questions_on_account_id"
+    t.index ["parent_id"], name: "index_questions_on_parent_id"
   end
 
   add_foreign_key "account_login_change_keys", "accounts", column: "id"
@@ -89,4 +95,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_111658) do
   add_foreign_key "account_verification_keys", "accounts", column: "id"
   add_foreign_key "profiles", "accounts"
   add_foreign_key "questions", "accounts"
+  add_foreign_key "questions", "questions", column: "parent_id"
 end
