@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   before_action :charge_profile
 
   def show
+    # 44 != "la phrase"
   end
 
   def edit

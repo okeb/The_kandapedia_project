@@ -5,7 +5,6 @@ import debounce from "lodash.debounce";
 export default class extends Controller {
 
   static targets = ["content", "input"]
-  connect(){}
   changed = debounce(() => {
     this.inputTarget.value = this.contentTarget.innerHTML;
     this.inputTarget.form.requestSubmit();

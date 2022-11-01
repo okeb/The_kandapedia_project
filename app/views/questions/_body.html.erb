@@ -1,1 +1,270 @@
-<p><%= @question.body %></p>
+<style>
+  .hljs-comment  {
+    color: #777;
+    font-style: italic;
+  }
+  .hljs-comment.hljs-doctag  {
+    font-weight:bold;
+  }
+
+  .hljs-constant {
+    color: #ffa657;
+  }
+
+  .hljs-entity {
+    color: #f85149;
+  }
+
+  .hljs-keyword {
+    color: #d2a8ff;
+  }
+
+  .hljs-string {
+    color: #50fa7b;
+  }
+
+  .hljs-variable {
+    color: #ffa657;
+  }
+
+  .hljs-number {
+    color: #a5d6ff;
+  }
+
+  .hljs-name, .hljs-title {
+    color: #79c0ff;
+  }
+
+  .hljs-tag {
+    color: #ffa657;
+  }
+
+  .hljs-attribute {
+    color: #ffa657;
+  }
+
+
+  .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #282a36;
+  }
+
+  .hljs-built_in,
+  .hljs-selector-tag,
+  .hljs-section,
+  .hljs-link {
+    color: #8be9fd;
+  }
+
+  .hljs-variable {
+    color: #f85149;
+  }
+
+  .hljs-keyword {
+    color: #bd93f9;
+  }
+
+  .hljs,
+  .hljs-subst {
+    color: #f8f8f2;
+  }
+
+
+  .hljs-attr,
+  .hljs-meta-keyword {
+    font-style: italic;
+    color: #50fa7b;
+  }
+
+  .hljs-symbol {
+    color:#ffa657;
+  }
+
+  .hljs-meta,
+  .hljs-name,
+  .hljs-type,
+  .hljs-bullet,
+  .hljs-addition,
+  .hljs-template-tag,
+  .hljs-template-variable {
+    color: #f1fa8c;
+  }
+
+  .hljs-quote,
+  .hljs-deletion {
+    color: #6272a4;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-title,
+  .hljs-section,
+  .hljs-doctag,
+  .hljs-type,
+  .hljs-name,
+  .hljs-strong {
+    font-weight: bold;
+  }
+
+  .hljs-literal {
+    color: #b62324;
+  }
+  .hljs-number {
+    color: #f2cc60;
+    /* color: #ff7b72; */
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+
+  /* .hljs-variable,
+  .hljs-template-variable,
+  .hljs-attribute,
+  .hljs-tag,
+  .hljs-name,
+  .hljs-regexp,
+  .hljs-link,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class {
+    color: #F98181;
+  }
+
+  .hljs-number,
+  .hljs-meta,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-literal,
+  .hljs-type,
+  .hljs-params {
+    color: #FBBC88;
+  }
+
+  .hljs-string,
+  .hljs-symbol,
+  .hljs-bullet {
+    color: #B9F18D;
+  }
+
+  .hljs-title,
+  .hljs-section {
+    color: #FAF594;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag {
+    color: #70CFF8;
+  } */
+
+  .hljs-selector-class {
+    color: #F98181;
+  }
+  .hljs-selector-tag {
+    color: #8250df;
+    /* color: #FBBC88; */
+  }
+
+  .hljs-emphasis {
+    font-style: italic;
+  }
+
+  .hljs-strong {
+    font-weight: 700;
+  }
+
+  .ProseMirror {
+    outline:none;
+  }
+  /* Basic editor styles */
+  .ProseMirror {
+    > * + * {
+      margin-top: 0.75em;
+    }
+  }
+  .character-count {
+    color: #868e96;
+    margin-top: 1rem;
+  }
+
+  /* Placeholder (at the top) */
+  .ProseMirror p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+  .ProseMirror mark {
+    background-color: #ffe066;
+    border-radius: 0.25em;
+    box-decoration-break: clone;
+    padding: 0.125em 0;
+  }
+
+  /* Placeholder (on every new line) */
+  .ProseMirror p.is-empty::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    font-weight:400;
+    height: 0;
+    pointer-events: none;
+  }
+  . input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  /* a {
+      color: #68cef8;
+  } */
+  .ProseMirror blockquote {
+      border-left: 3px solid rgba(111,111,111 , 0.2);
+      padding-left: 1rem;
+      font-size:1.4rem;
+      font-style: italic;
+      padding-bottom:7px;
+      margin-bottom:10px;
+      margin-top:5px;
+      padding-top:7px;
+  }
+
+  .ProseMirror pre {
+      background: #0d0d0d;
+      border-radius: 0.5rem;
+      color: #fff;
+      font-family: "JetBrainsMono", monospace;
+      padding: 0.75rem 1rem;
+      margin: 1.4rem 0;
+
+  }
+
+  .ProseMirror pre > code {
+        font-family: "JetBrainsMono", monospace;
+        background: none;
+        color: inherit;
+        font-size: .93rem;
+        padding: 0;
+  }
+
+  code {
+      font-family: "JetBrainsMono", monospace;
+      background-color: rgba(255, 168, 0, 0.2);
+      border-radius: 0.25em;
+      box-decoration-break: clone;
+      color: #555;
+      font-size: 0.9rem;
+      padding: 0.15em;
+  }
+
+</style>
+
+<div class="" style="height:30px"></div>
+<%= form_with  model: @question, data: { controller: "tiptap" }, local: false do |f| %>
+  <div data-tiptap-target="body"></div>
+  <%= f.hidden_field :body, data: { tiptap_target: "input" } %>
+<% end %>
+<div class="" style="height:60px"></div>

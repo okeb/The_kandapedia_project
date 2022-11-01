@@ -13,6 +13,73 @@
  *= require_self
  */
 
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Italic.ttf') format('truetype');
+}
+
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Medium-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: asset-url('JetBrainsMono-Bold-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: asset-url('JetBrainsMon0-ExtraBold-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: asset-url('JetBrainsMon0-ExtraBold.ttf') format('truetype');
+}
+
+
+
 @import "mixins/media";
 
 // Configuration
