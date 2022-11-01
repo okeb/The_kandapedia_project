@@ -4,7 +4,6 @@
     box-shadow: var(--shadow-large);
     padding: var(--space-xs) var(--space-m);
     margin-bottom: var(--space-xxl);
-    background-color: (var(--color-white));
 
     &__brand {
         font-weight: bold;
@@ -22,4 +21,16 @@
     &__right {
         margin-left: auto;
     }
+}
+
+@media (prefers-color-scheme: light) {
+  .navbar {
+    background-color: (var(--color-white));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .navbar {
+    background-color: #000;
+  }
 }

@@ -1,18 +1,18 @@
-<div class="container">
 <p style="color: green"><%= notice %></p>
 
 <h1>Questions</h1>
-
-<div id="questions" class="">
-  <% @questions.each do |question| %>
-    <%  @question = question %>
-    <%= render @question %>
+<div style="height:25px"></div>
+<div id="questions">
+  <% @questions.desc.each do |question| %>
+    <% @question = question %>
+     <div style="height:5px"></div>
+    <h2>
+      <%= link_to question do %>
+        <%= @question.title %>
+      <% end %>
+    </h2>
+    <div style="height:20px"></div>
   <% end %>
 </div>
-<div style="width:100%; height:70px"></div>
-<%= link_to "Nouvelle question", 
-            new_question_path,  
-            class: "btn btn--primary", 
-            data: { turbo_frame: dom_id(Question.new) } %>
-<%= turbo_frame_tag dom_id(Question.new) %>
-</div>
+
+<%= button_to "New question", new_question_path, class: "btn btn--primary" %>

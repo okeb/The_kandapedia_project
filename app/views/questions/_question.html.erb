@@ -2,17 +2,15 @@
 <%= turbo_frame_tag dom_id(question, "edit") do %>
   <div style="width:100%; height:50px"></div>
 
-  <div id="<%= dom_id question %>">
-    <%= render "title", as: :question %>
+  <div id="<%= dom_id question %>"> 
 
+    <%= render "title", as: :question %>
 
     <%= render "body" %>
     
-  
-    
+    <%#= link_to "Edit this question", edit_question_path(question) %>
 
-    <%= link_to "Edit this question", edit_question_path(question) %>
+  </div> 
 
-  </div>
-  <% end %>
+<% end %>
 </div>

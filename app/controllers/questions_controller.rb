@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index show ]
-  before_action :set_question, only: %i[ edit update destroy ]
-  before_action :find_question_by_slug, only: %i[ show create edit update ]
+  before_action :set_question, only: %i[ show update destroy ]
+  before_action :find_question_by_slug, only: %i[ show update ]
+  after_action :give_new_slug, only: %i[ update ]
 
   # GET /questions or /questions.json
   def index
@@ -19,9 +20,7 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
-  # GET /questions/1/edit
-  def edit
-  end
+
 
   # POST /questions or /questions.json
   def create
@@ -29,11 +28,9 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to question_url(@question), notice: "Question was successfully created." }
-        format.json { render :show, status: :created, location: @question }
+        format.html { redirect_to @question }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +39,10 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to question_url(@question), notice: "Question was successfully updated." }
-        format.json { render :show, status: :ok, location: @question }
+        format.html { redirect_to @question }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -57,7 +53,6 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -68,11 +63,22 @@ class QuestionsController < ApplicationController
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
-      @question = current_account.questions.find_by(slug: params[:id])
+      unless (Question.find_by(slug: params[:id]))
+        redirect_to questions_path
+      end
     end
+
+    def give_new_slug
+      @question.slug
+    end
+    
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:title, :body)
+      params.require(:question).permit(:title, :body, :position, :parent_id)
+    end
+    
+    def create_question_params
+      params.require(:question).permit(:title, :position, :parent_id)
     end
 end
