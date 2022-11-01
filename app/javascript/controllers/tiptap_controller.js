@@ -36,16 +36,21 @@ import TextAlign from "@tiptap/extension-text-align";
 // load all highlight.js languages
 import { lowlight } from "lowlight";
 
+// pour forcer un titre dans le body
+// const CustomDocument = Document.extend({
+//   content: 'heading block*'
+// })
+
 // Connects to data-controller="tiptap"
 export default class extends Controller {
 
   static targets = ["body", "input"]
-
   
   connect() {
     this.editor = new Editor({
       element: this.bodyTarget,
       extensions: [
+        // CustomDocument,
         CodeBlockLowlight.configure({
           lowlight,
         }),
@@ -93,10 +98,9 @@ export default class extends Controller {
         }),
         Placeholder.configure({
           placeholder: ({ node }) => {
-            if (node.type.name === "heading") {
-              return "Ecrivez un titre...";
+            if (node.type.name == "heading") {
+              return "Ecrivez votre titre ici...";
             }
-
             return "Ecrivez quelque chose...";
           },
         }),

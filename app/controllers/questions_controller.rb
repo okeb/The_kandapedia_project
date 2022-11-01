@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action -> { rodauth.require_authentication }, except: %i[ index show ]
+  before_action -> { rodauth.require_authentication }, except: %i[ index ]
   before_action :set_question, only: %i[ show update destroy ]
   before_action :find_question_by_slug, only: %i[ show update ]
   after_action :give_new_slug, only: %i[ update ]
@@ -19,8 +19,6 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
   end
-
-
 
   # POST /questions or /questions.json
   def create

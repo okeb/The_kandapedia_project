@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= yield :title %>
     <title><%= @page_title ? "Kandapedia - #{@page_title}" : "Kandapedia" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -26,16 +27,12 @@
     <%= render "layouts/navbar" %>
     <div style="width:100%; height:70px"></div>
 
-    <%
-=begin%>
- <% if notice %>
+    <% if notice %>
       <div class="alert alert-success"><%= notice %></div>
     <% end %>
     <% if alert %>
       <div class="alert alert-danger"><%= alert %></div>
     <% end %> 
-<%
-=end%>
     <%= yield %>
 
     <ninja-keys data-controller="command-palette" placeholder="<%= t("command_palette.placeholder") %>"></ninja-keys>

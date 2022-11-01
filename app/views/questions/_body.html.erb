@@ -199,6 +199,14 @@
     height: 0;
     pointer-events: none;
   }
+  .ProseMirror .is-empty::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #ced4da;
+    pointer-events: none;
+    height: 0;
+  }
+    
   .ProseMirror mark {
     background-color: #ffe066;
     border-radius: 0.25em;
@@ -215,7 +223,7 @@
     height: 0;
     pointer-events: none;
   }
-  . input[type="checkbox"] {
+  input[type="checkbox"] {
     margin-right: 8px;
   }
   /* a {
@@ -239,6 +247,7 @@
       font-family: "JetBrainsMono", monospace;
       padding: 0.75rem 1rem;
       margin: 1.4rem 0;
+      box-shadow:0.2px 0.1px 0.3px hsl(0deg 0% 0%/ 0.17), 3.6px 2.8px 5.5px -1px hsl(0deg 0% 0%/ 0.2), 14.5px 11.4px 22.3px -1.9px hsl(0deg 0% 0% / 0.23);
   }
 
   iframe {
@@ -296,7 +305,7 @@
     display:flex;
     align-items: center;
   }
-   .ProseMirror li > label {
+  .ProseMirror li > label {
     flex: 0 0 auto;
     margin-right: 0.5rem;
     user-select: none;
@@ -315,12 +324,66 @@
 
   code {
       font-family: "JetBrainsMono", monospace;
-      background-color: rgba(255, 168, 0, 0.2);
       border-radius: 0.25em;
       box-decoration-break: clone;
-      color: #555;
       font-size: 0.9rem;
       padding: 0.15em;
+  }
+  @media (prefers-color-scheme: light) {
+    code {
+      background-color: rgba(255, 168, 0, 0.2);
+      color: #555;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    code {
+      background-color: #003399;;
+      color: #68cef8;
+    }
+  }
+
+  .bubble-menu {
+  display: flex;
+  background-color: #0D0D0D;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  }
+  .bubble-menu button {
+    border: none;
+    background: none;
+    color: #FFF;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+
+  }
+  .bubble-menu button:hover,
+  .bubble-menu button.is-active {
+      opacity: 1;
+  }
+
+  .floating-menu {
+  display: flex;
+  background-color: #0D0D0D10;
+  padding: 0.2rem;
+  border-radius: 0.5rem;
+
+  }
+  .floating-menu button {
+    border: none;
+    background: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0 0.2rem;
+    opacity: 0.6;
+
+  }
+  .floating-menu button:hover,
+  .floating-menu button.is-active {
+      opacity: 1;
   }
 
 </style>
