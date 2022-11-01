@@ -7,6 +7,8 @@ class Question < ApplicationRecord
   after_create :create_slug
   before_update :update_slug
 
+  scope :desc, -> { order(created_at: :desc) }
+
   def to_param
     slug
   end 

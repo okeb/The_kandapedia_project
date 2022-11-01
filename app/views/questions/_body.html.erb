@@ -239,7 +239,70 @@
       font-family: "JetBrainsMono", monospace;
       padding: 0.75rem 1rem;
       margin: 1.4rem 0;
+  }
 
+  iframe {
+    border: 8px solid #000;
+    border-radius: 4px;
+    min-width: 200px;
+    min-height: 200px;
+    display: block;
+    outline: 0px solid transparent;
+  }
+
+  div[data-youtube-video] {
+    cursor: move;
+    padding-right: 24px;
+  }
+
+  .ProseMirror-selectednode iframe {
+    transition: outline 0.15s;
+    outline: 6px solid #ece111;
+  }
+
+  .ProseMirror ul {
+    padding: 0 1rem;
+  }
+  .ProseMirror ol {
+    padding-left: 1.8rem;
+  }
+
+  .ProseMirror ol li::marker {
+    color: #777;
+    font-family: "JetBrainsMono", monospace;
+  }
+  
+  .ProseMirror ul li::marker {
+    color: #ff7b72;
+  }
+
+  .ProseMirror a {
+    color: #AAA;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .ProseMirror a:hover {
+    color: #222;
+    text-decoration: underline;
+    text-decoration-offset: 3px;
+    cursor: pointer;
+  }
+  .ProseMirror ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+  }
+
+  .ProseMirror ul[data-type="taskList"] > li {
+    display:flex;
+    align-items: center;
+  }
+   .ProseMirror li > label {
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+    user-select: none;
+  }
+  .ProseMirror li > div {
+    flex: 1 1 auto;
   }
 
   .ProseMirror pre > code {
@@ -262,9 +325,9 @@
 
 </style>
 
-<div class="" style="height:30px"></div>
-<%= form_with  model: @question, data: { controller: "tiptap" }, local: false do |f| %>
-  <div data-tiptap-target="body"></div>
+<div style="height:30px"></div>
+<%= form_with(model: @question, data: { controller: "tiptap" }, local: false) do |f| %>
   <%= f.hidden_field :body, data: { tiptap_target: "input" } %>
+  <div data-tiptap-target="body"></div>
 <% end %>
-<div class="" style="height:60px"></div>
+<div style="height:60px"></div>

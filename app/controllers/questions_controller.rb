@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index show ]
   before_action :set_question, only: %i[ show update destroy ]
   before_action :find_question_by_slug, only: %i[ show update ]
+  after_action :give_new_slug, only: %i[ update ]
 
   # GET /questions or /questions.json
   def index
@@ -39,6 +40,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.update(question_params)
         format.html { redirect_to @question }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -65,6 +67,11 @@ class QuestionsController < ApplicationController
         redirect_to questions_path
       end
     end
+
+    def give_new_slug
+      @question.slug
+    end
+    
 
     # Only allow a list of trusted parameters through.
     def question_params

@@ -21,12 +21,12 @@ input, h1.title {
 }
 
 </style>
-<%= form_with model: @question, data: { controller: "editable" } do |f| %>
+<%= form_with model: @question, data: { controller: "editable"}  do |f| %>
   <h1 contenteditable
+      data-uuid="<%= @question.uuid %>"
       data-editable-target="content"
       data-action="keyup->editable#changed"
       data-placeholder="<%= t("untitled") %>"
       class="title editable"><%= @question.title %></h1>
   <%= f.hidden_field :title, data: { editable_target: "input"} %>
 <% end %>
-/* <%= link_to @question.title || t("untitled"), question_url(@question) %> */
