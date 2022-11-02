@@ -15,6 +15,45 @@ class QuestionsController < ApplicationController
     @profile = Profile.find_by(account_id: @question.account_id)
   end
 
+  # add or remove the question to the bookmark of the user
+  def toggle_to_bookmark
+    if current_account.voted_up_on? @question, vote_scope: :bookmark
+      @question.unvote_by voter: current_account, vote_scope: :bookmark
+    else
+      @question.upvote_from current_account, vote_scope: :bookmark
+    end
+    respond_to do |format|
+        format.turbo_stream
+    end
+  end
+
+  # add the question to a readlater list of the user
+  def add_to_readlist
+    if current_account.voted_for? @question, vote_scope: :readlist
+      if current_account.voted_down_on? @question, vote_scope: :readlist
+        @question.unvote_by current_account, vote_scope: :readlist
+      else
+        @question.downvote_from current_account, vote_scope: :readlist
+      end
+    else
+      @question.downvote_from current_account, vote_scope: :readlist
+    end
+    respond_to do |format|
+        format.turbo_stream
+    end
+  end
+
+  # remove the question to a readlater list of the user
+  def remove_to_readlist
+    if current_account.voted_for? @question, vote_scope: :readlist
+      @question.unvote_by current_account, vote_scope: :readlist
+    end
+    respond_to do |format|
+        format.turbo_stream
+    end
+  end
+  
+
   # GET /questions/new
   def new
     @question = Question.new

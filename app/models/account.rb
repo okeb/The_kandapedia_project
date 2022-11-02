@@ -4,4 +4,5 @@ class Account < ApplicationRecord
 
   has_many :questions, counter_cache: true
   has_one :profile
+  acts_as_voter
 end

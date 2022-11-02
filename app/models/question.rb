@@ -3,6 +3,8 @@ class Question < ApplicationRecord
   before_create { self.uuid = ApplicationRecord.generate_uuid }
   belongs_to :question, class_name: "Question", optional: true
   belongs_to :account
+  
+  acts_as_votable
 
   after_create :create_slug
   before_update :update_slug
