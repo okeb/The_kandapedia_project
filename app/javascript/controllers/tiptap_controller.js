@@ -33,6 +33,8 @@ import Highlight from "@tiptap/extension-highlight";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from '@tiptap/extension-superscript';
 // load all highlight.js languages
 import { lowlight } from "lowlight";
 
@@ -70,6 +72,8 @@ export default class extends Controller {
         TableRow,
         TableHeader,
         TableCell,
+        Subscript,
+        Superscript,
         Image,
         TaskList,
         TaskItem.configure({
@@ -112,7 +116,6 @@ export default class extends Controller {
 
   disconnect() {
     this.editor.destroy()
-    console.log("hasta la vista tiptap");
   }
 
   onUpdate = () => {
