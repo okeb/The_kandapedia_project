@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question_by_slug, only: %i[ update show update destroy ]
   before_action :find_question_for_bookmarking, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist ]
   after_action :give_new_slug, only: %i[ update ]
+  before_action :remove_appreciation, only: %i[ add_love add_perfect add_nice add_wrong add_bad ]
 
   # GET /questions or /questions.json
   def index
@@ -27,16 +28,28 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # add the question to a readlater list of the user
-  def add_to_appreciation
-    if current_account.voted_for? @question, vote_scope: :appreciation
-      
-    end
-    respond_to do |format|
-      format.html { redirect_to @question }
-      # format.turbo_stream
-    end
+  # add appreciation to the question
+  def add_love
+    @question.upvote_by current_account, vote_scope: :appr_love, vote_weight: 3
   end
+  def add_perfect
+    @question.upvote_by current_account, vote_scope: :appr_perfect, vote_weight: 2
+  end
+  def add_nice
+    @question.upvote_by current_account, vote_scope: :appr_nice
+  end
+  def add_wrong
+    @question.downvote_by current_account, vote_scope: :appr_wrong
+  end
+  def add_bad
+    @question.downvote_by current_account, vote_scope: :appr_bad, vote_weight: 2
+  end
+
+  # to verify if user has give an appreciation to the question
+  def has_appreciate
+    get_appreciation? nil
+  end
+  
   # add the question to a readlater list of the user
   def add_to_readlist
     if current_account.voted_for? @question, vote_scope: :readlist
@@ -106,6 +119,42 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+    def remove_appreciation
+      if current_account.voted_for? @question, vote_scope: :appr_love
+        @question.unvote_by current_account, vote_scope: :appr_love
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_perfect
+        @question.unvote_by current_account, vote_scope: :appr_perfect
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_nice
+        @question.unvote_by current_account, vote_scope: :appr_nice
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_wrong
+        @question.unvote_by current_account, vote_scope: :appr_wrong
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_bad
+        @question.unvote_by current_account, vote_scope: :appr_bad
+      end
+    end
+
+    def get_appreciation
+      if current_account.voted_for? @question, vote_scope: :appr_love
+        "love"
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_perfect
+        "perfect"
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_nice
+        "nice"
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_wrong
+        "wrong"
+      end
+      if current_account.voted_for? @question, vote_scope: :appr_bad
+        "bad"
+      end
+    end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_question_by_slug
