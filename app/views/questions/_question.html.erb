@@ -6,10 +6,10 @@
   <div id="<%= dom_id question %>"> 
     <div style="display:flex; align-items:center">
       <%= render "bookmark", as: :question %>
-      <div style="width:10px; height:10px"></div>
+      <div style="width:20px; height:20px"></div>
       <%= render "readlist", as: :question %>
-      <div style="width:10px; height:10px"></div>
-      <%#= render "appreciation", as: :question %>
+      <div style="width:20px; height:20px"></div>
+      <%= render "appreciation", as: :question %>
     </div>
     <%= render "title", as: :question %>
 

@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   before_action :set_question_by_slug, only: %i[ update show update destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
-
   # GET /questions or /questions.json
   def index
     @questions = Question.includes(:account)
@@ -29,11 +28,11 @@ class QuestionsController < ApplicationController
 
   # add appreciation to the question
   def add_awesome
-    if current_account.voted_up_on? @question, vote_scope: :appr_awesome
+    if current_account.voted_for? @question, vote_scope: :appr_awesome
       @question.unvote_by current_account, vote_scope: :appr_awesome
     else
       remove_appreciation
-      @question.upvote_by current_account, vote_scope: :appr_awesome, vote_weight: 3
+      @question.upvote_by current_account, vote_scope: :appr_awesome
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -41,11 +40,11 @@ class QuestionsController < ApplicationController
   end
 
   def add_perfect
-    if current_account.voted_up_on? @question, vote_scope: :appr_perfect
+    if current_account.voted_for? @question, vote_scope: :appr_perfect
       @question.unvote_by current_account, vote_scope: :appr_perfect
     else
       remove_appreciation
-      @question.upvote_by current_account, vote_scope: :appr_perfect, vote_weight: 2
+      @question.upvote_by current_account, vote_scope: :appr_perfect
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -53,7 +52,7 @@ class QuestionsController < ApplicationController
   end
 
   def add_nice
-    if current_account.voted_up_on? @question, vote_scope: :appr_nice
+    if current_account.voted_for? @question, vote_scope: :appr_nice
       @question.unvote_by current_account, vote_scope: :appr_nice
     else
       remove_appreciation
@@ -66,7 +65,7 @@ class QuestionsController < ApplicationController
   end
 
   def add_wrong
-    if current_account.voted_up_on? @question, vote_scope: :appr_wrong
+    if current_account.voted_for? @question, vote_scope: :appr_wrong
       @question.downvote_by current_account, vote_scope: :appr_wrong
     else
       remove_appreciation
@@ -78,11 +77,11 @@ class QuestionsController < ApplicationController
   end
 
   def add_bad
-    if current_account.voted_up_on? @question, vote_scope: :appr_bad
+    if current_account.voted_for? @question, vote_scope: :appr_bad
       @question.downvote_by current_account, vote_scope: :appr_bad
     else
       remove_appreciation
-      @question.downvote_by current_account, vote_scope: :appr_bad, vote_weight: 2
+      @question.downvote_by current_account, vote_scope: :appr_bad
     end
     respond_to do |format|
         format.html { redirect_to @question }
