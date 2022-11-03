@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
 
   def add_wrong
     if current_account.voted_for? @question, vote_scope: :appr_wrong
-      @question.downvote_by current_account, vote_scope: :appr_wrong
+      @question.unvote_by current_account, vote_scope: :appr_wrong
     else
       remove_appreciation
       @question.downvote_by current_account, vote_scope: :appr_wrong
@@ -78,7 +78,7 @@ class QuestionsController < ApplicationController
 
   def add_bad
     if current_account.voted_for? @question, vote_scope: :appr_bad
-      @question.downvote_by current_account, vote_scope: :appr_bad
+      @question.unvote_by current_account, vote_scope: :appr_bad
     else
       remove_appreciation
       @question.downvote_by current_account, vote_scope: :appr_bad
