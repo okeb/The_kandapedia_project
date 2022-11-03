@@ -1,6 +1,6 @@
 <div style="display:flex; align-items:center">
 <% if current_account&.voted_for? @question, vote_scope: :appreciation %>
-  <%= button_to question_remove_to_readlist_url(@question), method: :put, data: { action: "remove to redalist" } do %>
+  <%= button_to question_add_love_url(@question), method: :put, data: { action: "remove to redalist" } do %>
     <div style="display:flex; align-items:center">
       <svg width="24" height="24" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m7.5 7.5l6 6m0-6l-6 6"/></svg>
     </div>
