@@ -1,17 +1,14 @@
 
 <div class="container">
-<%= turbo_frame_tag dom_id(question, "edit") do %>
-  <div style="width:100%; height:50px"></div>
+  <div style="width:100%; height:50px">
+  </div>
 
   <div id="<%= dom_id question %>"> 
-
+    <%= render "questions/toggle_to_bookmark", as: :question %>
     <%= render "title", as: :question %>
 
     <%= render "body" %>
     
-    <%#= link_to "Edit this question", edit_question_path(question) %>
-
   </div> 
 
-<% end %>
 </div>

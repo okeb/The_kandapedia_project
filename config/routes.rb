@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     #   put 'upvote', to: 'questions#upvote'
     # end
     resources :profiles
+    
+    resources :questions do
+      put "add_to_readlist", to: 'questions#add_to_readlist'
+      put "remove_to_readlist", to: 'questions#remove_to_readlist'
+      put "toggle_to_bookmark", to: 'questions#toggle_to_bookmark'
+    end
   end
     
 end

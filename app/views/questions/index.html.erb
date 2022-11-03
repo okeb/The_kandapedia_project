@@ -1,20 +1,15 @@
-<p style="color: green"><%= notice %></p>
+
 
 <div class="container">
+
+<p style="color: green"><%= notice %></p>
+
   <h1>Questions</h1>
   <div style="height:25px"></div>
-  <div id="questions">
-    <% @questions.desc.each do |question| %>
-      <% @question = question %>
-      <div style="height:5px"></div>
-      <h2>
-        <%= link_to question do %>
-          <%= @question.title %>
-        <% end %>
-      </h2>
-      <div style="height:20px"></div>
-    <% end %>
-  </div>
+  <% @questions.desc.each do |question| %>
+    <% @question = question %>
+    <%= render "index_question", question: {question: @question} %>
+  <% end %>
 
   <%= button_to "New question", new_question_path, class: "btn btn--primary" %>
 </div>

@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index ]
-  before_action :set_question, only: %i[ show update destroy ]
-  before_action :find_question_by_slug, only: %i[ show update ]
+  before_action :set_question_by_slug, only: %i[ update show update destroy ]
+  before_action :find_question_for_bookmarking, only: %i[ toggle_to_bookmark ]
   after_action :give_new_slug, only: %i[ update ]
 
   # GET /questions or /questions.json
@@ -17,13 +17,13 @@ class QuestionsController < ApplicationController
 
   # add or remove the question to the bookmark of the user
   def toggle_to_bookmark
-    if current_account.voted_up_on? @question, vote_scope: :bookmark
-      @question.unvote_by voter: current_account, vote_scope: :bookmark
+    if current_account.voted_up_on? @question, vote_scope: 'bookmark'
+      @question.unvote_by current_account, vote_scope: 'bookmark'
     else
-      @question.upvote_from current_account, vote_scope: :bookmark
+      @question.upvote_from current_account, vote_scope: 'bookmark'
     end
     respond_to do |format|
-        format.turbo_stream
+        format.html { redirect_to @question }
     end
   end
 
@@ -95,14 +95,19 @@ class QuestionsController < ApplicationController
 
   private
 
-    def find_question_by_slug
-      @question = Question.find_by(slug: params[:id])
-    end
     # Use callbacks to share common setup or constraints between actions.
-    def set_question
+    def set_question_by_slug
       unless (Question.find_by(slug: params[:id]))
         redirect_to questions_path
       end
+      @question = Question.find_by(slug: params[:id])
+    end
+    # Use callbacks to share common setup or constraints between actions.
+    def find_question_for_bookmarking
+      unless (Question.find_by(slug: params[:question_id]))
+        redirect_to questions_path
+      end
+      @question = Question.find_by(slug: params[:question_id])
     end
 
     def give_new_slug

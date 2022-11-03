@@ -45,7 +45,8 @@
     "@tiptap/extension-youtube": "^2.0.0-beta.199",
     "lodash.debounce": "^4.0.8",
     "lowlight": "^2.7.0",
-    "ninja-keys": "^1.2.2"
+    "ninja-keys": "^1.2.2",
+    "slugify": "^1.6.5"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets"

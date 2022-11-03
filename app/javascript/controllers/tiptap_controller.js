@@ -55,6 +55,9 @@ export default class extends Controller {
         // CustomDocument,
         CodeBlockLowlight.configure({
           lowlight,
+          HTMLAttributes: {
+            class: "code",
+          },
         }),
         BulletList,
         Blockquote,
@@ -122,6 +125,7 @@ export default class extends Controller {
     this.inputTarget.value = this.editor.getHTML();
     this.inputTarget.form.requestSubmit()
   };
+
 }
 
 
