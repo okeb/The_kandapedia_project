@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index ]
   before_action :set_question_by_slug, only: %i[ update show update destroy ]
-  before_action :find_question_for_bookmarking, only: %i[ toggle_to_bookmark ]
+  before_action :find_question_for_bookmarking, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist ]
   after_action :give_new_slug, only: %i[ update ]
 
   # GET /questions or /questions.json
@@ -17,10 +17,10 @@ class QuestionsController < ApplicationController
 
   # add or remove the question to the bookmark of the user
   def toggle_to_bookmark
-    if current_account.voted_up_on? @question, vote_scope: 'bookmark'
-      @question.unvote_by current_account, vote_scope: 'bookmark'
+    if current_account.voted_up_on? @question, vote_scope: :bookmark
+      @question.unvote_by current_account, vote_scope: :bookmark
     else
-      @question.upvote_from current_account, vote_scope: 'bookmark'
+      @question.upvote_from current_account, vote_scope: :bookmark
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
   def add_to_readlist
     if current_account.voted_for? @question, vote_scope: :readlist
       if current_account.voted_down_on? @question, vote_scope: :readlist
-        @question.unvote_by current_account, vote_scope: :readlist
+        @question.upvote_from current_account, vote_scope: :readlist
       else
         @question.downvote_from current_account, vote_scope: :readlist
       end
@@ -39,7 +39,8 @@ class QuestionsController < ApplicationController
       @question.downvote_from current_account, vote_scope: :readlist
     end
     respond_to do |format|
-        format.turbo_stream
+      format.html { redirect_to @question }
+      # format.turbo_stream
     end
   end
 
@@ -49,7 +50,8 @@ class QuestionsController < ApplicationController
       @question.unvote_by current_account, vote_scope: :readlist
     end
     respond_to do |format|
-        format.turbo_stream
+      format.html { redirect_to @question }
+      # format.turbo_stream
     end
   end
   
