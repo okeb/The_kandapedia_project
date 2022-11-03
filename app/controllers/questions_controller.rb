@@ -28,6 +28,16 @@ class QuestionsController < ApplicationController
   end
 
   # add the question to a readlater list of the user
+  def add_to_appreciation
+    if current_account.voted_for? @question, vote_scope: :appreciation
+      
+    end
+    respond_to do |format|
+      format.html { redirect_to @question }
+      # format.turbo_stream
+    end
+  end
+  # add the question to a readlater list of the user
   def add_to_readlist
     if current_account.voted_for? @question, vote_scope: :readlist
       if current_account.voted_down_on? @question, vote_scope: :readlist

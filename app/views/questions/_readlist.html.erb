@@ -1,8 +1,8 @@
 <div style="display:flex; align-items:center">
   <%= button_to question_add_to_readlist_url(@question), method: :put do %>
     <div style="display:flex; align-items:center">
-      <% if current_account&.voted_for? @question, vote_scope: 'readlist' %>
-        <% if current_account&.voted_down_on? @question, vote_scope: 'readlist' %>
+      <% if current_account&.voted_for? @question, vote_scope: :readlist %>
+        <% if current_account&.voted_down_on? @question, vote_scope: :readlist %>
           <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3l7 3V5c0-1.1-.9-2-2-2z"/></svg>
         <% else %>
           <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m19 21l-7-3l-7 3V5c0-1.1.9-2 2-2h7a5.002 5.002 0 0 0 5 7.9V21zM17.83 9L15 6.17l1.41-1.41l1.41 1.41l3.54-3.54l1.41 1.41L17.83 9z"/></svg>
@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <% if current_account&.voted_for? @question, vote_scope: 'readlist' %>
+  <% if current_account&.voted_for? @question, vote_scope: :readlist %>
     <%= button_to question_remove_to_readlist_url(@question), method: :put do %>
       <div style="display:flex; align-items:center">
         <svg width="24" height="24" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m7.5 7.5l6 6m0-6l-6 6"/></svg>
