@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index ]
   before_action :set_question_by_slug, only: %i[ update show update destroy ]
-  before_action :find_question_for_bookmarking, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist ]
+  before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_love add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
   before_action :remove_appreciation, only: %i[ add_love add_perfect add_nice add_wrong add_bad ]
 
@@ -48,6 +48,15 @@ class QuestionsController < ApplicationController
   # to verify if user has give an appreciation to the question
   def has_appreciate
     get_appreciation? nil
+  end
+
+  # get the global appreciation value of @question
+  def get_global_appreciation_value
+    upvote_global_value = (@question.get_upvotes(vote_scope: :appr_love).sum(:vote_weight)).to_i + (@question.get_upvotes(vote_scope: :appr_perfect).sum(:vote_weight)).to_i +  (@question.get_upvotes(vote_scope: :appr_nice).sum(:vote_weight)).to_i   
+
+    downvote_global_value = (@question.get_downvotes(vote_scope: :appr_wrong).sum(:vote_weight)).to_i - (@question.get_downvotes(vote_scope: :appr_bad).sum(:vote_weight)).to_i
+
+    upvote_global_value - downvote_global_value
   end
   
   # add the question to a readlater list of the user
@@ -163,8 +172,9 @@ class QuestionsController < ApplicationController
       end
       @question = Question.find_by(slug: params[:id])
     end
-    # Use callbacks to share common setup or constraints between actions.
-    def find_question_for_bookmarking
+
+    # get the right question to vote
+    def find_question_for_vote
       unless (Question.find_by(slug: params[:question_id]))
         redirect_to questions_path
       end
