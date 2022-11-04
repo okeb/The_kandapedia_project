@@ -1,7 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :account
   has_one_attached :avatar
-  after_create :add_color
+  before_create :add_color
 
   def avatar_thumb
     self.avatar.variant(resize_to_limit: [100, 100]).processed

@@ -42,6 +42,10 @@
     <div style="padding-top:var(--space-m)">
       <%= f.submit "Modifier", class: "btn btn--primary" %>
     </div>
+
+    <div style="height:50px; width:50px; color:red">
+      <%= link_to "Supprimer le compte", rodauth.close_account_path %>
+    </div>
   <% end %>
 
 </div>
