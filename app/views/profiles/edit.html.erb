@@ -4,6 +4,23 @@
     <div style="padding-bottom:var(--space-m)">
         <h4><%= current_account.email %></h4>
     </div>
+    
+    <div style="padding-bottom:var(--space-m)">
+      <% if @profile.avatar.attached? %>
+        <%= image_tag(@profile.avatar_profile) %>
+      <% else %>
+        <%#= image_tag("/default_avatar_profile.jpg") %>
+        <div style="background-color:<%= Random.bytes(3).unpack1('H*').paint.brighten(23) %>;height:100px; width:100px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
+          <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:2.5rem">
+            <%= @profile.get_initial_profile %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="my-5 field">
+      <%= f.file_field :avatar %>
+    </div>
 
     <div class="my-5 field">
       <%= f.label :firstname %><br>

@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action -> { rodauth.require_authentication }, except: [:index, :show]
-  before_action :its_me, except: [:index, :show]
+  before_action -> { rodauth.require_authentication }, except: [ :index, :show ]
+  before_action :its_me, except: [ :index, :show ]
   before_action :charge_profile
 
   def show
@@ -37,6 +37,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:firstname, :lastname, :job, :bio)
+    params.require(:profile).permit(:firstname, :lastname, :job, :bio, :avatar)
   end
 end
