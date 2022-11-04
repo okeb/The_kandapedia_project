@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question_by_slug, only: %i[ update show update destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
+  
   # GET /questions or /questions.json
   def index
     @questions = Question.includes(:account)
@@ -28,11 +29,10 @@ class QuestionsController < ApplicationController
 
   # add appreciation to the question
   def add_awesome
-    if current_account.voted_for? @question, vote_scope: :appr_awesome
-      @question.unvote_by current_account, vote_scope: :appr_awesome
-    else
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 3)
       remove_appreciation
-      @question.upvote_by current_account, vote_scope: :appr_awesome
+    else
+      @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 3
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -40,11 +40,10 @@ class QuestionsController < ApplicationController
   end
 
   def add_perfect
-    if current_account.voted_for? @question, vote_scope: :appr_perfect
-      @question.unvote_by current_account, vote_scope: :appr_perfect
-    else
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
       remove_appreciation
-      @question.upvote_by current_account, vote_scope: :appr_perfect
+    else
+      @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 2
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -52,11 +51,10 @@ class QuestionsController < ApplicationController
   end
 
   def add_nice
-    if current_account.voted_for? @question, vote_scope: :appr_nice
-      @question.unvote_by current_account, vote_scope: :appr_nice
-    else
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
       remove_appreciation
-      @question.upvote_by current_account, vote_scope: :appr_nice
+    else
+      @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 1
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -65,11 +63,10 @@ class QuestionsController < ApplicationController
   end
 
   def add_wrong
-    if current_account.voted_for? @question, vote_scope: :appr_wrong
-      @question.unvote_by current_account, vote_scope: :appr_wrong
-    else
+    if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
       remove_appreciation
-      @question.downvote_by current_account, vote_scope: :appr_wrong
+    else
+      @question.downvote_by current_account, vote_scope: :appreciation, vote_weight: 1
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -77,11 +74,10 @@ class QuestionsController < ApplicationController
   end
 
   def add_bad
-    if current_account.voted_for? @question, vote_scope: :appr_bad
-      @question.unvote_by current_account, vote_scope: :appr_bad
-    else
+    if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
       remove_appreciation
-      @question.downvote_by current_account, vote_scope: :appr_bad
+    else
+      @question.downvote_by current_account, vote_scope: :appreciation, vote_weight: 2
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -174,38 +170,26 @@ class QuestionsController < ApplicationController
 
     # remove all appreciation by the current account to the question @question
     def remove_appreciation
-      if current_account.voted_for? @question, vote_scope: :appr_awesome
-        @question.unvote_by current_account, vote_scope: :appr_awesome
-      end
-      if current_account.voted_for? @question, vote_scope: :appr_perfect
-        @question.unvote_by current_account, vote_scope: :appr_perfect
-      end
-      if current_account.voted_for? @question, vote_scope: :appr_nice
-        @question.unvote_by current_account, vote_scope: :appr_nice
-      end
-      if current_account.voted_for? @question, vote_scope: :appr_wrong
-        @question.unvote_by current_account, vote_scope: :appr_wrong
-      end
-      if current_account.voted_for? @question, vote_scope: :appr_bad
-        @question.unvote_by current_account, vote_scope: :appr_bad
+      if current_account.voted_for? @question, vote_scope: :appreciation
+        @question.unvote_by current_account, vote_scope: :appreciation
       end
     end
 
     # get the word to precise the appreciation [ awesome, perfect, nice, wrong, bad ]
     def get_appreciation
-      if current_account.voted_for? @question, vote_scope: :appr_awesome
+      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 3)
         "awesome"
       end
-      if current_account.voted_for? @question, vote_scope: :appr_perfect
+      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
         "perfect"
       end
-      if current_account.voted_for? @question, vote_scope: :appr_nice
+      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
         "nice"
       end
-      if current_account.voted_for? @question, vote_scope: :appr_wrong
+      if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
         "wrong"
       end
-      if current_account.voted_for? @question, vote_scope: :appr_bad
+      if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
         "bad"
       end
     end
