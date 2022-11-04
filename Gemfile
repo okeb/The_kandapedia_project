@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.0.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -79,8 +79,9 @@ gem "sassc-rails", "~> 2.1"
 gem "rodauth-rails", "~> 1.6"
 
 gem "rotp", "~> 6.2"
+
 gem "rqrcode", "~> 2.1"
 
 gem "mysql-binuuid-rails", "~> 1.3"
 
-#gem "activeuuid", "~> 0.6.1"
+gem "acts_as_votable", "~> 0.14.0"

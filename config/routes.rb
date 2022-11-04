@@ -11,6 +11,18 @@ Rails.application.routes.draw do
     #   put 'upvote', to: 'questions#upvote'
     # end
     resources :profiles
+    
+    resources :questions do
+      put "add_to_readlist", to: 'questions#add_to_readlist'
+      put "remove_to_readlist", to: 'questions#remove_to_readlist'
+      put "bookmark", to: 'questions#toggle_to_bookmark'
+
+      put "awesome_question", to: 'questions#add_awesome'
+      put "perfect_question", to: 'questions#add_perfect'
+      put "nice_question", to: 'questions#add_nice'
+      put "wrong_question", to: 'questions#add_wrong'
+      put "bad_question", to: 'questions#add_bad'
+    end
   end
     
 end

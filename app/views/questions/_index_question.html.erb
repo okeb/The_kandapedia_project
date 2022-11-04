@@ -1,0 +1,11 @@
+<div style="height:5px"></div>
+<h2>
+    <%= link_to @question.title, @question %>
+</h2>
+<div style="height:20px"></div>
+
+<div style="display:flex; align-items:center">
+  <%= render "bookmark", as: :question %>
+  <div style="width:10px; height:10px"></div>
+  <%= render "readlist", as: :question %>
+</div>

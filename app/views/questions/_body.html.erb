@@ -250,6 +250,27 @@
       box-shadow:0.2px 0.1px 0.3px hsl(0deg 0% 0%/ 0.17), 3.6px 2.8px 5.5px -1px hsl(0deg 0% 0%/ 0.2), 14.5px 11.4px 22.3px -1.9px hsl(0deg 0% 0% / 0.23);
   }
 
+  .ProseMirror pre.code {
+    display: table;
+    table-layout: fixed;
+    width: 100%; /* anything but auto, otherwise fixed layout not guaranteed */
+    white-space: pre-wrap;
+  }
+  .ProseMirror pre.code::before {
+    counter-reset: listing;
+  }
+  .ProseMirror pre.code code {
+    counter-increment: listing;
+  }
+  .ProseMirror pre.code code::before {
+    /* content: counter(listing) ". "; */
+    display: inline-block;
+    width: 1.8rem;
+    padding-left: auto;
+    margin-left:auto;
+    text-align:right;
+  }
+
   iframe {
     border: 8px solid #000;
     border-radius: 4px;

@@ -1,0 +1,3 @@
+<%= turbo_stream.update dom_id(@question) do %>
+  <%= render "questions/toggle_to_bookmark", question: @question %>
+<% end %>
