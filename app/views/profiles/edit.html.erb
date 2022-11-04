@@ -19,6 +19,7 @@
       <% end %>
     </div>
 
+    <h2>Mes informations</h2>
     <div class="my-5 field">
       <%= f.file_field :avatar %>
     </div>
@@ -42,6 +43,9 @@
     <div style="padding-top:var(--space-m)">
       <%= f.submit "Modifier", class: "btn btn--primary" %>
     </div>
+
+    <h2>Changer mon mot de passe</h2>
+    <%= link_to "Modifier mon mot de passe", rodauth.change_password_path %>
 
     <div style="height:50px; width:50px; color:red"></div>
     <%= link_to "Supprimer le compte", rodauth.close_account_path %>
