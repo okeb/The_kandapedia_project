@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <div data-controller="select-tag" >
+    <%= form.label :tag_list, style: "display: block" %>
+    <%= form.text_field :tag_list, data: {select_tag_target: "select"} %>
+  </div>
 
   <div>
     <%= form.label :title, style: "display: block" %>
@@ -23,10 +27,7 @@
 
   <%
 =begin%>
- <div>
-    <%= form.label :note, style: "display: block" %>
-    <%= form.number_field :note %>
-  </div>
+ 
 
   <div>
     <%= form.label :is_published, style: "display: block" %>
@@ -36,6 +37,6 @@
 =end%>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Enregistrer la question", class: "btn btn--primary" %>
   </div>
 <% end %>

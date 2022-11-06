@@ -1,38 +1,35 @@
 
 <div class="container">
-  <div class="mx-16 grid grid-cols-4 mb-36">
-    <div class="span-1 rounded-lg">
+  <div class="grid grid-cols-4 mx-16 mb-36">
+    <div class="rounded-lg span-1">
 
-      <div class="flex justify-center mt-16 items-center">
-        <h2 style="font-size:var(--font-size-3xl); color:var(--color-text-header); padding-bottom:var(--space-m)"><%= @profile.lastname.capitalize %></h2>
+      <div class="flex items-center justify-center mt-16">
+        <h2 style="font-size:var(--font-size-3xl); color:var(--color-text-header); padding-bottom:var(--space-m)"><%= current_account.profile.lastname.capitalize %></h2>
       </div>
       <div style="padding-bottom:var(--space-m)">
-      <% if @profile.avatar.attached? %>
+      <% if current_account.profile.avatar.attached? %>
         <div style="margin-right:4px; height:100px; width:100px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
           <%= image_tag(current_account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"100px") %>
         </div>
       <% else %>
-        <div style="background-color:<%= @profile.color %>;height:100px; width:100px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
+        <div style="background-color:<%= current_account.profile.color %>;height:100px; width:100px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
           <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:2.7rem; letter-spacing:-1px">
-            <%= @profile.get_initial_profile %>
+            <%= current_account.profile.get_initial_profile %>
           </p>
         </div>
       <% end %>
     </div>
 
-      <p class=""><%= @profile.job %></p>
-      <p class=""><%= @profile.bio %></p>
-      <% if @profile.id != current_account.profile.id %>
-      <% end %>
+      <p class=""><%= current_account.profile.job %></p>
+      <p class=""><%= current_account.profile.bio %></p>
     </div>
   </div>
 
   <div style="padding-top:var(--space-m)">
-    <% if current_account.id === @profile.account_id %>
-      <div class="mr-6 mb-6 flex items-center">
-        <%= link_to "Modifier le profil", edit_profile_path(@profile), class: "btn btn--primary" %>
-        <%= link_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
-      </div>
-    <% end %>
+    <div class="flex items-center mb-6 mr-6" style="display:flex">
+      <%= link_to "Modifier le profil", edit_profile_path(current_account), class: "btn btn--primary" %>
+      <div style="height:10px; width:10px"></div>
+      <%= button_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
+    </div>
   </div>
 </div>

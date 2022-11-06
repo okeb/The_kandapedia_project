@@ -4,6 +4,9 @@ class QuestionsController < ApplicationController
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
   
+  ActsAsTaggableOn.remove_unused_tags = true
+  ActsAsTaggableOn.force_lowercase = true
+  
   # GET /questions or /questions.json
   def index
     @questions = Question.includes(:account)
@@ -217,10 +220,10 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:title, :body, :position, :parent_id)
+      params.require(:question).permit(:title, :body, :position, :parent_id, :tag_list)
     end
     
     def create_question_params
-      params.require(:question).permit(:title, :position, :parent_id)
+      params.require(:question).permit(:title, :position, :parent_id, :tag_list)
     end
 end

@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   has_many :questions, counter_cache: true
   has_one :profile
   acts_as_voter
+  acts_as_tagger
 
   def vote_weight_on(votable, vote_scope:)
     find_votes(
