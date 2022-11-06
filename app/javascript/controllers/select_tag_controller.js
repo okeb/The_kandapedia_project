@@ -9,7 +9,7 @@ export default class extends Controller {
     let input_form = this.inputTarget;
     new TomSelect(this.selectTarget, {
       plugins: ["remove_button", "caret_position"],
-      placeholder: "Ecrivez vos tags...",
+      placeholder: "Ecrivez vos tags ici...",
       create: true,
       onChange(){
         this.setTextboxValue("");
@@ -21,15 +21,15 @@ export default class extends Controller {
       render: {
         option: function (data, escape) {
           return (
-            '<div class="d-flex"><span>' +
+            '<div class="d-flex" style="justify-content:space-between; display:flex"><span>' +
             escape(data.value) +
-            '</span><span class="ms-auto text-muted">' +
-            escape(data.date) +
-            "</span></div>"
+            '</span><span class="ms-auto text-muted" style="opacity:.3">' +
+            escape(data.text) +
+            " fois utilisé</span></div>"
           );
         },
         item: function (data, escape) {
-          return "<div>" + escape(data.value) + "</div>";
+          return "<div style='border-radius:5px'>" + escape(data.value) + "</div>";
         },
         loading: function (data, escape) {
           return '<div class="spinner"></div>';
