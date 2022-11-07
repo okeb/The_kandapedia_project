@@ -87,3 +87,5 @@ gem "mysql-binuuid-rails", "~> 1.3"
 gem "acts_as_votable", "~> 0.14.0"
 
 gem "chroma", "~> 0.2.0"
+
+gem "acts-as-taggable-on", "~> 9.0"

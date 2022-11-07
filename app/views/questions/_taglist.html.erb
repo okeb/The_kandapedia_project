@@ -1,0 +1,5 @@
+<% if !@question.tag_list.empty? %>
+  <div style="display:flex; align-items:center; justify-content:flex-start">
+    <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + @question.tag_list.join(", #") %></p>
+  </div>
+<% end %>

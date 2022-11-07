@@ -36,6 +36,12 @@
       <%= f.label :job %><br>
       <%= f.text_field :job, value: @profile.job %>
     </div>
+
+    <div class="my-5 field" data-controller="select-skill" style="margin:20px 0">
+      <% skills = ActsAsTaggableOn::Tag.for_context(:skills).most_used(10).map { |skill| [skill.taggings_count, skill.name] } %>
+      <%= f.select :skill_list, skills, {}, {multiple: true, data: {select_skill_target: "select"} } %>
+      <%= f.hidden_field :skill_list, data: { select_skill_target: "input" } %>
+    </div>
     <div class="my-5 field">
       <%= f.label :bio %><br>
       <%= f.text_area :bio, value: @profile.bio %>
