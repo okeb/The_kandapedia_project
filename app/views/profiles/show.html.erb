@@ -19,6 +19,9 @@
         </div>
       <% end %>
     </div>
+      <div style="display:flex; align-items:center; justify-content:flex-start">
+          <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + current_account.profile.skill_list.join(", #") %></p>
+      </div>
 
       <p class=""><%= current_account.profile.job %></p>
       <p class=""><%= current_account.profile.bio %></p>

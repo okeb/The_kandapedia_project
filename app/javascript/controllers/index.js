@@ -13,6 +13,9 @@ application.register("editable", EditableController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import SelectSkillController from "./select_skill_controller"
+application.register("select-skill", SelectSkillController)
+
 import SelectTagController from "./select_tag_controller"
 application.register("select-tag", SelectTagController)
 

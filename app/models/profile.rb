@@ -3,6 +3,9 @@ class Profile < ApplicationRecord
   has_one_attached :avatar
   before_create :add_color
 
+  acts_as_ordered_taggable
+  acts_as_ordered_taggable_on :skills
+
   def avatar_thumb
     self.avatar.variant(resize_to_limit: [100, 100]).processed
   end
