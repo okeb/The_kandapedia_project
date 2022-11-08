@@ -6,7 +6,8 @@ class QuestionPolicy
     @question = question
   end
 
-  def update?
+  def edit?
+   (@account != nil)  and @question.account_id == @account.id
     # account.admin? || !question.published?
   end
 end

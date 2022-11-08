@@ -1,11 +1,15 @@
 class QuestionsController < ApplicationController
-  before_action -> { rodauth.require_authentication }, except: %i[ index ]
+  before_action -> { rodauth.require_authentication }, except: %i[ index show ]
   before_action :set_question_by_slug, only: %i[ update show edit destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
   
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
+
+  def pundit_user
+    current_account
+  end
   
   # GET /questions or /questions.json
   def index
@@ -149,6 +153,7 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    authorize @question
   end
 
   # PATCH/PUT /questions/1 or /questions/1.json

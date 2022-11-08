@@ -20,7 +20,9 @@
   <div><%= @question.body.html_safe %></div>
 
   <div style="margin:60px 0">
+    <% if policy(@question).edit? %>
     <%= link_to "Edit this question", edit_question_path(@question) %> | 
+    <% end %>
     <%= link_to "Back to questions", questions_path %>
 
   </div>
