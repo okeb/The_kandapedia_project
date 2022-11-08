@@ -11,7 +11,8 @@
     <%= render "appreciation", as: :question %>
   </div>
 
-  <div><%= @question.title %></div>
+  <h1><%= @question.title %></h1>
+  <div style="margin:40px 0">
   <% if !@question.tag_list.empty? %>
     <div style="display:flex; align-items:center; justify-content:flex-start">
       <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + @question.tag_list.join(", #") %></p>

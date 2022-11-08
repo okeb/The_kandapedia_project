@@ -11,6 +11,8 @@
     <%= render "index_question", question: {question: @question} %>
   <% end %>
   <div style="height:50px"></div>
+  <% if policy(@questions).new? and rodauth.logged_in? %>
   <%= link_to "New question", new_question_path, class: "btn btn--primary" %>
   <div style="height:90px"></div>
+  <% end %>
 </div>
