@@ -60,9 +60,9 @@ class RodauthMain < Rodauth::Rails::Auth
     # create_email_auth_email do
     #   RodauthMailer.email_auth(self.class.configuration_name, account_id, email_auth_key_value)
     # end
-    create_unlock_account_email do
-      RodauthMailer.unlock_account(self.class.configuration_name, account_id, unlock_account_key_value)
-    end
+    # create_unlock_account_email do
+    #   RodauthMailer.unlock_account(self.class.configuration_name, account_id, unlock_account_key_value)
+    # end
     send_email do |email|
       # queue email delivery on the mailer after the transaction commits
       db.after_commit { email.deliver_later }
