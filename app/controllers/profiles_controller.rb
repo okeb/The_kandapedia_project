@@ -5,6 +5,7 @@ class ProfilesController < ApplicationController
 
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
+  
   def show
     # 44 != "la phrase"
   end

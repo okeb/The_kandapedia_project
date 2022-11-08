@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index ]
-  before_action :set_question_by_slug, only: %i[ update show update destroy ]
+  before_action :set_question_by_slug, only: %i[ update show edit destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
   
@@ -146,6 +146,9 @@ class QuestionsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
+  end
+
+  def edit
   end
 
   # PATCH/PUT /questions/1 or /questions/1.json

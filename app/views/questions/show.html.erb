@@ -2,15 +2,27 @@
   <title><%= "Kandapedia&trade; | " + ((@question.title != "") ? @question.title : t("untitled")) %></title>
 <% end %>
 
-<%= turbo_stream_from @question %>
+<div class="container">
+  <div style="display:flex; align-items:center">
+    <%= render "bookmark", as: :question %>
+    <div style="width:20px; height:20px"></div>
+    <%= render "readlist", as: :question %>
+    <div style="width:20px; height:20px"></div>
+    <%= render "appreciation", as: :question %>
+  </div>
 
-<p style="color: green"><%= notice %></p>
+  <div><%= @question.title %></div>
+  <% if !@question.tag_list.empty? %>
+    <div style="display:flex; align-items:center; justify-content:flex-start">
+      <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + @question.tag_list.join(", #") %></p>
+    </div>
+  <% end %>
+  <div><%= @question.body.html_safe %></div>
 
-<%= render @question %>
+  <div style="margin:60px 0">
+    <%= link_to "Edit this question", edit_question_path(@question) %> | 
+    <%= link_to "Back to questions", questions_path %>
 
-<div style="margin-bottom:60px">
-  <%= link_to "Edit this question", edit_question_path(@question) %> |
-  <%= link_to "Back to questions", questions_path %>
-
-  <%= button_to "Destroy this question", @question, method: :delete %>
+  </div>
 </div>
+
