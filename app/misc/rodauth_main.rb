@@ -38,7 +38,7 @@ class RodauthMain < Rodauth::Rails::Auth
     # reset_password_autologin? true
 
     # Delete the account record when the user has closed their account.
-    # delete_account_on_close? true
+    delete_account_on_close? true
 
     # Redirect to the app from login and registration pages if already logged in.
     # already_logged_in { redirect login_redirect }
@@ -60,9 +60,9 @@ class RodauthMain < Rodauth::Rails::Auth
     # create_email_auth_email do
     #   RodauthMailer.email_auth(self.class.configuration_name, account_id, email_auth_key_value)
     # end
-    # create_unlock_account_email do
-    #   RodauthMailer.unlock_account(self.class.configuration_name, account_id, unlock_account_key_value)
-    # end
+    create_unlock_account_email do
+      RodauthMailer.unlock_account(self.class.configuration_name, account_id, unlock_account_key_value)
+    end
     send_email do |email|
       # queue email delivery on the mailer after the transaction commits
       db.after_commit { email.deliver_later }
@@ -74,7 +74,7 @@ class RodauthMain < Rodauth::Rails::Auth
     # flash_error_key :error # default is :alert
 
     # Override default flash messages.
-    # create_account_notice_flash "Your account has been created. Please verify your account by visiting the confirmation link sent to your email address."
+    create_account_notice_flash "Your account has been created. Please verify your account by visiting the confirmation link sent to your email address."
     require_login_error_flash "Login is required for accessing this page"
     # login_notice_flash nil
 

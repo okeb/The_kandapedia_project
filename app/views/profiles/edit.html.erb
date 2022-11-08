@@ -1,8 +1,41 @@
+<style>
+.text_area {
+  width:100% !important;
+  padding:10px 15px;
+  border-radius: 7px;
+}
+.field input {
+  width:100%;
+  border-radius: 7px;
+  padding:7px 10px;
+}
+
+.field {
+  padding-top:20px;
+}
+
+@media (prefers-color-scheme: light) {
+  .text_area {
+    background-color: (var(--color-white));
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .text_area, .field input {
+    background-color: #0a040e;
+    border: 1px solid #a267f0;
+    color:white
+  }
+  label {
+    color:#a267f0;
+  }
+}
+</style>
 <div class="container">
-  <%= form_for(@profile, class: "px-8") do |f| %>
+  <%= form_for @profile, as: :profile, url: profile_path(current_account.profile.account_id), method: :patch, html: { class: "edit_profile", id: "edit_profile_#{current_account.profile.account_id}" } do |f| %>
 
     <div style="padding-bottom:var(--space-m)">
-        <h4><%= current_account.email %></h4>
+        <h4><%= @profile.account.email %></h4>
     </div>
     
     <div style="padding-bottom:var(--space-m)">
@@ -37,24 +70,26 @@
       <%= f.text_field :job, value: @profile.job %>
     </div>
 
-    <div class="my-5 field" data-controller="select-skill" style="margin:20px 0">
+    <div class="my-5" data-controller="select-skill" style="margin:20px 0">
       <% skills = ActsAsTaggableOn::Tag.for_context(:skills).most_used(10).map { |skill| [skill.taggings_count, skill.name] } %>
       <%= f.select :skill_list, skills, {}, {multiple: true, data: {select_skill_target: "select"} } %>
-      <%= f.hidden_field :skill_list, data: { select_skill_target: "input" } %>
+      <%= f.hidden_field :skill_list, data: { select_skill_target: "input" },value: @profile.skill_list.join(", ") %>
     </div>
-    <div class="my-5 field">
+    <div class="my-5 field" >
       <%= f.label :bio %><br>
-      <%= f.text_area :bio, value: @profile.bio %>
+      <%= f.text_area :bio, value: @profile.bio, rows: "7", class: "text_area" %>
     </div>
     <div style="padding-top:var(--space-m)">
       <%= f.submit "Modifier", class: "btn btn--primary" %>
+      <%= link_to "Retour", profile_path(current_account), class: "btn btn--secondary" %>
     </div>
 
-    <h2>Changer mon mot de passe</h2>
+    <h2 style="margin-top:35px; margin-bottom:7px">Changer mon mot de passe</h2>
     <%= link_to "Modifier mon mot de passe", rodauth.change_password_path %>
 
-    <div style="height:50px; width:50px; color:red"></div>
+    <div style="height:50px; width:50px; color:red;"></div>
     <%= link_to "Supprimer le compte", rodauth.close_account_path %>
+    <div style="height:50px; width:50px; color:red;"></div>
   <% end %>
 
 </div>

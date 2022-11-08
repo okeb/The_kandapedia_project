@@ -3,6 +3,8 @@ class ProfilesController < ApplicationController
   before_action :its_me, except: [ :index, :show ]
   before_action :charge_profile
 
+  ActsAsTaggableOn.remove_unused_tags = true
+  ActsAsTaggableOn.force_lowercase = true
   def show
     # 44 != "la phrase"
   end
@@ -30,9 +32,8 @@ class ProfilesController < ApplicationController
 
   def its_me
     unless rodauth.session_value === params[:id].to_i
-      puts "isn't you"
+      puts "isn't you car #{rodauth.session_value}(rodauth session value) != #{params[:id].to_i}(id)"
       redirect_back fallback_location: '/', allow_other_host: false, notice: "vous n'êtes pas en mesure de modifier ce compte",status: 403
-
     end
   end
 

@@ -20,7 +20,9 @@
       <% end %>
     </div>
       <div style="display:flex; align-items:center; justify-content:flex-start">
+        <% if !current_account.profile.skill_list.empty? %>
           <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + current_account.profile.skill_list.join(", #") %></p>
+        <% end %>
       </div>
 
       <p class=""><%= current_account.profile.job %></p>

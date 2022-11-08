@@ -5,6 +5,8 @@ class Profile < ApplicationRecord
 
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :skills
+  acts_as_tagger
+  
 
   def avatar_thumb
     self.avatar.variant(resize_to_limit: [100, 100]).processed
