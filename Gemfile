@@ -91,3 +91,5 @@ gem "chroma", "~> 0.2.0"
 gem "acts-as-taggable-on", "~> 9.0"
 
 gem "pundit", "~> 2.2"
+
+gem "impressionist", "~> 2.0"
