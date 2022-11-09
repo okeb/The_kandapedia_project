@@ -11,7 +11,7 @@ class QuestionPolicy
   end
 
   def edit?
-    (((@account != nil) and @question.account_id == @account.id) and ((@question.updated_at <= 1.days.ago) and @question.is_published == true))
-    # account.admin? || !question.published?
+    ((@account != nil) and @question.account_id == @account.id) and ((@question.updated_at <= 1.days.ago))
+    # account.admin? coun|| !question.published?
   end
 end
