@@ -1,11 +1,20 @@
-<h1>Editing question</h1>
-<%= turbo_frame_tag dom_id(@question, "edit") do %>
-  <%= render "form", question: @question %>
-<% end %>
+<div class="container">
 
-<br>
+  <h1>Editing question</h1>
 
-<div>
-  <%= link_to "Show this question", @question %> |
-  <%= link_to "Back to questions", questions_path %>
+  <% content_for :title do %>
+    <title><%= "Kandapedia | " + ((@question.title != "") ? @question.title : t("untitled")) %></title>
+  <% end %>
+
+  <%= render @question %>
+
+  <br>
+
+  <div style="margin-bottom:60px">
+    <%= link_to "Show this question", @question %>  |  
+    <%= link_to "Back to questions", questions_path %> |
+    <%= button_to "Destroy this question", @question, method: :delete, class: "btn btn--primary" %>
+
+  </div>
+
 </div>

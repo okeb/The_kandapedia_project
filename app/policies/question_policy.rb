@@ -6,7 +6,12 @@ class QuestionPolicy
     @question = question
   end
 
-  def update?
+  def new?
+    @account!= nil
+  end
+
+  def edit?
+    (((@account != nil) and @question.account_id == @account.id) and ((@question.updated_at <= 1.days.ago) and @question.is_published == true))
     # account.admin? || !question.published?
   end
 end

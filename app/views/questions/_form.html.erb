@@ -1,15 +1,5 @@
 <%= form_with(model: question) do |form| %>
-  <% if question.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-      <ul>
-        <% question.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  
   <div data-controller="select-tag" >
     <%= form.label :tag_list, style: "display: block" %>
     <%= form.text_field :tag_list, data: {select_tag_target: "select"} %>
@@ -24,17 +14,6 @@
     <%= form.label :body, style: "display: block" %>
     <%= form.text_area :body %>
   </div>
-
-  <%
-=begin%>
- 
-
-  <div>
-    <%= form.label :is_published, style: "display: block" %>
-    <%= form.check_box :is_published %>
-  </div> 
-<%
-=end%>
 
   <div>
     <%= form.submit "Enregistrer la question", class: "btn btn--primary" %>

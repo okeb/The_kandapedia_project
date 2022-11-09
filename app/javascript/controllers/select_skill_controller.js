@@ -10,9 +10,9 @@ export default class extends Controller {
       plugins: ["remove_button", "caret_position"],
       placeholder: "Ecrivez vos expertises/compétences ici...",
       create: true,
-      createFilter: function(input) {
+      createFilter: function (input) {
         input = input.toLowerCase();
-        return !((input in this.options || input == ""));
+        return !(input in this.options || input == "");
       },
       onChange() {
         this.setTextboxValue("");
@@ -25,6 +25,8 @@ export default class extends Controller {
           return (
             '<div class="d-flex" style="justify-content:space-between; display:flex"><span>' +
             escape(data.value) +
+            '</span><span class="ms-auto text-muted" style="opacity:.3">' +
+            escape(data.text) +
             " fois utilisé</span></div>"
           );
         },
@@ -36,12 +38,20 @@ export default class extends Controller {
         loading: function (data, escape) {
           return '<div class="spinner"></div>';
         },
-        option_create: function(data, escape) {
-          return '<div class="create">ajoutez <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+        option_create: function (data, escape) {
+          return (
+            '<div class="create">ajoutez <strong>' +
+            escape(data.input) +
+            "</strong>&hellip;</div>"
+          );
         },
-        no_results:function(data,escape){
-          return '<div class="no-results">Aucun résultats pour "'+escape(data.input)+'"</div>';
-        }
+        no_results: function (data, escape) {
+          return (
+            '<div class="no-results">Aucun résultats pour "' +
+            escape(data.input) +
+            '"</div>'
+          );
+        },
       },
     });
   }

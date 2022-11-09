@@ -5,7 +5,7 @@ class Question < ApplicationRecord
   belongs_to :account
 
   acts_as_taggable_on :tags
-  acts_as_votable
+  acts_as_votable cacheable_strategy: :update_columns
 
   after_create :create_slug
   before_update :update_slug
