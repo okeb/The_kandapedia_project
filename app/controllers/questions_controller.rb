@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
 
+  # is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :all
+
   def pundit_user
     current_account
   end
