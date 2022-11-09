@@ -13,30 +13,50 @@
     } 
     .readlist_box {
       position:relative;
-      background-color:#EFEFEF;
       border-radius:7px;
       justify-content:center;
       padding:2px 6px;
       font-size:11px;
     }
+    @media (prefers-color-scheme: light) {
+      .readlist_box {
+        background-color:#EFEFEF;
+      }
+      .readlist_box:hover .close_button {
+        background-color:#FFF;
+      }
+      .readlist_box:hover .close_button:hover{
+      background-color:#EFEFEF;
+    } 
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .readlist_box {
+        background-color:transparent;
+        border:1px solid #444;
+      }
+      .readlist_box:hover .close_button {
+        background-color: #222;
+        border:1px solid #444;
+        color:#AAA;
+      }
+      .readlist_box:hover .close_button:hover {
+        background-color: #444;
+        border:1px solid #444;
+        color:#FFF;
+      }
+    }
     .readlist_box .close_button {
       border-radius:100%;
-      border: none;
-      background-color:#FFF;
       position:absolute;
-      bottom:27px;
-      right:6px;
+      bottom:28px;
+      right:5px;
       display:none;
     } 
     .readlist_box:hover .close_button {
       border-radius:100%;
-      border: none;
-      background-color:#FFF;
       display:block;
-    }  
-    .readlist_box:hover .close_button:hover{
-      background-color:#EFEFEF;
-    }  
+    }   
     .readlist:hover{
       
     } 

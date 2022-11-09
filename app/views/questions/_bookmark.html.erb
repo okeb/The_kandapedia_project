@@ -4,9 +4,18 @@
     background-color:transparent;
     border:none
   }
-  .bookmark:hover {
-    background-color:#EFEFEF;
-    border-radius:3px;
+  @media (prefers-color-scheme: light) {
+    .bookmark:hover {
+      background-color:#EFEFEF;
+      border-radius:3px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .bookmark:hover {
+      background-color:#444;
+      border-radius:3px;
+    }
   }
   </style>
   <%= button_to question_bookmark_url(@question), class: "bookmark", method: :put do %>

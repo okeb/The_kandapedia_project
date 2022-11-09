@@ -114,10 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_105820) do
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "username"
     t.string "firstname"
     t.string "lastname"
     t.string "job"
     t.text "bio"
+    t.boolean "terms_of_service"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -7,6 +7,8 @@ class Profile < ApplicationRecord
   acts_as_ordered_taggable_on :skills
   acts_as_tagger
   
+  validates_uniqueness_of :username, uniqueness: { case_sensitive: false }
+  validates :terms_of_service, acceptance: { message: 'must be abided' }
 
   def avatar_thumb
     self.avatar.variant(resize_to_limit: [100, 100]).processed
@@ -18,9 +20,13 @@ class Profile < ApplicationRecord
 
   def get_initial_profile
     initials = ""
-    long_name = (self.lastname + " " + self.firstname).split(' ')
+    if self.lastname != nil && self.firstname != nil
+      long_name = (self.lastname + " " + self.firstname).split(' ')
+      long_name.each{ |x|  initials += x[0]}
+    else
+      initials = self.username
+    end
 
-    long_name.each{ |x|  initials += x[0]}
 
     initials[0..2].upcase
   end
