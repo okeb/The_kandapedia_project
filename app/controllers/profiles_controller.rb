@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
   
   def show
     # 44 != "la phrase"
+    @questions = Question.find_by(account_id: @profile.account_id)
   end
 
   def edit
