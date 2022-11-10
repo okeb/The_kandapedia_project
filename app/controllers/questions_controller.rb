@@ -10,13 +10,14 @@ class QuestionsController < ApplicationController
 
   impressionist :actions=>[:show], :unique => [:action_name, :session_hash, :user_id, :impressionable_type, :impressionable_id, :ip_address]
   impressionist :actions=>[:index], :unique => [:impressionable_type, :impressionable_id, :session_hash, :ip_address]
+  
   def pundit_user
     current_account
   end
   
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:account)
+    @questions = Question.includes(account: :profile)
     @profiles = Profile.all
   end
 
