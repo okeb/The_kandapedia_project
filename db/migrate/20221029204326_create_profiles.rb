@@ -6,6 +6,7 @@ class CreateProfiles < ActiveRecord::Migration[7.0]
       t.string :lastname
       t.string :job
       t.text :bio
+      t.text :skill_list
       t.boolean :terms_of_service
       
       t.references :account, null: false, foreign_key: true

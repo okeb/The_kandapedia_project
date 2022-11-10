@@ -1,14 +1,13 @@
 class ProfilesController < ApplicationController
-  before_action -> { rodauth.require_authentication }, except: [ :index, :show ]
-  before_action :its_me, except: [ :index, :show ]
   before_action :charge_profile
+  before_action -> { rodauth.require_authentication }, except: [ :show, :avatar_thumb, :charge_profile, :profile_params ]
+  before_action :its_me, except: [ :show, :update, :avatar_thumb, :charge_profile, :profile_params ]
 
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
   
   def show
-    # 44 != "la phrase"
-    @questions = Question.find_by(account_id: @profile.account_id)
+    @questions = Question.all.where(account_id: @profile.account_id)
   end
 
   def edit
@@ -22,24 +21,23 @@ class ProfilesController < ApplicationController
     end
   end
 
-  # def avatar_thumb
-  #   @profile.avatar.variant(resize_to_limit: [100, 100])
-  # end
+  def avatar_thumb
+    @profile.avatar.variant(resize_to_limit: [100, 100])
+  end
 
   private
 
   def charge_profile
-    @profile = Profile.find_by(account_id: params[:id])
+    @profile = Profile.find_by(id: params[:id])
   end
 
   def its_me
-    unless rodauth.session_value === params[:id].to_i
-      puts "isn't you car #{rodauth.session_value}(rodauth session value) != #{params[:id].to_i}(id)"
-      redirect_back fallback_location: '/', allow_other_host: false, notice: "vous n'êtes pas en mesure de modifier ce compte",status: 403
+    unless rodauth.session_value === @profile.account_id
+      redirect_to @profile, notice: "vous n'êtes pas en mesure de modifier ce compte",status: 403
     end
   end
 
   def profile_params
-    params.require(:profile).permit(:username, :firstname, :lastname, :job, :bio, :terms_of_service, :avatar, :skill_list)
+    params.require(:profile).permit(:username, :firstname, :lastname, :job, :bio, :terms_of_service, :avatar, :skill_list, :color)
   end
 end

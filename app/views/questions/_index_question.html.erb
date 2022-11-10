@@ -55,7 +55,7 @@
           </div>
         <% end %>
       </div>
-      <%= link_to @question.account.profile.lastname != nil ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account), class:"name_author" %>   
+      <%= link_to @question.account.profile.lastname != nil ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account.profile), class:"name_author" %>   
     </div>
 </div>
 <h2>
