@@ -107,10 +107,8 @@ class RodauthMain < Rodauth::Rails::Auth
     # Perform additional actions after the account is created.
     after_create_account do
       Profile.create!(account_id: account_id,
-                      firstname: param("firstname"), 
-                      lastname: param("lastname"), 
-                      job: param("job"), 
-                      bio: param("bio"))
+                      username: param("username"), 
+                      terms_of_service: param("terms_of_service"))
     end
 
     # Do additional cleanup after the account is closed.
@@ -145,6 +143,12 @@ class RodauthMain < Rodauth::Rails::Auth
       set_notice_now_flash "#{otp_setup_notice_flash}, Please make note of your recovery codes"
       return_response add_recovery_codes_view
     end
+
+    # before_otp_auth_route do
+    #   if recovery_code_match?(param(otp_auth_param))
+    #     two_factor_authenticate("recovery_code")
+    #   end
+    # end
 
     new_recovery_code { SecureRandom.uuid }
 

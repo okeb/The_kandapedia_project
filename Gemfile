@@ -80,7 +80,7 @@ gem "rodauth-rails", "~> 1.6"
 
 gem "rotp", "~> 6.2"
 
-gem "rqrcode", "~> 2.1"
+
 
 gem "mysql-binuuid-rails", "~> 1.3"
 
@@ -91,3 +91,7 @@ gem "chroma", "~> 0.2.0"
 gem "acts-as-taggable-on", "~> 9.0"
 
 gem "pundit", "~> 2.2"
+
+gem "impressionist", "~> 2.0"
+
+gem "rqrcode", "~> 2.1"

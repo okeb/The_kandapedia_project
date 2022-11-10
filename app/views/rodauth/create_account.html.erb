@@ -1,5 +1,7 @@
 <%= form_with url: rodauth.create_account_path, method: :post, data: { turbo: false } do |form| %>
-  <div class="form-group mb-3">
+  <%
+=begin%>
+ <div class="form-group mb-3">
     <%= form.label :firstname, "Nom(s)", class: "form-label" %>
     <%= form.text_field :firstname, value: params[:firstname], id: "job", autocomplete: "firstname", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:firstname)}", aria: ({ invalid: true, describedby: "firstname_error_message" } if rodauth.field_error(:firstname)) %>
     <%= content_tag(:span, rodauth.field_error(:firstname), class: "invalid-feedback", id: "firstname_error_message") if rodauth.field_error(:firstname) %>
@@ -9,6 +11,14 @@
     <%= form.label :lastname, "Prénom(s)", class: "form-label" %>
     <%= form.text_field :lastname, value: params[:lastname], id: "job", autocomplete: "lastname", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:lastname)}", aria: ({ invalid: true, describedby: "lastname_error_message" } if rodauth.field_error(:lastname)) %>
     <%= content_tag(:span, rodauth.field_error(:lastname), class: "invalid-feedback", id: "lastname_error_message") if rodauth.field_error(:lastname) %>
+  </div> 
+<%
+=end%>
+
+  <div class="form-group mb-3">
+    <%= form.label :username, "Pseudo", class: "form-label" %>
+    <%= form.text_field :username, value: params[:username], id: "job", autocomplete: "username", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:username)}", aria: ({ invalid: true, describedby: "username_error_message" } if rodauth.field_error(:username)) %>
+    <%= content_tag(:span, rodauth.field_error(:username), class: "invalid-feedback", id: "username_error_message") if rodauth.field_error(:username) %>
   </div>
 
   <div class="form-group mb-3">
@@ -17,17 +27,22 @@
     <%= content_tag(:span, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
   </div>
 
-  <div class="form-group mb-3">
+  <%
+=begin%>
+ <div class="form-group mb-3">
     <%= form.label :job, "Job", class: "form-label" %>
     <%= form.text_field :job, value: params[:job], id: "job", autocomplete: "job", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:job)}", aria: ({ invalid: true, describedby: "job_error_message" } if rodauth.field_error(:job)) %>
     <%= content_tag(:span, rodauth.field_error(:job), class: "invalid-feedback", id: "job_error_message") if rodauth.field_error(:job) %>
-  </div>
+  </div> 
+
 
   <div class="form-group mb-3">
     <%= form.label :bio, "Biographie", class: "form-label" %>
     <%= form.text_area :bio, value: params[:bio], id: "bio", autocomplete: "bio", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:bio)}", aria: ({ invalid: true, describedby: "bio_error_message" } if rodauth.field_error(:bio)) %>
     <%= content_tag(:span, rodauth.field_error(:bio), class: "invalid-feedback", id: "bio_error_message") if rodauth.field_error(:bio) %>
   </div>
+<%
+=end%>
 
   <% if rodauth.require_login_confirmation? %>
     <div class="form-group mb-3">
@@ -51,6 +66,11 @@
         <%= content_tag(:span, rodauth.field_error(rodauth.password_confirm_param), class: "invalid-feedback", id: "password-confirm_error_message") if rodauth.field_error(rodauth.password_confirm_param) %>
       </div>
     <% end %>
+
+    <div class="form-group mb-3">
+      <%= form.label "accepter les conditions d'utilisation", :terms_of_service, class: "form-label" %>
+      <%= form.check_box :terms_of_service, value: params[:terms_of_service], id: "terms_of_service", required: true, class: "form-control" %>
+    </div>
   <% end %>
 
   <div class="form-group mb-3">

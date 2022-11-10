@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action -> { rodauth.require_authentication }, except: %i[ index show ]
+  before_action :get_user_authenticate
   before_action :set_question_by_slug, only: %i[ update show edit destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :give_new_slug, only: %i[ update ]
@@ -7,21 +8,23 @@ class QuestionsController < ApplicationController
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
 
-  # is_impressionable :counter_cache => true, :column_name => :views_count, :unique => :all
-
+  impressionist :actions=>[:show], :unique => [:action_name, :session_hash, :user_id, :impressionable_type, :impressionable_id, :ip_address]
+  impressionist :actions=>[:index], :unique => [:impressionable_type, :impressionable_id, :session_hash, :ip_address]
+  
   def pundit_user
     current_account
   end
   
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(:account)
+    @questions = Question.includes(account: :profile)
     @profiles = Profile.all
   end
 
   # GET /questions/1 or /questions/1.json
   def show
     @profile = Profile.find_by(account_id: @question.account_id)
+    impressionist(@question, "visionnage de la question : #{@question.title}")
   end
 
   # add or remove the question to the bookmark of the user
@@ -225,6 +228,12 @@ class QuestionsController < ApplicationController
 
     def give_new_slug
       @question.slug
+    end
+
+    def get_user_authenticate
+      if rodauth.logged_in?
+        @current_user = current_account
+      end
     end
     
 
