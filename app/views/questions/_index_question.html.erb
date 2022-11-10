@@ -6,7 +6,7 @@
     color:#AAA;
   }
   .picture_author {
-    "margin-right:4px;
+    margin-right:3px;
     height:17px;
     width:17px;
     border-radius:100%;
@@ -16,7 +16,6 @@
     overflow:hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border: 2px solid <%= @question.account.profile.color %>;
   }
   .initial_author {
     background-color:<%= @question.account.profile.color %>;
@@ -46,7 +45,7 @@
       <div style=" display:flex; align-items:center;  justify-content: center;">
         <% if @question.account.profile.avatar.attached? %>
           <div class="picture_author">
-            <%= image_tag(@question.account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border: 2px solid transparent; border-radius:100%", size:"27px") %>
+            <%= image_tag(@question.account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"27px") %>
           </div>
         <% else %>
           <div class="initial_author">

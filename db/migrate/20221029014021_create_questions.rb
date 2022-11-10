@@ -8,6 +8,7 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.integer :note, default: 0
       t.integer :views_count, default: 0
       t.integer :position
+      t.integer :is_private, default: 0
       t.boolean :is_published, default: false
       t.references :parent, null: true, foreign_key: { to_table: :questions }
 
