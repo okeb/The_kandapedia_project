@@ -23,7 +23,6 @@ class QuestionsController < ApplicationController
   # GET /questions or /questions.json
   def index
     @questions = Question.includes(account: :profile).where(is_private: false)
-    @profiles = Profile.all
   end
 
   # GET /questions/1 or /questions/1.json

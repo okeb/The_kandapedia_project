@@ -1,8 +1,8 @@
 class ProfilesController < ApplicationController
-  before_action :get_user_authenticate
+  #before_action :get_user_authenticate, only: %i[ :edit, :update ]
   before_action :charge_profile
   before_action -> { rodauth.require_authentication }, except: [ :show, :avatar_thumb, :charge_profile, :profile_params ]
-  after_action :set_skills
+  after_action :set_skills, only: %i[ :update ]
 
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
@@ -15,6 +15,7 @@ class ProfilesController < ApplicationController
   
   def show
     @questions = Question.all.where(account_id: @profile.account_id)
+    #@profile = current_account.profile if @profile == nil
   end
 
   def edit

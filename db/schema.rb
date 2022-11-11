@@ -120,7 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_105820) do
     t.string "color"
     t.string "job"
     t.text "bio"
-    t.text "skill"
+    t.text "skills"
     t.boolean "terms_of_service"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
