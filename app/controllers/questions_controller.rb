@@ -3,10 +3,15 @@ class QuestionsController < ApplicationController
   before_action :get_user_authenticate
   before_action :set_question_by_slug, only: %i[ update show edit destroy ]
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
+  after_action :set_tags, only: %i[ create ]
   after_action :give_new_slug, only: %i[ update ]
+  after_action :increment_counter, only: %i[ create ]
+  after_action :decrement_counter, only: %i[ destroy ]
   
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
+  # ActsAsTaggableOn.tags_table = 'tag_list'
+  # ActsAsTaggableOn.taggings_table = 'tag_list'
 
   impressionist :actions=>[:show], :unique => [:action_name, :session_hash, :user_id, :impressionable_type, :impressionable_id, :ip_address]
   impressionist :actions=>[:index], :unique => [:impressionable_type, :impressionable_id, :session_hash, :ip_address]
@@ -17,7 +22,7 @@ class QuestionsController < ApplicationController
   
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(account: :profile)
+    @questions = Question.includes(account: :profile).where(is_private: false)
     @profiles = Profile.all
   end
 
@@ -165,6 +170,8 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
+        @question[:tags] = @question.tag_list.join(", ")
+        @question.save!
         format.html { redirect_to @question }
         format.turbo_stream
       else
@@ -183,6 +190,20 @@ class QuestionsController < ApplicationController
   end
 
   private
+    def increment_counter
+      current_account.questions_count += 1
+      current_account.save!
+    end
+
+    def decrement_counter
+      current_account.questions_count -= 1
+      current_account.save!
+    end
+
+    def set_tags
+      @question[:tags] = @question.tag_list.join(", ")
+      @question.save!
+    end
 
     # remove all appreciation by the current account to the question @question
     def remove_appreciation
@@ -239,10 +260,6 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:title, :body, :position, :parent_id, :tag_list)
-    end
-    
-    def create_question_params
-      params.require(:question).permit(:title, :position, :parent_id, :tag_list)
+      params.require(:question).permit(:title, :body, :position, :parent_id, :tag_list, :tags)
     end
 end

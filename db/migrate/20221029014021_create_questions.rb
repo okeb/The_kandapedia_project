@@ -3,10 +3,11 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
     create_table :questions do |t|
       t.binary :uuid, limit: 16
       t.string :title
-      t.text :tag_list
       t.string :slug
       t.text :body
       t.integer :note, default: 0
+      t.string :authorised_users
+      t.text :tags
       t.integer :views_count, default: 0
       t.integer :position
       t.integer :is_private, default: 0

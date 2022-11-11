@@ -3,10 +3,11 @@ import TomSelect from "tom-select";
 
 // Connects to data-controller="select-tag"
 export default class extends Controller {
-  static targets = ["select", "input"]
+  static targets = ["select", "input", 'tags']
   connect() {
     let select_form = this.selectTarget.form;
     let input_form = this.inputTarget;
+    // let tags_input_form = this.tagsTarget;
     new TomSelect(this.selectTarget, {
       plugins: ["remove_button", "caret_position"],
       placeholder: "Ecrivez vos tags ici...",
@@ -15,6 +16,7 @@ export default class extends Controller {
         this.setTextboxValue("");
         this.refreshOptions();
         input_form.value = this.getValue().join(", ");
+        // tags_input_form.value = this.getValue().join(", ").split(",");
         select_form.requestSubmit();
       },
       persist: false,

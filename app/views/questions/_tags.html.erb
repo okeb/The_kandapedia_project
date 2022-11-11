@@ -6,6 +6,7 @@
   <% tags = ActsAsTaggableOn::Tag.for_context(:tags).most_used(10).map { |tag| [tag.taggings_count, tag.name] } %>
   <%= f.select :tag_list, tags, {}, {multiple: true, data: {select_tag_target: "select"} } %>
   <%= f.hidden_field :tag_list, data: { select_tag_target: "input" } %>
+  <%#= f.text_field :tags, data: { select_tag_target: "tags" }, value: @question.tag_list %>
 <% end %>
 
 
