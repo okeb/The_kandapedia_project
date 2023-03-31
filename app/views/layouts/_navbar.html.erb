@@ -1,6 +1,6 @@
 <header class="navbar">
   <div class="navbar__brand">
-    <a href="<%= root_path %>" class="--font-size-3xl" style="color:#222; font-family: 'Climate Crisis', cursive;">Kandapedia</a>
+    <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__name_title" %>
   </div>
   <% if rodauth.logged_in? %>
     <div class="navbar__name" style="display:flex; align-items:center; justify-content:end">
@@ -24,7 +24,7 @@
           </div>
         <% end %>
       </div>
-      <%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user) %>   
+      <%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user), class: "navbar__profile_link" %>   
     </div>
     <%= button_to "Deconnexion",
                   rodauth.logout_path,

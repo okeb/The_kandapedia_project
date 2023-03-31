@@ -16,6 +16,12 @@
         margin-left: auto;
         margin-right: var(--space-s);
         color: var(--color-text-header);
+
+        &_title {
+          color:#222;
+          margin-inline: 20px;
+          font-family: 'Climate Crisis', cursive;
+        }
     }
 
     &__right {
