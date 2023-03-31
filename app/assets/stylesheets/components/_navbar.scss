@@ -21,7 +21,7 @@
           color:var(--color-text-body);
           margin-left: var(--space-l);
           margin-right: auto;
-          text-decoration:none !important;
+          text-decoration: none !important;
           font-family: 'Climate Crisis', cursive;
         }
     }
@@ -58,6 +58,11 @@
           margin-top:4px;
           font-size: var(--font-size-s);
           color: var(--color-text-body);
+          transition: filter 250ms, color 500ms;
+          &.active {
+            color: var(--color-primary) !important;
+            transition: filter 250ms, color 300ms;
+          }
         }
 
         &_pseudo {
@@ -76,29 +81,55 @@
         }
 
         &_menu {
-          // navbar__name_menu
           list-style-type: none;
-          min-width: 180px !important;
+          min-width: 200px !important;
           border-radius: var(--border-radius-m);
-          padding:var(--space-m);
+          padding: var(--space-s) 0;
           position: absolute;
-          margin-top:290px;
+          margin:0;
+          margin-top:400px;
           transform-origin: top right;
           background-color: var(--bg-color);
-          // border:1px solid var(--color-text-pseudo);
           z-index: 50;
           right: 0px;
-          transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-          animation-duration: .3s;
-          row-gap: var(--space-m);
+          transition: filter 250ms, color 200ms, background-color 300ms;
+          row-gap: var(--space-2xl);
           box-shadow: var(--shadow-cm);
           li {
+            display:flex;
+            align-items:center;  
+            column-gap: 12px;
             margin: var(--space-s);
+
+            .separator {
+              border-bottom:1px dashed var(--color-separator);
+              width: 100%;
+              padding:0;
+              margin: var(--space-xs) 0px;
+            }
+
+            .icon {
+              margin-top: auto;
+              margin-bottom: auto;
+              margin-left: var(--space-m);
+              margin-right: 0px;
+              &.logout {
+                color:red !important;
+              }
+            }
+
             a {
               line-height: var(--line-height-link);
               font-weight:400;
+              margin-top:auto;
+              margin-bottom: auto;
+              margin-right: var(--space-m);
               color:var(--color-text-header);
               font-size: var(--font-size-s);
+              &.logout {
+                color:red !important;
+              }
+              
             }
           }
         }

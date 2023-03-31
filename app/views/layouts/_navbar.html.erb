@@ -6,7 +6,7 @@
 
     <div class="navbar__name" data-controller="dropdown">
 
-      <button class="navbar__name_button" type="button" data-dropdown-target="navbar__name_button" data-action="dropdown#toggle click@window->dropdown#hide">
+      <button class="navbar__name_button" type="button" data-action="dropdown#toggle click@window->dropdown#hide">
         <div style="" class="navbar__name_avatar-box">
           <%
           if @profile != nil && current_account.id == @profile.account_id
@@ -16,7 +16,12 @@
           end
           %>
           <% if user.avatar.attached? %>
-            <div style="margin-right:4px; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;border: 3px solid <%= user.color %>">
+            <div style="margin-right:4px; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <%
+=begin %>
+            <div style="margin-right:4px; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;border: 3px solid <%= user.color %>"> 
+            <% 
+=end %>
               <%= image_tag(user.avatar_profile, class: "navbar__name_image",  size:"32px") %>
             </div>
           <% else %>
@@ -28,7 +33,7 @@
           <% end %>
         </div>
         <div class="navbar__name-user">
-          <div class="navbar__name_link">
+          <div class="navbar__name_link" data-dropdown-target="navbar__name_button">
             <%= user.lastname != nil ? user.lastname.capitalize : user.username.capitalize %>
           </div>
           <div class="navbar__name_pseudo">
@@ -37,16 +42,55 @@
         </div>
       </button>
       <ul data-dropdown-target="menu" class="hidden navbar__name_menu">
-        <li><%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user), class: "navbar__name_link" %></li>
-        <li><a href="#" data-action="dropdown#toggle">Support</a></li>
-        <li><a href="#" data-action="dropdown#toggle">License</a></li>
         <li>
-          <%= link_to rodauth.two_factor_manage_path do %>
-            <div style="margin:5px;"><svg width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M2 7v2h4v2H4a2 2 0 0 0-2 2v4h6v-2H4v-2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H2m7 0v10h2v-4h3v-2h-3V9h4V7H9m9 0a2 2 0 0 0-2 2v8h2v-3h2v3h2V9a2 2 0 0 0-2-2h-2m0 2h2v3h-2V9Z"/></svg></div>
-          <% end %>
+        <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="20" fill="currentColor"><path d="M10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-14a4 4 0 0 1 4 4v2a4 4 0 1 1-8 0V8a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v2a2 2 0 1 0 4 0V8a2 2 0 0 0-2-2zM5.91 16.876a8.033 8.033 0 0 1-1.58-1.232 5.57 5.57 0 0 1 2.204-1.574 1 1 0 1 1 .733 1.86c-.532.21-.993.538-1.358.946zm8.144.022a3.652 3.652 0 0 0-1.41-.964 1 1 0 1 1 .712-1.868 5.65 5.65 0 0 1 2.284 1.607 8.032 8.032 0 0 1-1.586 1.225z"></path></svg>
+        </span>
+        <%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user), class: "navbar__name_link" %>
         </li>
         <li>
-          <%= button_to "Deconnexion", rodauth.logout_path, data: { turbo_method: :question}, class: "btn btn--black navbar__right" %>
+          <div class="separator"></div>
+        </li>
+        <li>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -4 24 24" width="20" fill="currentColor"><path d="M9 12V1a1 1 0 1 1 2 0v11h1a1 1 0 0 1 0 2h-1v1a1 1 0 0 1-2 0v-1H8a1 1 0 0 1 0-2h1zm7-10V1a1 1 0 0 1 2 0v1h1a1 1 0 0 1 0 2h-1v11a1 1 0 0 1-2 0V4h-1a1 1 0 0 1 0-2h1zM4 5h1a1 1 0 1 1 0 2H4v8a1 1 0 0 1-2 0V7H1a1 1 0 1 1 0-2h1V1a1 1 0 1 1 2 0v4z"></path></svg>
+          </span>
+          <a href="#" data-action="dropdown#toggle">Paramètres</a>
+        </li>
+        <li>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16H3l3.47-4.66A2 2 0 1 0 3 9.8m7 6.2V8h4m-4 4h3m4 4v-6a2 2 0 0 1 4 0v6m-4-3h4"/></svg>
+          </span>
+          <%= link_to "Auth" , rodauth.two_factor_manage_path, class: "navbar__name_link" %>
+        </li>
+        <li>
+          <div class="separator"></div>
+        </li>
+        <li>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="20" fill="currentColor"><path d="M2 3v4h12.98l2.853-1.714a.333.333 0 0 0 0-.572L14.98 3H2zm6-2a1 1 0 1 1 2 0h4.98a2 2 0 0 1 1.03.286L18.863 3a2.333 2.333 0 0 1 0 4L16.01 8.714A2 2 0 0 1 14.98 9H10v1h7.995a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H10v1a1 1 0 0 1-2 0v-1H5.015a2 2 0 0 1-1.03-.286L1.132 16a2.333 2.333 0 0 1 0-4l2.853-1.714A2 2 0 0 1 5.015 10H8V9H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h6zm9.995 11H5.015l-2.853 1.714a.333.333 0 0 0 0 .572L5.015 16h12.98v-4z"></path></svg>
+          </span>
+          <a href="#" data-action="dropdown#toggle">Guides</a>
+        </li>
+        <li>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-linejoin="round" d="M14 19c3.771 0 5.657 0 6.828-1.172C22 16.657 22 14.771 22 11c0-3.771 0-5.657-1.172-6.828C19.657 3 17.771 3 14 3h-4C6.229 3 4.343 3 3.172 4.172C2 5.343 2 7.229 2 11c0 3.771 0 5.657 1.172 6.828c.653.654 1.528.943 2.828 1.07"/><path d="M10 8.484C10.5 7.494 11 7 12 7c1.246 0 2 .989 2 1.978s-.5 1.033-2 2.022v1m0 2.5v.5m2 4c-1.236 0-2.598.5-3.841 1.145c-1.998 1.037-2.997 1.556-3.489 1.225c-.492-.33-.399-1.355-.212-3.404L6.5 17.5"/></g></svg>
+          </span>
+          <a href="#" data-action="dropdown#toggle">Aide</a>
+        </li>
+        <li>
+          <span class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="20" fill="currentColor"><path d="M6 2H3a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2zM3.01 8v9.965H5V13a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4.965h6.013V8H15c-.768 0-1.47-.289-2-.764A2.989 2.989 0 0 1 11 8H9c-.768 0-1.47-.289-2-.764A2.989 2.989 0 0 1 5 8H3.01zm-2-.754A2.993 2.993 0 0 1 0 5V3a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v2c0 .882-.38 1.676-.987 2.225v10.74a2 2 0 0 1-2 2h-7.64A2.01 2.01 0 0 1 9 20H7a2.01 2.01 0 0 1-.373-.035H3.011a2 2 0 0 1-2-2V7.245zM9 17.966V13H7v4.965h2zM12 2H8v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2zm2 0v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-3zm0 9h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z"></path></svg></span>
+          <a href="#" data-action="dropdown#toggle">License</a>
+        </li>
+        <li>
+          <div class="separator"></div>
+        </li>
+        <li>
+        <span class="icon logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 12q-.425 0-.712-.288Q11 11.425 11 11V3q0-.425.288-.713Q11.575 2 12 2t.713.287Q13 2.575 13 3v8q0 .425-.287.712Q12.425 12 12 12Zm0 9q-1.875 0-3.512-.712q-1.638-.713-2.85-1.926q-1.213-1.212-1.926-2.85Q3 13.875 3 12q0-1.575.513-3.012Q4.025 7.55 4.95 6.4q.275-.35.7-.338q.425.013.75.338q.275.275.25.675q-.025.4-.275.75q-.65.875-1.012 1.937Q5 10.825 5 12q0 2.925 2.038 4.962Q9.075 19 12 19t4.962-2.038Q19 14.925 19 12q0-1.175-.362-2.263q-.363-1.087-1.038-1.962q-.25-.325-.275-.713q-.025-.387.25-.662q.3-.3.725-.313q.425-.012.7.313q.95 1.15 1.475 2.588Q21 10.425 21 12q0 1.875-.712 3.512q-.713 1.638-1.925 2.85q-1.213 1.213-2.85 1.926Q13.875 21 12 21Z"/></svg>
+        </span>
+          <%= link_to "Deconnexion", rodauth.logout_path, data: { turbo_method: :question}, class:"logout" %>
         </li>  
       </ul>  
 
