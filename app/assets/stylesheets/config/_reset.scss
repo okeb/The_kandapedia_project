@@ -19,24 +19,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-
-  background-color: var(--color-background);
-  color: var(--color-text-body);
-  line-height: var(--line-height-body);
-  font-family: var(--font-family-sans);
 }
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #FFFFFF;
-    color: var(--color-text-body);
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 5%, 25%);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #222;
-    color: #EEE;
+    background-color: hsl(0, 0%, 13%);
+    color: hsl(0, 0%, 94%);
   }
 }
 

@@ -16,10 +16,7 @@
   --font-size-3xl: 2rem;    // 32px
   --font-size-4xl: 2.5rem; // 40px
 
-  // Three different text colors
-  --color-text-header: hsl(0, 1%, 16%);
-  --color-text-body:   hsl(0, 5%, 25%);
-  --color-text-muted:  hsl(0, 1%, 44%);
+  // Three different text colors and background colors
   @media (prefers-color-scheme: light) {
     .navbar {
       --color-text-header: hsl(0, 1%, 16%);
@@ -27,6 +24,17 @@
       --color-text-muted:  hsl(0, 1%, 44%);
       
       --bg-color: hsl(0, 0%, 100%);
+      --bg-color-body:hsl(0, 0%, 100%);
+
+      --btn_default-border-color:hsl(0, 5%, 25%);
+      --btn_default-bg-color: hsl(0, 0%, 94%);
+      --btn_default-bg-hover-color: hsl(0, 0%, 88%);
+
+      --btn_dark-bg-color:hsl(0, 1%, 16%);
+      --btn_dark-text-color: hsl(0, 0%, 94%);
+      --btn_dark-border:transparent;
+      --btn_dark-bg-hover-color: hsl(0, 0%, 32%);
+
     }
   }
 
@@ -35,8 +43,18 @@
       --color-text-header: hsl(0, 0%, 100%);
       --color-text-body:   hsl(0, 0%, 94%);
       --color-text-muted:  hsl(0, 0%, 81%);
-
+      
       --bg-color: hsl(0, 1%, 16%);
+      --bg-color-body: hsl(0, 0%, 13%);
+      
+      --btn-defaut-border-color:hsl(0, 0%, 94%);
+      --btn-defaut-bg-color:hsl(0, 0%, 32%);
+      --btn_default-bg-hover-color: hsl(0, 0%, 20%);
+
+      --btn_dark-bg:transparent;
+      --btn_dark-text: hsl(0, 0%, 94%);
+      --btn_dark-border:hsl(0, 0%, 94%) 1px solid;
+      --btn_dark-bg-hover: hsl(0, 0%, 22%);
     }
   }
 
@@ -53,8 +71,8 @@
   --space-4xl: 4rem;     // 64px
 
   // Application colors
-  --color-primary:          hsl(350, 67%, 50%);
-  --color-primary-rotate:   hsl(10, 73%, 54%);
+  --color-primary:          hsl(219, 68%, 50%);
+  --color-primary-rotate:   hsl(259, 73%, 54%);
   --color-primary-bg:       hsl(0, 85%, 96%);
   --color-secondary:        hsl(101, 45%, 56%);
   --color-secondary-rotate: hsl(120, 45%, 56%);
@@ -69,6 +87,9 @@
 
   // Border radius
   --border-radius: 0.375rem;
+  --border-radius-m: 0.575rem;
+  --border-radius-l: 0.775rem;
+  --border-radius-full: 100%;
 
   // Border
   --border: solid 2px var(--color-light);

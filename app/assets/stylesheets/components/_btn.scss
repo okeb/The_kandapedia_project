@@ -1,23 +1,40 @@
 .btn {
   display: inline-block;
   padding: var(--space-2xs) var(--space-m);
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-m);
   background-origin: border-box; // Invisible borders with linear gradients
-  background-color: transparent;
-  border: solid 2px transparent;
-  font-weight: bold;
-  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid transparent;
+  background-color: var(--btn_default-bg-color);
+  font-size:var(--font-size-s);
+  font-family: var(--font-family-sans);
+  text-decoration: none !important;
+  color: var(--color-primary);
   cursor: pointer;
   outline: none;
-  transition: filter 400ms, color 200ms;
+  transition: filter 400ms, color 200ms, background-color 500ms;
 
   &:hover,
   &:focus,
   &:focus-within,
   &:active {
     transition: filter 250ms, color 200ms;
+    background-color: var(--btn_default-bg-hover-color);
+    transition: filter 400ms, color 200ms, background-color 300ms;
   }
 
+  &--black {
+    background-color: var(--btn_dark-bg-color);
+    color: var(--btn_dark-text-color);
+    border: var(--btn_dark-border);
+
+    &:hover,
+    &:focus-within {
+      background-color: var(--btn_dark-bg-hover-color);
+      transition: filter 250ms, color 200ms, background-color 300ms;
+      border-color:(--color-white);
+    }
+  }
 
   &--primary {
     color: var(--color-white);
@@ -55,19 +72,6 @@
     &:active {
       color: var(--color-dark);
       filter: brightness(92%);
-    }
-  }
-
-  &--dark {
-    color: var(--color-white);
-    border-color: var(--color-dark);
-    background-color: var(--color-dark);
-
-    &:hover,
-    &:focus,
-    &:focus-within,
-    &:active {
-      color: var(--color-white);
     }
   }
 }
