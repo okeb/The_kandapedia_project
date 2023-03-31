@@ -19,5 +19,8 @@ application.register("select-skill", SelectSkillController)
 import SelectTagController from "./select_tag_controller"
 application.register("select-tag", SelectTagController)
 
+import SetPrivateController from "./set_private_controller"
+application.register("set-private", SetPrivateController)
+
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)

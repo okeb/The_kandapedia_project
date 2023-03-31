@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || root_path)
   end
 
+  def authenticate
+    rodauth.require_account # redirect to login page if not authenticated
+  end
+
+  def current_account
+    rodauth.rails_account
+  end
+
+  helper_method :current_account  
+
 end

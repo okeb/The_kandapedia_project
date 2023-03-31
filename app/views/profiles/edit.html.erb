@@ -32,7 +32,7 @@
 }
 </style>
 <div class="container">
-  <%= form_for @profile, as: :profile, url: profile_path(current_account.profile.account_id), method: :patch, html: { class: "edit_profile", id: "edit_profile_#{current_account.profile.account_id}" } do |f| %>
+  <%= form_for @profile, as: :profile, url: profile_path(current_account.profile), method: :patch, html: { class: "edit_profile", id: "edit_profile_#{current_account.profile.account_id}" } do |f| %>
 
     <div style="padding-bottom:var(--space-m)">
         <h4><%= @profile.account.email %></h4>
@@ -58,6 +58,10 @@
     </div>
 
     <div class="my-5 field">
+      <%= f.label :color %><br>
+      <%= f.color_field :color, value: @profile.color, style: "height:50px; width:150px" %>
+    </div>
+    <div class="my-5 field">
       <%= f.label :firstname %><br>
       <%= f.text_field :firstname, value: @profile.firstname %>
     </div>
@@ -81,7 +85,7 @@
     </div>
     <div style="padding-top:var(--space-m)">
       <%= f.submit "Modifier", class: "btn btn--primary" %>
-      <%= link_to "Retour", profile_path(current_account), class: "btn btn--secondary" %>
+      <%= link_to "Retour", profile_path(current_account.profile), class: "btn btn--secondary" %>
     </div>
 
     <h2 style="margin-top:35px; margin-bottom:7px">Changer mon mot de passe</h2>

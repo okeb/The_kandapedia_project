@@ -38,9 +38,10 @@
     letter-spacing:-1px
   } 
 </style>
-
-<div style="height:20px"></div>
-<div class="">
+<% if true  #(current_account === @question.account && @question.is_private?) || !@question.is_private?  %>
+<% #current_account.is_premium %>
+  <div style="height:20px"></div>
+  <div class="">
     <div class="navbar__name" style="display:flex; align-items:center; justify-content:start">
       <div style=" display:flex; align-items:center;  justify-content: center;">
         <% if @question.account.profile.avatar.attached? %>
@@ -55,22 +56,30 @@
           </div>
         <% end %>
       </div>
-      <%= link_to @question.account.profile.lastname != nil ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account), class:"name_author" %>   
+      <%= link_to @question.account.profile.lastname != "" ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account.profile), class:"name_author" %>   
     </div>
-</div>
-<h2>
-    <%= link_to @question.title, @question %>
-</h2>
-<div style="height:5px"></div>
-<%= render "taglist", as: :question %>
-<div style="display:flex; align-items:center">
-  <%= render "bookmark", as: :question %>
-  <div style="width:10px; height:10px"></div>
-  <%= render "readlist", as: :question %>
-  <div style="width:10px; height:10px"></div>
-  <%= render "view_question", as: :question %>
-  <div style="width:20px; height:10px"></div>
-  <p style="letter-spacing:0.1; font-size:11px; font-weight:600; color:#AAA">
-    <%= @question.get_likes.size %>&nbsp;J'aime
-  </p>
-</div>
+  </div>
+  <h2 style="display:flex; align-items:center; font-family: 'Inter Tight', sans-serif">
+  <% if (current_account === @question.account && @question.is_private?) ||  !@question.is_private? %>
+    <%= link_to @question.title, @question, style: "color: #000 !important" %>
+  <% else %>
+    <%= @question.title %>
+  <% end %>
+    <% if @question.is_private? %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 16 16" style="margin:auto 3px"><path fill="#FC0" d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/></svg>
+    <% end %>
+  </h2>
+  <div style="height:5px"></div>
+  <%= render "taglist", as: :question %>
+  <div style="display:flex; align-items:center">
+    <%= render "bookmark", as: :question %>
+    <div style="width:10px; height:10px"></div>
+    <%#= render "readlist", as: :question %>
+    <div style="width:10px; height:10px"></div>
+    <%= render "view_question", as: :question %>
+    <div style="width:20px; height:10px"></div>
+    <p style="letter-spacing:0.1; font-size:11px; font-weight:600; color:#AAA">
+      <%= @question.likes_count %>&nbsp;J'aime
+    </p>
+  </div>
+<% end %>

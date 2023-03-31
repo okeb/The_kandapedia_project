@@ -20,11 +20,16 @@ class Profile < ApplicationRecord
 
   def get_initial_profile
     initials = ""
-    if self.lastname != nil && self.firstname != nil
-      long_name = (self.lastname + " " + self.firstname).split(' ')
-      long_name.each{ |x|  initials += x[0]}
-    else
-      initials = self.username
+    if !lastname.nil? && !self.firstname.nil?
+      if !self.lastname.empty? && !self.firstname.empty?
+        long_name = (self.lastname + " " + self.firstname).split(' ')
+        long_name.each{ |x|  initials += x[0]}
+        if initials.length < 2
+          initials = self.username
+        end
+      else
+        initials = self.username
+      end
     end
 
 
