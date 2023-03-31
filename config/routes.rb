@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       put "add_to_readlist", to: 'questions#add_to_readlist'
       put "remove_to_readlist", to: 'questions#remove_to_readlist'
       put "bookmark", to: 'questions#toggle_to_bookmark'
+      patch "update_tags", to: 'questions#update_tags'
 
       put "awesome_question", to: 'questions#add_awesome'
       put "perfect_question", to: 'questions#add_perfect'

@@ -9,6 +9,7 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.string :authorised_users
       t.text :tags
       t.integer :views_count, default: 0
+      t.integer :likes_count, default: 0
       t.integer :position
       t.integer :is_private, default: 0
       t.boolean :is_published, default: false

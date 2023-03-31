@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_09_105820) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_11_140006) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -125,6 +125,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_105820) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "bookmark_list"
+    t.json "readlist_list"
     t.index ["account_id"], name: "index_profiles_on_account_id"
   end
 
@@ -151,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_105820) do
     t.integer "cached_weighted_appreciation_score", default: 0
     t.integer "cached_weighted_appreciation_total", default: 0
     t.float "cached_weighted_appreciation_average", default: 0.0
+    t.integer "likes_count", default: 0
     t.index ["account_id"], name: "index_questions_on_account_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
   end

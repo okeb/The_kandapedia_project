@@ -71,10 +71,17 @@
       <div style="width:20px; height:20px"></div>
       <%= render "appreciation", as: :question %>
       <div style="width:20px; height:20px"></div>
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
+
+      <%= form_with model: question, data: { controller: "set-private"}, local: false, html: {style: "display:flex; align-items:center"}  do |f| %>
+        <label class="switch">
+          <input type="checkbox" data-set-private-target="checkbox" data-action="click->set-private#switched" <%= question.is_private == 1 ? "checked" : "" %>/>
+          <span class="slider round"></span>
+        </label>
+        <p style="margin-left:5px" data-set-private-target="text"><%= question.is_private == 1 ? "Private" : "Public" %></p>
+        <%= f.hidden_field :is_private, data: { set_private_target: "field"}, id: "question_is_private"  %>
+      <% end %>
+
+
     </div>
     <%= render "title", as: :question %>
     <%= render "tags", as: :question %>

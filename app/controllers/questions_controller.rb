@@ -5,8 +5,8 @@ class QuestionsController < ApplicationController
   before_action :find_question_for_vote, only: %i[ toggle_to_bookmark add_to_readlist remove_to_readlist add_awesome add_perfect add_nice add_wrong add_bad get_global_appreciation_value get_appreciation ]
   after_action :set_tags, only: %i[ create ]
   after_action :give_new_slug, only: %i[ update ]
-  after_action :increment_counter, only: %i[ create ]
-  after_action :decrement_counter, only: %i[ destroy ]
+  after_action :increment_question_counter, only: %i[ create ]
+  after_action :decrement_question_counter, only: %i[ destroy ]
   
   ActsAsTaggableOn.remove_unused_tags = true
   ActsAsTaggableOn.force_lowercase = true
@@ -22,7 +22,8 @@ class QuestionsController < ApplicationController
   
   # GET /questions or /questions.json
   def index
-    @questions = Question.includes(account: :profile).where(is_private: false)
+    @questions = Question.includes(account: :profile)
+    # @questions = Question.includes(account: :profile).where(is_private: false)
   end
 
   # GET /questions/1 or /questions/1.json
@@ -47,8 +48,13 @@ class QuestionsController < ApplicationController
   def add_awesome
     if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 3)
       remove_appreciation
+      decrement_likes_counter(@question)
     else
+      if current_account.voted_up_on? @question, vote_scope: :appreciation
+        decrement_likes_counter(@question)
+      end
       @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 3
+      increment_likes_counter(@question)
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -58,8 +64,13 @@ class QuestionsController < ApplicationController
   def add_perfect
     if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
       remove_appreciation
+      decrement_likes_counter(@question)
     else
+      if current_account.voted_up_on? @question, vote_scope: :appreciation
+        decrement_likes_counter(@question)
+      end
       @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 2
+      increment_likes_counter(@question)
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -69,8 +80,13 @@ class QuestionsController < ApplicationController
   def add_nice
     if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
       remove_appreciation
+      decrement_likes_counter(@question)
     else
+      if current_account.voted_up_on? @question, vote_scope: :appreciation
+        decrement_likes_counter(@question)
+      end
       @question.upvote_by current_account, vote_scope: :appreciation, vote_weight: 1
+      increment_likes_counter(@question)
     end
     respond_to do |format|
         format.html { redirect_to @question }
@@ -79,6 +95,9 @@ class QuestionsController < ApplicationController
   end
 
   def add_wrong
+    if current_account.voted_up_on? @question, vote_scope: :appreciation
+      decrement_likes_counter(@question)
+    end
     if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
       remove_appreciation
     else
@@ -90,6 +109,9 @@ class QuestionsController < ApplicationController
   end
 
   def add_bad
+    if current_account.voted_up_on? @question, vote_scope: :appreciation
+      decrement_likes_counter(@question)
+    end
     if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
       remove_appreciation
     else
@@ -169,6 +191,18 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
+        format.html { redirect_to @question }
+        format.turbo_stream
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_tags
+    @question =Question.find_by(slug: params[:question_id])
+    respond_to do |format|
+      if @question.update(question_params_without_tags)
         @question[:tags] = @question.tag_list.join(", ")
         @question.save!
         format.html { redirect_to @question }
@@ -189,14 +223,41 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def increment_counter
+  
+  require 'json'
+
+    def add_bookmark_list
       current_account.questions_count += 1
       current_account.save!
     end
 
-    def decrement_counter
+    def remove_bookmark_list(question, profile)
+      bookmark_list = JSON.parse(profile.bookmark_list)
+      id_question = question.id
+      if bookmark_list.include? id_question
+        profile.bookmark_list 
+        current_account.save!
+      end
+    end
+
+    def increment_question_counter
+      current_account.questions_count += 1
+      current_account.save!
+    end
+
+    def decrement_question_counter
       current_account.questions_count -= 1
       current_account.save!
+    end
+    
+    def increment_likes_counter(item)
+      item.likes_count += 1
+      item.save!
+    end
+
+    def decrement_likes_counter(item)
+      item.likes_count -= 1
+      item.save!
     end
 
     def set_tags
@@ -232,10 +293,12 @@ class QuestionsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_question_by_slug
-      unless (Question.find_by(slug: params[:id]))
-        redirect_to questions_path
-      end
       @question = Question.find_by(slug: params[:id])
+      if (@question == nil)
+        redirect_to questions_path
+      else
+        @question
+      end
     end
 
     # get the right question to vote
@@ -259,6 +322,9 @@ class QuestionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def question_params
-      params.require(:question).permit(:title, :body, :position, :parent_id, :tag_list, :tags)
+      params.require(:question).permit(:title, :body, :is_private, :position, :parent_id)
+    end
+    def question_params_without_tags
+      params.require(:question).permit(:title, :body, :is_private, :position, :parent_id, :tag_list, :likes_count, :tags)
     end
 end

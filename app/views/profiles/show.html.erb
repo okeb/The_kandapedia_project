@@ -20,7 +20,7 @@
       <% end %>
     </div>
       <div style="display:flex; align-items:center; justify-content:flex-start">
-        <% if !@profile[:skills].empty? %>
+        <% if !@profile[:skills].nil? %>
           <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + @profile[:skills].gsub!(", ", ", #") %></p>
         <% end %>
       </div>

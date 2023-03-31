@@ -2,7 +2,7 @@
 <style>
 
 </style>
-<%= form_with model: @question, data: { controller: "select-tag"}  do |f| %>
+<%= form_with model: @question, url: question_update_tags_path(@question), data: { controller: "select-tag"}, method: :patch, local: false do |f| %>
   <% tags = ActsAsTaggableOn::Tag.for_context(:tags).most_used(10).map { |tag| [tag.taggings_count, tag.name] } %>
   <%= f.select :tag_list, tags, {}, {multiple: true, data: {select_tag_target: "select"} } %>
   <%= f.hidden_field :tag_list, data: { select_tag_target: "input" } %>
