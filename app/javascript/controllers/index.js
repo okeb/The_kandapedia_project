@@ -7,6 +7,9 @@ import { application } from "./application"
 import CommandPaletteController from "./command_palette_controller"
 application.register("command-palette", CommandPaletteController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
@@ -24,6 +27,3 @@ application.register("set-private", SetPrivateController)
 
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)
-
-import Dropdown from "stimulus-dropdown";
-application.register("dropdown", Dropdown);
