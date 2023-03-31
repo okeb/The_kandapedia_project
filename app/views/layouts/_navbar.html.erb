@@ -1,6 +1,6 @@
 <header class="navbar">
   <div class="navbar__brand">
-    <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__name_title" %>
+    <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__brand_title" %>
   </div>
   <% if rodauth.logged_in? %>
     <div class="navbar__name" style="display:flex; align-items:center; justify-content:end">
@@ -14,7 +14,7 @@
         %>
         <% if user.avatar.attached? %>
           <div style="margin-right:4px; height:27px; width:27px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;border: 2px solid <%= user.color %>">
-            <%= image_tag(user.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border: 2px solid transparent; border-radius:100%", size:"27px") %>
+            <%= image_tag(user.avatar_profile, class: "navbar__name_image",  size:"27px") %>
           </div>
         <% else %>
           <div style="background-color:<%= user.color %>; height:25px; width:25px; border-radius:100%; display:flex; align-items:center;  justify-content: center;margin-right:5px">
@@ -24,7 +24,7 @@
           </div>
         <% end %>
       </div>
-      <%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user), class: "navbar__profile_link" %>   
+      <%= link_to user.lastname != nil ? user.lastname.capitalize : user.username.capitalize , profile_url(user), class: "navbar__name_link" %>   
     </div>
     <%= button_to "Deconnexion",
                   rodauth.logout_path,

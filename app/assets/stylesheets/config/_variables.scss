@@ -20,6 +20,25 @@
   --color-text-header: hsl(0, 1%, 16%);
   --color-text-body:   hsl(0, 5%, 25%);
   --color-text-muted:  hsl(0, 1%, 44%);
+  @media (prefers-color-scheme: light) {
+    .navbar {
+      --color-text-header: hsl(0, 1%, 16%);
+      --color-text-body:   hsl(0, 5%, 25%);
+      --color-text-muted:  hsl(0, 1%, 44%);
+      
+      --bg-color: hsl(0, 0%, 100%);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .navbar {
+      --color-text-header: hsl(0, 0%, 100%);
+      --color-text-body:   hsl(0, 0%, 94%);
+      --color-text-muted:  hsl(0, 0%, 81%);
+
+      --bg-color: hsl(0, 1%, 16%);
+    }
+  }
 
   // Classical and robust spacing system
   --space-3xs: 0.25rem;  // 4px
