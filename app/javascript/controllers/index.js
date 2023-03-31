@@ -24,3 +24,6 @@ application.register("set-private", SetPrivateController)
 
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)
+
+import Dropdown from "stimulus-dropdown";
+application.register("dropdown", Dropdown);
