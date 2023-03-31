@@ -1,0 +1,9 @@
+.question {
+  font-family: 'Inter Tight', sans-serif;
+  display:flex; 
+  align-items:center; 
+  
+  .question__title {
+    color: var(--color-text-body);
+  }
+}

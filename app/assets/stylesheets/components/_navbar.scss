@@ -99,7 +99,7 @@
             display:flex;
             align-items:center;  
             column-gap: 12px;
-            margin: var(--space-s);
+            margin: var(--space-s) 0;
 
             .separator {
               border-bottom:1px dashed var(--color-separator);
@@ -111,7 +111,7 @@
             .icon {
               margin-top: auto;
               margin-bottom: auto;
-              margin-left: var(--space-m);
+              margin-left: var(--space-l);
               margin-right: 0px;
               &.logout {
                 color:red !important;
@@ -120,10 +120,11 @@
 
             a {
               line-height: var(--line-height-link);
+              user-select: none;
               font-weight:400;
               margin-top:auto;
               margin-bottom: auto;
-              margin-right: var(--space-m);
+              margin-right: var(--space-l);
               color:var(--color-text-header);
               font-size: var(--font-size-s);
               &.logout {
