@@ -27,6 +27,7 @@
       
       --bg-color: hsl(0, 0%, 100%);
       --bg-color-body:hsl(0, 0%, 100%);
+      --bg-color-header: hsla(0, 0%, 100%, 0.777);
 
       --btn_default-border-color:hsl(0, 5%, 25%);
       --btn_default-bg-color: hsl(0, 0%, 94%);
@@ -44,11 +45,12 @@
     .navbar {
       --color-text-header: hsl(0, 0%, 100%);
       --color-text-body:   hsl(0, 0%, 94%);
-      --color-text-pseudo: hsl(0, 0%, 37%);
+      --color-text-pseudo: hsl(0, 0%, 50%);
       --color-text-muted:  hsl(0, 0%, 81%);
       
       --bg-color: hsl(0, 1%, 16%);
       --bg-color-body: hsl(0, 0%, 13%);
+      --bg-color-header: hsla(0, 0%, 11%, 0.377);
       
       --btn-defaut-border-color:hsl(0, 0%, 94%);
       --btn-defaut-bg-color:hsl(0, 0%, 32%);

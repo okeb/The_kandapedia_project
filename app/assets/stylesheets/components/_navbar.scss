@@ -1,8 +1,14 @@
 .navbar {
     display: flex;
     align-items: center;
-    //box-shadow: var(--shadow-large);
-    background-color: (var(--bg-color));
+    position: fixed;
+    z-index: 1000;
+    width: full;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    backdrop-filter: blur(17px);
+    background-color: var(--bg-color-header);
     padding: var(--space-m) var(--space-2xl);
     margin-bottom: var(--space-xxl);
 
@@ -78,7 +84,9 @@
           position: absolute;
           margin-top:290px;
           transform-origin: top right;
-          background-color:(--bg-color-body);
+          background-color: var(--bg-color);
+          // border:1px solid var(--color-text-pseudo);
+          z-index: 50;
           right: 0px;
           transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
           animation-duration: .3s;
@@ -87,11 +95,11 @@
           li {
             margin: var(--space-s);
             a {
-            line-height: var(--line-height-link);
-            font-weight:400;
-            color:var(--color-text-header);
-            font-size: var(--font-size-s);
-          }
+              line-height: var(--line-height-link);
+              font-weight:400;
+              color:var(--color-text-header);
+              font-size: var(--font-size-s);
+            }
           }
         }
     }
