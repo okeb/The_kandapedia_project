@@ -1,19 +1,20 @@
-import Dropdown from "stimulus-dropdown";
+import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="dropdown"
-export default class extends Dropdown {
+export default class extends Controller {
+  static targets = ["menu", "navbar__name_button"]
   connect() {
-    super.connect();
-    console.log("Dropdown is ok.");
+    console.log("Dropdown")
   }
-
   toggle(event) {
-    super.toggle();
-    console.log("Il toggle.");
+    event.preventDefault()
+    this.menuTarget.classList.toggle("hidden")
+    this.navbar__name_buttonTarget.classList.toggle("active");
   }
-
+  
   hide(event) {
-    super.hide(event);
-    console.log("Il se hide.");
+    if (this.element.contains(event.target) === false) {
+      this.menuTarget.classList.add("hidden");
+      this.navbar__name_buttonTarget.classList.remove("active");
+    }
   }
 }

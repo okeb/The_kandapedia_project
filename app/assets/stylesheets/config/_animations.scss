@@ -6,3 +6,51 @@
     opacity:1
   }
 }
+
+@keyframes fade {
+  0%, 100% {
+    opacity:0
+  }
+  5%, 60% {
+    opacity:1
+  }
+}
+
+
+@keyframes desappear-then-fade {
+  0%, 100% {
+    opacity:1
+  }
+  5%, 60% {
+    opacity:0
+  }
+}
+
+@keyframes desapear {
+  0% {
+    opacity:1
+  }
+  100% {
+    opacity:0
+  }
+}
+
+.animate {
+
+  &_fade {
+    animation-name: "appear-then-fade";
+    animation-delay: 0s;
+    animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    -o-animation-duration: 200ms;
+  }
+  &_hide {
+    animation-name: "appear-then-fade";
+    animation-delay: 0s;
+    animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-duration: 200ms;
+    -moz-animation-duration: 200ms;
+    -o-animation-duration: 200ms;
+  }
+
+}

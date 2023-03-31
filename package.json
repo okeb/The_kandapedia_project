@@ -47,7 +47,6 @@
     "lowlight": "^2.7.0",
     "ninja-keys": "^1.2.2",
     "slugify": "^1.6.5",
-    "stimulus-dropdown": "^2.1.0",
     "tom-select": "^2.2.2"
   },
   "scripts": {
