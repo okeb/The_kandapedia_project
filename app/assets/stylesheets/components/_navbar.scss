@@ -44,25 +44,21 @@
           display:flex;
           justify-items: left;
           padding:2px;
-          // padding-right: 2px;
-          .icons {
-            margin: auto 0;
-          }
         }
 
         &_image {
           object-fit: cover; 
-          object-position: 
-          center;
+          object-position:center;
           width:100%; 
           height:100%; 
           border: 2px solid transparent; 
           border-radius:100%;
-
+          
           &.user {
-            width: 25px;
-            height: 25px;
+            width: 27px;
+            height: 27px;
             border-width: 0;
+            margin-top:-2px;
           }
         }
 
@@ -83,9 +79,16 @@
             font-weight:700;
             font-size: var(--font-size-m);
             margin-right: 0;
+            margin-top:auto;
+            margin-bottom:auto;
             padding: 2px;
             padding-left: 0px;
+            width:auto !important;
           }
+        }
+
+        span.icons {
+          margin:auto 0;
         }
 
         &_pseudo {
@@ -98,7 +101,7 @@
             font-size: var(--font-size-s);
             color: var(--color-text-body);
             opacity:.8;
-            margin-top:-6px;
+            margin-top:-1px;
           }
         }
 
@@ -112,40 +115,59 @@
 
         &_menu {
           list-style-type: none;
-          min-width: 235px !important;
+          min-width: 250px !important;
           border-radius: var(--border-radius-m);
-          padding: var(--space-s) 0;
+          padding: 0;
+          padding-top: var(--space-m);
+          padding-bottom: var(--space-s);
           position: absolute;
           margin:0;
-          margin-top:500px;
+          top:0;
+          margin-top:45px;
+          row-gap:0;
           transform-origin: bottom right;
           background-color: var(--bg-color);
           z-index: 50;
           right: 0px;
           transition: filter 250ms, color 200ms, background-color 300ms;
-          row-gap: var(--space-2xl);
+          row-gap: var(--space-l);
           box-shadow: var(--shadow-cm);
           li {
             display:flex;
+            justify-content: space-between;
             align-items:center;  
             column-gap: 12px;
-            margin: var(--space-s) 0;
+            margin: var(--space-2xs) var(--space-s);
 
-            ul.details {
-              display:flex;
-              margin-top:-7px !important;
-              margin-bottom:-12px !important;
-              column-gap: 12px;
-              opacity:.7;
-              li {
-                column-gap: 1px;
-                font-size: var(--font-size-xs) !important;
-                font-weight: 400 !important;
-                .nbre {
-                  font-weight:bold !important;
+            &.account {
+              margin:-14px 0 ;
+              a {
+                border-radius:7px; 
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                padding:17px 10px;
+
+                ul.details {
+                  display:flex;
+                  margin-top:2px !important;
+                  margin-bottom:-10px !important;
+                  column-gap: 12px;
+                  opacity:.7;
+                  user-select: none;
+                  li {
+                    column-gap: 1px;
+                    margin: var(--space-xs) 0;
+                    font-size: var(--font-size-xs) !important;
+                    font-weight: 400 !important;
+                    user-select: none;
+                    .nbre {
+                      font-weight:bold !important;
+                    }
+                  }
                 }
               }
             }
+
 
             .separator {
               border-bottom:1px dashed var(--color-separator);
@@ -157,27 +179,82 @@
             .icon {
               margin-top: auto;
               margin-bottom: auto;
-              margin-left: var(--space-l);
+              margin-left: var(--space-2xs);
               margin-right: 0px;
               &.logout {
                 color:red !important;
               }
               &.user {
-                margin-top:9px;
+                margin: 0;
+                margin-top: -15px;
+                margin-left: 4px;
+                margin-right: -5px;
+                width:30px;
               }
             }
 
             a {
+              display:flex;
+              border-radius: var(--border-radius);
+              align-items:center;  
+              column-gap: var(--space-s);
+              padding: var(--space-xs) 0;
+              width: 100%;
               line-height: var(--line-height-link);
               user-select: none;
               font-weight:500;
+              text-decoration:none;
               margin-top:auto;
-              margin-bottom: auto;
-              margin-right: var(--space-l);
+              margin-bottom:auto;
               color:var(--color-text-header);
               font-size: var(--font-size-s);
+              transition: background-color 100ms;
+
+              &.with_badge {
+                justify-content: space-between;
+                .title {
+                  display:flex;
+                  justify-content: center;
+                  align-content: center;
+                  column-gap: var(--space-s);
+                  padding: 0;
+                  padding-left: 0;
+
+                  p {
+                    margin:auto; 
+                    margin-right:0; 
+                    padding:0
+                  }
+                }
+                .badge {
+                  display:flex;
+                  justify-content: center;
+                  margin:0;
+                  padding:0;
+                  padding-right: var(--space-s);
+                  div {
+                    padding:0; 
+                    margin:0;
+                    display:flex;
+                    justify-content: center;
+                    .red_badge {
+                      color:white;
+                      background-color:var(--color-red);
+                      border-radius:5px; 
+                      padding:3px 4px; 
+                      font-size:9px; 
+                      margin:0; 
+                      font-weight:bold; 
+                    }
+                  }
+                }
+              }
               &.logout {
                 color:red !important;
+              }
+              &:hover, &:active, &:focus {
+                transition: background-color 0ms;
+                background-color: var(--bg-color-hover);
               }
               
               
