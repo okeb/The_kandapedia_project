@@ -1,26 +1,34 @@
-<%= form_with url: rodauth.login_path, method: :post, data: { turbo: false } do |form| %>
+<%= form_with url: rodauth.login_path, method: :post, data: { turbo: false }, class:"form__layout" do |form| %>
   <% if rodauth.skip_login_field_on_login? %>
-    <div class="form-group mb-3">
-      <%= form.label "login", rodauth.login_label, class: "form-label" %>
-      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", readonly: true, class: "form-control-plaintext" %>
+    <div class="form__group mb-3">
+      <%= form.label "login", rodauth.login_label, class: "form__label" %>
+      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", readonly: true, class: "form__input plaintext" %>
     </div>
   <% else %>
-    <div class="form-group mb-3">
-      <%= form.label "login", rodauth.login_label, class: "form-label" %>
-      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
+    <div class="form__group mb-3">
+      <%= form.label "login", rodauth.login_label, class: "form__label" %>
+      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
       <%= content_tag(:span, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
     </div>
   <% end %>
 
   <% unless rodauth.skip_password_field_on_login? %>
-    <div class="form-group mb-3">
-      <%= form.label "password", rodauth.password_label, class: "form-label" %>
-      <%= form.password_field rodauth.password_param, value: "", id: "password", autocomplete: rodauth.password_field_autocomplete_value, required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth.field_error(rodauth.password_param)) %>
+    <div class="form__group mb-3" position:relative>
+      <%= form.label "Votre mot de password", rodauth.password_label, class: "form__label" %>
+      <%= form.password_field rodauth.password_param, value: "", id: "password", autocomplete: rodauth.password_field_autocomplete_value, required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth.field_error(rodauth.password_param)) %>
       <%= content_tag(:span, rodauth.field_error(rodauth.password_param), class: "invalid-feedback", id: "password_error_message") if rodauth.field_error(rodauth.password_param) %>
+      <button type="button" data-action="password-visibility#toggle" style="margin-left:-6px; background-color:transparent; border:1px solid red; display:inline-flex">
+        <span data-password-visibility-target="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><path fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 16c.635 1.22 1.596 2.35 2.823 3.355C12.26 22.173 17.779 24 24 24s11.739-1.827 15.177-4.645C40.404 18.35 41.365 17.22 42 16m-13.023 8l2.071 7.727m6.305-10.373l5.657 5.656M5 27.01l5.657-5.657m6.271 10.375L18.998 24"/></svg>
+        </span>
+        <span data-password-visibility-target="icon" class="hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><g fill="none" stroke="#888888" stroke-linejoin="round" stroke-width="4"><path d="M24 36c11.046 0 20-12 20-12s-8.954-12-20-12S4 24 4 24s8.954 12 20 12Z"/><path d="M24 29a5 5 0 1 0 0-10a5 5 0 0 0 0 10Z"/></g></svg>
+        </span>
+      </button> 
     </div>
   <% end %>
 
-  <div class="form-group mb-3">
-    <%= form.submit rodauth.login_button, class: "btn btn-primary" %>
+  <div class="form__group btn__box mb-3">
+    <%= form.submit rodauth.login_button, class: "btn btn--primary" %>
   </div>
 <% end %>

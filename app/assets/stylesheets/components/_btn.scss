@@ -1,7 +1,8 @@
 .btn {
   display: inline-block;
-  padding: var(--space-2xs) var(--space-m);
-  border-radius: var(--border-radius-m);
+  // padding: var(--space-2xs) var(--space-m);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-l);
   background-origin: border-box; // Invisible borders with linear gradients
   font-weight: 500;
   border: 1px solid transparent;
@@ -10,15 +11,22 @@
   font-family: var(--font-family-sans);
   text-decoration: none !important;
   color: var(--color-primary);
-  cursor: pointer;
+  cursor: default;
   outline: none;
   transition: filter 400ms, color 200ms, background-color 500ms;
+
+
+  &__box{
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    padding: 0.75rem 0.25rem;
+    vertical-align: middle;
+  }
 
   &:hover,
   &:focus,
   &:focus-within,
   &:active {
-    transition: filter 250ms, color 200ms;
     background-color: var(--btn_default-bg-hover-color);
     transition: filter 400ms, color 200ms, background-color 300ms;
   }
@@ -37,6 +45,22 @@
   }
 
   &--primary {
+    background-color: var(--color-primary);
+    color: var(--btn_dark-text-color);
+    border-color: var(--color-primary);
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      // filter: saturate(0.1)  brightness(15%);
+      background-color: var(--color-primary--hover);
+      transition: filter 250ms, color 200ms, background-color 300ms;
+      border-color:(--color-primary--hover);
+    }
+  }
+
+  &--default {
     color: var(--color-white);
     background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-rotate));
 

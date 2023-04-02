@@ -3,8 +3,23 @@
   flex-wrap: wrap;
   gap: var(--space-xs);
 
+  &__layout {
+    margin-left:auto;
+    margin-right: auto;
+    width: 66.66%;
+    padding-left: 11rem;
+    padding-right: 11rem;
+  }
+
   &__group {
     flex: 1;
+    margin-top: 1.75rem;
+  }
+
+  &__label {
+    font-size: var(--font-size-s);
+    font-weight: 700;
+    line-height: 1.75rem;
   }
 
   &__actions {
@@ -15,17 +30,35 @@
   }
 
   &__input {
-    display: block;
+    background-color: var(--bg-color-input);
+    appearance: none;
+    line-height: var(--line-height-body);
+    color: var(--color-text-body);
+    border-color: var(--color-border_input);
+    border-style: solid;
+    border-width: 1.5px;
+    font-size: var(--font-size-l);
+    font-family: var(--font-family-sans);
+    margin-top: 0.125rem;
+    outline-color: var(--color-primary);
+    padding: 0.75rem 1rem;
     width: 100%;
-    max-width: 100%;
-    padding: var(--space-2xs) var(--space-xs);
-    border: var(--border);
-    border-radius: var(--border-radius);
     outline: none;
-    transition: box-shadow 250ms;
+    border-radius: var(--border-radius-l);
+    transition: border-color 350ms;
+    // display: block;
+    // width: 100%;
+    // max-width: 100%;
+    // padding: var(--space-2xs) var(--space-xs);
+    // border: var(--border);
+    // border-radius: var(--border-radius);
+    // outline: none;
+    // transition: box-shadow 250ms;
 
     &:focus {
-      box-shadow: 0 0 0 2px var(--color-glint);
+      border-color: var(--color-primary);
+      transition: border-color 200ms;
+      // box-shadow: 0 0 0 2px var(--color-primary);
     }
 
     &--invalid {
@@ -41,4 +74,25 @@
   & label {
     margin-right: var(--space-s);
   }
+}
+
+.link {
+    color: var(--color-primary);
+    list-style-position: inside;
+    cursor: pointer;
+    font-weight: 400;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
+
+    &:hover {
+      text-underline-offset: 3px;
+      text-decoration-thickness: 4px;
+    }
+}
+
+.list-disc {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-bottom: 0;
+  margin-top: 1.5rem;
 }
