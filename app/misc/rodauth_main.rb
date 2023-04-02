@@ -173,6 +173,8 @@ class RodauthMain < Rodauth::Rails::Auth
 
     change_password_button "Modifier votre mot de passe"
 
+    create_account_button "Créer votre compte"
+
     prefix "/user"
   end
 end
