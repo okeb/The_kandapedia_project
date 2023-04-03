@@ -26,6 +26,7 @@
       --color-gradient-white: linear-gradient(to right, var(--color-text-header), var(--color-text-header));
 
       --color-text-header: hsl(0, 1%, 16%);
+      --color-text-input: hsl(0, 0%, 19%);
       --color-text-body:   hsl(0, 0%, 19%);
       --color-text-pseudo: hsl(0, 0%, 57%);
       --color-text-muted:  hsl(0, 1%, 44%);
@@ -62,6 +63,7 @@
 
 
       --color-text-header: hsl(0, 0%, 87%);
+      --color-text-input: hsl(0, 0%, 97%);
       --color-text-body:   hsla(0, 0%, 100%, 0.6);
       --color-text-pseudo: hsl(0, 0%, 50%);
       --color-text-muted:  hsl(0, 0%, 81%);
