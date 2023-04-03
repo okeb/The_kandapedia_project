@@ -16,16 +16,22 @@
   --font-size-2xl: 1.5rem;   // 24px
   --font-size-3xl: 2rem;    // 32px
   --font-size-4xl: 2.5rem; // 40px
+  --font-size-btn: 16px;
 
   // Three different text colors and background colors
   @media (prefers-color-scheme: light) {
+
+      --color-primary:       hsl(214, 100%, 45%);
+      --color-alert:         hsl(0, 100%, 45%);
+      --color-gradient-white: linear-gradient(to right, var(--color-text-header), var(--color-text-header));
+
       --color-text-header: hsl(0, 1%, 16%);
       --color-text-body:   hsl(0, 0%, 19%);
       --color-text-pseudo: hsl(0, 0%, 57%);
       --color-text-muted:  hsl(0, 1%, 44%);
       --color-separator: hsl(0, 0%, 90%);
       --color-border_input: hsla(197, 20%, 70%, 0.777);
-      --color-primary--hover:   hsl(204, 69%, 65%);
+      --color-primary--hover:   hsla(214, 100%, 45%, 0.74);
       
       --bg-color: hsl(0, 0%, 100%);
       --bg-color-body:hsl(0, 0%, 100%);
@@ -35,6 +41,8 @@
 
       // couleur des badge
       --color-red:  hsl(0, 100%, 50%);
+      --color-red--dark:  hsl(0, 100%, 39%);
+      --color-red--light:  hsl(0, 100%, 94%);
 
       --btn_default-border-color:hsl(0, 5%, 25%);
       --btn_default-bg-color: hsl(0, 0%, 94%);
@@ -47,8 +55,14 @@
   }
 
   @media (prefers-color-scheme: dark) {
-      --color-text-header: hsl(0, 0%, 100%);
-      --color-text-body:   hsl(0, 0%, 94%);
+
+      --color-primary:       hsl(214, 100%, 52%);
+      --color-alert:         hsl(0, 100%, 51%);
+      --color-gradient-white: linear-gradient(to bottom right,  hsl(0, 0%, 100%), hsla(210, 100%, 95%, 0.472));
+
+
+      --color-text-header: hsl(0, 0%, 87%);
+      --color-text-body:   hsla(0, 0%, 100%, 0.6);
       --color-text-pseudo: hsl(0, 0%, 50%);
       --color-text-muted:  hsl(0, 0%, 81%);
       --color-separator: hsl(0, 0%, 24%);
@@ -62,6 +76,9 @@
       --bg-color-input: hsl(203, 80%, 6%);
       
       --color-red:  hsl(0, 100%, 35%);
+      --color-red--dark:  hsl(0, 100%, 72%);
+      --color-red--light:  hsl(0, 100%, 20%);
+
       
       --btn-defaut-border-color:hsl(0, 0%, 94%);
       --btn-defaut-bg-color:hsl(0, 0%, 32%);
@@ -86,7 +103,6 @@
   --space-4xl: 4rem;     // 64px
 
   // Application colors
-  --color-primary:          hsl(204, 88%, 53%);
   --color-primary-rotate:   hsl(259, 73%, 54%);
   --color-primary-bg:       hsl(0, 85%, 96%);
   --color-secondary:        hsl(101, 45%, 56%);

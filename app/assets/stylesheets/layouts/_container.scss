@@ -11,3 +11,28 @@
     max-width: 60rem;
   }
 }
+
+
+.form__container {
+  margin-left:auto;
+  margin-right: auto;
+  width: 100%;
+  max-width:607px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  @include media(tablet) {
+    margin-left:auto;
+    margin-right: auto;
+    width: 80.66%;
+    max-width:607px;
+  }
+
+  @include media(hd) {
+    margin-left:auto;
+    margin-right: auto;
+    width: 66.66%;
+    max-width:607px;
+  }
+
+}

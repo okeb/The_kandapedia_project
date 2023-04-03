@@ -7,7 +7,7 @@
   font-weight: 500;
   border: 1px solid transparent;
   background-color: var(--btn_default-bg-color);
-  font-size:var(--font-size-s);
+  font-size: var(--font-size-btn);
   font-family: var(--font-family-sans);
   text-decoration: none !important;
   color: var(--color-primary);
@@ -40,14 +40,14 @@
     &:focus-within {
       background-color: var(--btn_dark-bg-hover-color);
       transition: filter 250ms, color 200ms, background-color 300ms;
-      border-color:(--color-white);
+      border-color:var(--color-white);
     }
   }
 
   &--primary {
     background-color: var(--color-primary);
-    color: var(--btn_dark-text-color);
-    border-color: var(--color-primary);
+    color: white !important;
+    // border-color: var(--color-primary);
 
     &:hover,
     &:focus,
@@ -56,7 +56,7 @@
       // filter: saturate(0.1)  brightness(15%);
       background-color: var(--color-primary--hover);
       transition: filter 250ms, color 200ms, background-color 300ms;
-      border-color:(--color-primary--hover);
+      // border-color:var(--color-primary--hover) !important;
     }
   }
 

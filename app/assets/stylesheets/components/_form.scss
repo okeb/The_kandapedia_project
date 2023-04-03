@@ -3,14 +3,6 @@
   flex-wrap: wrap;
   gap: var(--space-xs);
 
-  &__layout {
-    margin-left:auto;
-    margin-right: auto;
-    width: 66.66%;
-    padding-left: 11rem;
-    padding-right: 11rem;
-  }
-
   &__group {
     flex: 1;
     margin-top: 1.75rem;
@@ -27,6 +19,28 @@
     flex: 0 0 auto;
     align-self: flex-start;
     gap: var(--space-xs);
+  }
+
+  &__title {
+    letter-spacing: -0.025em;
+  }
+
+  &__sub-title {
+    font-size:3rem; 
+    margin-top:.7rem; 
+    font-weight:700; 
+    line-height:2.7rem; 
+    letter-spacing:0.3;
+    background-image: var(--color-gradient-white);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+
+  }
+
+  &__text {
+    line-height:21px; 
+    margin-top:1.5rem;
+    color: var(--color-text-body);
   }
 
   &__input {
@@ -61,6 +75,10 @@
       // box-shadow: 0 0 0 2px var(--color-primary);
     }
 
+    &.is-invalid {
+      border-color: var(--color-red);
+    }
+
     &--invalid {
       border-color: var(--color-primary);
     }
@@ -68,6 +86,15 @@
     &::placeholder {
       color: lightgrey;
       font-style: italic;
+    }
+  }
+
+  &__check-box {
+    border-radius: var(--border-radius-m);
+    border: 2px solid --var(--color-alert);
+    // border: var(--color-border_input);
+    &:checked {
+      background-color: var(--color--primary);
     }
   }
 
@@ -90,9 +117,57 @@
     }
 }
 
+.email_auth_request {
+  margin-top: -1.5rem;
+  margin-bottom: 1.5rem;
+  margin-left: 2px;
+}
+
 .list-disc {
   list-style-type: disc;
   list-style-position: inside;
   margin-bottom: 0;
   margin-top: 1.5rem;
+}
+
+.invalid-feedback {
+  font-weight:600;
+  color: var(--color-alert);
+  margin-top: -4px;
+  margin-left:4px;
+
+  // &::before {
+  //   content: "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\"><g fill=\"none\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M9.378 4.661c1.143-2.057 4.101-2.057 5.245 0l6.6 11.882c1.111 2-.335 4.457-2.622 4.457H5.399c-2.287 0-3.733-2.457-2.622-4.457l6.6-11.882zM12 8a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zm1 9a1 1 0 1 1-2 0a1 1 0 0 1 2 0z\" fill=\"currentColor\"/></g></svg>";
+  //   display: inline-block;
+  // }
+}
+
+.error__explanation {
+  color: var(--color-red--dark); 
+  padding-top: 1.25rem; 
+  padding-bottom: 1.5rem; 
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 0.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--color-red--light);
+  
+  &-title {
+    font-weight:700; 
+    font-size:1.1rem; 
+    letter-spacing:.5; 
+    margin-bottom:-.7rem; 
+    padding-bottom:0rem;
+  }
+  .error-link {
+    color: var(--color-red--dark) !important;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    &:hover {
+      text-decoration-color: var(--color-red--dark);
+      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+    }
+  }
 }

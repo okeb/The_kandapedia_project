@@ -31,7 +31,7 @@ body {
 @media (prefers-color-scheme: dark) {
   body {
     background-color: hsl(204, 83%, 2%);
-    color: hsl(0, 0%, 94%);
+    color: hsla(0, 0%, 100%, .6);
   }
 }
 
@@ -76,7 +76,9 @@ h6 {
   h4,
   h5,
   h6 {
-    color: #FFF;
+    background-image:linear-gradient(to bottom right,  hsl(0, 0%, 100%), hsla(210, 100%, 95%, 0.472));
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
   }
 }
 

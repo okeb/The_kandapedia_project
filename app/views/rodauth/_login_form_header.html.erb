@@ -1,17 +1,35 @@
 <% # encoding: UTF-8 %>
-<div class="form__layout">
-  <% if rodauth.field_error(rodauth.password_param) && rodauth.features.include?(:reset_password) %>
-    <%= render template: "rodauth/reset_password_request", layout: false %>
-  <% end %>
+<div class="form__container">
 
-  <h2 style="letter-spacing: -0.025em;">Connectez-vous à Kandapedia</h2>
-  <p style="font-size:3rem; margin-top:.7rem; font-weight:700; line-height:2.7rem; letter-spacing:0.3">Renseignez vos identifiants</p>
+  <h2 class="form__title">Connexion</h2>
+  <% if !rodauth.skip_password_field_on_login? %>
+    <p class="form__sub-title">Renseignez<br/>vos identifiants</p>
+  <% else %>
+    <p class="form__sub-title">Bienvenue sur Kandapedia</p>
+  <% end %>
+  <% if rodauth.field_error(rodauth.login_param) || rodauth.field_error(rodauth.password_param) %>
+    <div class="error__explanation">
+      <p class="error__explanation-title">errors prohibited this user from being saved:</p>
+      <ul class="list-disc list-inside">
+        <% if rodauth.field_error(rodauth.login_param) %>
+          <li>
+            <a href="#login" class="error-link"><%= rodauth.field_error(rodauth.login_param) ? "Probleme de  #{rodauth.login_param}" : "pas de soucis" %></a>
+          </li>
+        <% end %>
+        <% if rodauth.field_error(rodauth.password_param) %>
+          <li>
+            <a href="#password" class="error-link"><%= rodauth.field_error(rodauth.password_param) ? "Probleme de #{rodauth.password_param}" : "pas de soucis" %></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <ul class="mb-2 list-disc">
     <li class="mb-1">
     Pas encore inscrit&nbsp;?&nbsp;<%= link_to "Inscrivez-vous", rodauth.create_account_path,  class: "link" %>
     </li>
     <li class="">
-      Mot de passe oublié&nbsp;?&nbsp;<%= link_to "Réinitialisez-le", rodauth.change_password_path,  class: "link" %>
+      Mot de passe oublié&nbsp;?&nbsp;<%= link_to "Réinitialisez-le", rodauth.reset_password_request_path,  class: "link" %>
     </li>
   </ul>
 </div>

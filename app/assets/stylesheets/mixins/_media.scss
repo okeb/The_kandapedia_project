@@ -2,4 +2,16 @@
   @if $query == tabletAndUp {
     @media (min-width: 50rem) { @content; }
   }
+
+  @if $query == tablet {
+    @media (min-width: 768px) { @content; }
+  }
+
+  @if $query == hd {
+    @media (min-width: 1024px) { @content; }
+  }
+
+  @if $query == '4k' {
+    @media (min-width: 1536px) { @content; }
+  }
 }
