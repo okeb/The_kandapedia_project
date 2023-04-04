@@ -1,4 +1,10 @@
 <div class="container">
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
   <img src="https://vite-ruby.netlify.app/logo.svg" width="150px" />
   <h1>Kandapedia</h1>
   <p>L'encyclopedie participative qui repond à toutes vos questions (ou presque)</p>
