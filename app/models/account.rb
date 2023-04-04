@@ -15,4 +15,8 @@ class Account < ApplicationRecord
       vote_scope: vote_scope
     ).pluck(:vote_weight).first
   end
+
+  def unfollow(user)
+    followerable_relationships.where(followable_id: user.id).destroy_all
+  end
 end

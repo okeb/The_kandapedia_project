@@ -72,17 +72,46 @@
       <p class="">Vous n'avez pas de question.</p>
   <% end %>
   <% if rodauth.logged_in? %>
-  <div style="height:55px"></div>
-  <div style="padding-top:var(--space-m)">
-    <div class="flex items-center mb-6 mr-6" style="display:flex">
-      <% if current_account.id == @profile.account_id %>
-        <%= link_to "Modifier le profil", edit_profile_path(@profile), class: "btn btn--primary" %>
+
+    <div style="height:55px"></div>
+
+    <div style="padding-top:var(--space-m)">
+        <% current_account.follow_requests.each do |request| %>
+          <p><strong><%= request.followerable.email %></strong> veut vous suivre</p>
+          <div class="" style="display:flex">
+            <%= button_to "Accepter", accept_following_path(request.followerable), class:"btn btn--primary" %>
+            <%= button_to "Refuser", decline_following_path(request.followerable), class:"btn btn--black" %>
+          </div>
+        <% end %>
+        <% current_account.followers.each do |follower| %>
+          <p><%= link_to follower.email, profiles_path(follower), class:"link" %> vous suit</p>
+          <%= button_to "Se désabonner", unfollow_profile_path(follower), class:"btn btn--black" %>
+        <% end %>
+
+      <div style="height:55px"></div>
+
+      <div class="flex items-center mb-6 mr-6" style="display:flex">
+          
+        <% if current_account.following?(@user) %>
+          <%= button_to "Se désabonner", unfollow_profile_path(@user), class:"btn" %>
+        <% elsif current_account.sent_follow_request_to?(@user) %>
+          <%= button_to "Annuler la demande", cancel_following_path(@user), class:"btn" %>
+        <% else %>
+          <% if !@user.sent_follow_request_to?(current_account) && current_account.id != @user.id %>
+            <%= button_to "Suivre", follow_profile_path(@user), class:"btn btn--black" %>
+          <% end %>
+        <% end %>
+
+
+        <% if current_account.id == @profile.account_id %>
+          <%= link_to "Modifier le profil", edit_profile_path(@user), class: "btn btn--primary" %>
+          <div style="height:10px; width:10px"></div>
+          <%= button_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
+        <% end %>
         <div style="height:10px; width:10px"></div>
-        <%= button_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
-      <% end %>
-      <div style="height:10px; width:10px"></div>
-      <%= link_to "Retour", :back,  class: "btn btn--primary" %>
+        <%= link_to "Retour", :back,  class: "btn btn--primary" %>
+
+      </div>
     </div>
-  </div>
   <% end %>
 </div>
