@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   has_one :profile
   acts_as_voter
   acts_as_tagger
+  followability
 
   def vote_weight_on(votable, vote_scope:)
     find_votes(
