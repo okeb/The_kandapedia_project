@@ -34,6 +34,7 @@
     background-image: var(--color-gradient-white);
     -webkit-background-clip: text; 
     -webkit-text-fill-color: transparent;
+    padding: 5px 0 7px 0;
 
   }
 
@@ -125,8 +126,16 @@
     text-decoration-line: underline;
 
     &:hover {
+      transition: color 150ms;
       text-underline-offset: 3px;
+      color: var(--color-primary--dark);
       text-decoration-thickness: 4px;
+    }
+
+    &:active, &:focus {
+      background-color: var(--color-primary--active);
+      color: var(--color-primary--active-dark);
+      transition: color 100ms, background-color 150ms;
     }
 }
 
