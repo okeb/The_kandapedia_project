@@ -35,9 +35,11 @@
       --color-primary--hover:   hsla(214, 100%, 45%, 0.74);
       
       --bg-color: hsl(0, 0%, 100%);
+      --bg-color__navbar-menu: hsl(0, 0%, 100%);
       --bg-color-body:hsl(0, 0%, 100%);
       --bg-color-header: hsla(0, 0%, 100%, 0.777);
       --bg-color-hover:  hsl(0, 0%, 94%);
+      --bg-color__navbar-menu--hover:  hsl(0, 0%, 94%);
       --bg-color-input: hsl(0, 0%, 97%);
 
       // couleur des badge
@@ -61,7 +63,6 @@
       --color-alert:         hsl(0, 100%, 51%);
       --color-gradient-white: linear-gradient(to bottom right,  hsl(0, 0%, 100%), hsla(210, 100%, 95%, 0.472));
 
-
       --color-text-header: hsl(0, 0%, 87%);
       --color-text-input: hsl(0, 0%, 97%);
       --color-text-body:   hsla(0, 0%, 100%, 0.6);
@@ -70,8 +71,11 @@
       --color-separator: hsl(0, 0%, 24%);
       --color-border_input: hsla(202, 100%, 79%, 0.477);
       --color-primary--hover:   hsl(204, 79%, 42%);
+
       
       --bg-color: hsl(204, 83%, 2%);
+      --bg-color__navbar-menu--hover: hsl(201, 29%, 14%);
+      --bg-color__navbar-menu: hsl(203, 28%, 9%);
       --bg-color-body: hsl(0, 0%, 13%);
       --bg-color-header: hsla(0, 0%, 7%, 0.377);
       --bg-color-hover:  hsl(0, 0%, 23%);

@@ -1,43 +1,3 @@
-<style>
-  .name_author {
-    letter-spacing:0.1;
-    font-size:11px;
-    font-weight:600;
-    color:#AAA;
-  }
-  .picture_author {
-    margin-right:3px;
-    height:17px;
-    width:17px;
-    border-radius:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .initial_author {
-    background-color:<%= @question.account.profile.color %>;
-    height:17px;
-    width:17px;
-    border-radius:100%;
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    margin-right:3px
-  }
-
-  .initial_author > p {
-    text-align:center;
-    font-weight:800;
-    color:black;
-    opacity:.9;
-    margin:auto;
-    font-size:.43rem;
-    letter-spacing:-1px
-  } 
-</style>
 <% if true  #(current_account === @question.account && @question.is_private?) || !@question.is_private?  %>
 <% #current_account.is_premium %>
   <div style="height:20px"></div>
@@ -56,7 +16,12 @@
           </div>
         <% end %>
       </div>
-      <%= link_to @question.account.profile.lastname != "" ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account.profile), class:"name_author" %>   
+      <p>
+      <%= link_to @question.account.profile.lastname != "" ? @question.account.profile.lastname.capitalize : @question.account.profile.username.capitalize , profile_url(@question.account.profile), class:"name_author" %>
+      </p> 
+      <p>
+      <%= link_to " @#{@question.account.profile.username.downcase}" , profile_url(@question.account.profile), class:"username_author" %>
+      </p>  
     </div>
   </div>
   <h2 class="question">

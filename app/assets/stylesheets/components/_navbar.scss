@@ -126,7 +126,7 @@
           margin-top:45px;
           row-gap:0;
           transform-origin: bottom right;
-          background-color: var(--bg-color);
+          background-color: var(--bg-color__navbar-menu);
           z-index: 50;
           right: 0px;
           transition: filter 250ms, color 200ms, background-color 300ms;
@@ -206,7 +206,7 @@
               text-decoration:none;
               margin-top:auto;
               margin-bottom:auto;
-              color:var(--color-text-header);
+              color:var(--color-text-body);
               font-size: var(--font-size-s);
               transition: background-color 100ms;
 
@@ -254,7 +254,7 @@
               }
               &:hover, &:active, &:focus {
                 transition: background-color 0ms;
-                background-color: var(--bg-color-hover);
+                background-color: var(--bg-color__navbar-menu--hover);
               }
               
               

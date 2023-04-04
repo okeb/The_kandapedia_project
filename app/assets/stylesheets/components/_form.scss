@@ -37,6 +37,19 @@
 
   }
 
+  &__password-btn-reveal {
+    color:var(--color-border_input);
+    opacity:1;
+    transition: color 300ms;
+    &:hover {
+      transition: color 200ms;
+      color: var(--color-primary);
+      // span {
+      //   color: var(--color-primary);
+      // }
+    }
+  }
+
   &__text {
     line-height:21px; 
     margin-top:1.5rem;

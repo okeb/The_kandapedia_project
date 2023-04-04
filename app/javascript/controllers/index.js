@@ -16,6 +16,9 @@ application.register("editable", EditableController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import PasswordVisibility from "./password_visibility_controller"
+application.register('password-visibility', PasswordVisibility)
+
 import SelectSkillController from "./select_skill_controller"
 application.register("select-skill", SelectSkillController)
 

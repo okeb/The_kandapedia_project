@@ -1,9 +1,60 @@
 .question {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', sans-serif;
   display:flex; 
   align-items:center; 
+  font-weight:500;
+  font-size:23px;
+  background-image: linear-gradient(to right,  hsla(0, 0%, 100%, .85), hsla(0, 0, 100%, 0.85)) !important;
   
   .question__title {
-    color: var(--color-text-body);
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
+
+  .name_author {
+    letter-spacing:0.1;
+    font-size:.9rem;
+    font-weight:600;
+    color:var(--color-text-body);
+  }
+  .username_author {
+    letter-spacing:0.1;
+    font-size:.9rem;
+    font-weight:400;
+    padding-left:5px;
+    color:var(--color-text-body);
+    opacity:.7;
+  }
+  .picture_author {
+    margin-right:5px;
+    height:27px;
+    width:27px;
+    border-radius:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .initial_author {
+    height:17px;
+    width:17px;
+    border-radius:100%;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin-right:3px
+  }
+
+  .initial_author > p {
+    text-align:center;
+    font-weight:800;
+    color:black;
+    opacity:.9;
+    margin:auto;
+    font-size:.43rem;
+    letter-spacing:-1px
+  }
