@@ -1,5 +1,11 @@
 <% # encoding: UTF-8 %>
 <div class="form__container">
+  <%= link_to :back, class:"btn-back" do %>
+  <span class="btn-back icon">
+  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
+  </span>
+  <span class="btn-back text">Retour</span>
+  <% end %>
 
   <h2 class="form__title">Connexion</h2>
   <% if !rodauth.skip_password_field_on_login? %>
@@ -32,4 +38,9 @@
       Mot de passe oublié&nbsp;?&nbsp;<%= link_to "Réinitialisez-le", rodauth.reset_password_request_path,  class: "link" %>
     </li>
   </ul>
+  <%
+=begin%>
+ <p>Pour vous connecter à votre compte, remplissez le<%= (!rodauth.skip_password_field_on_login?) ? 's' : '' %> champ<%= (!rodauth.skip_password_field_on_login?) ? 's' : '' %> ci-dessous et cliquez sur le bouton <strong><%= (!rodauth.skip_password_field_on_login?) ? 'Se connecter' : 'Continuer' %></strong>.</p> 
+<%
+=end%>
 </div>
