@@ -74,6 +74,10 @@
     outline: none;
     border-radius: var(--border-radius-l);
     transition: border-color 350ms;
+
+    &.with-reveal {
+      padding-right:60px;
+    }
     // display: block;
     // width: 100%;
     // max-width: 100%;
@@ -168,7 +172,7 @@
     }
 
     .text {
-      transition: margin-left 200ms;
+      transition: margin-left 20reve0ms;
       margin-left:7px;
     }
   }

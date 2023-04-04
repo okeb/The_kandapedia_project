@@ -1,10 +1,10 @@
 <% # encoding: UTF-8 %>
-<div class="form__container">
-  <%= link_to :back, class:"btn-back" do %>
-  <span class="btn-back icon">
-  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
-  </span>
-  <span class="btn-back text">Retour</span>
+<div class="form__container mt">
+  <%= link_to root_path, class:"btn-back" do %>
+    <span class="btn-back icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
+    </span>
+    <span class="btn-back text">Accueil</span>
   <% end %>
 
   <h2 class="form__title">Connexion</h2>
@@ -15,7 +15,7 @@
   <% end %>
   <% if rodauth.field_error(rodauth.login_param) || rodauth.field_error(rodauth.password_param) %>
     <div class="error__explanation">
-      <p class="error__explanation-title">errors prohibited this user from being saved:</p>
+      <p class="error__explanation-title"><%= alert %></p>
       <ul class="list-disc list-inside">
         <% if rodauth.field_error(rodauth.login_param) %>
           <li>
@@ -28,6 +28,10 @@
           </li>
         <% end %>
       </ul>
+    </div>
+  <% elsif !notice.nil? %>
+    <div class="error__explanation" style="background-color:rgba(255, 255, 0, .1)">
+      <p class="error__explanation-title" style="color:rgb(105, 105, 0)"><%= notice %></p>  
     </div>
   <% end %>
   <ul class="mb-2 list-disc">

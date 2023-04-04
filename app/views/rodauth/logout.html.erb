@@ -1,6 +1,16 @@
-<%= form_with url: rodauth.logout_path, method: :post, data: { turbo: false } do |form| %>
+<%= form_with url: rodauth.logout_path, method: :post, data: { turbo: false }, class:"form__container my" do |form| %>
+  <%= link_to :back, class:"btn-back" do %>
+    <span class="btn-back icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
+    </span>
+    <span class="btn-back text">Retour</span>
+  <% end %>
+
+  <h2 class="form__title">Déconnexion</h2>
+  <h3 class="form__sub-title">😳 Vous partez déjà ?</h3>
+  <p>Pour vous déconnecter, cliquez sur le bouton ci-dessous</p>
   <% if rodauth.features.include?(:active_sessions) %>
-    <div class="form-group mb-3">
+    <div class="form__group mb-3">
       <div class="form-check">
         <%= form.check_box rodauth.global_logout_param, id: "global-logout", class: "form-check-input" %>
         <%= form.label "global-logout", rodauth.global_logout_label, class: "form-check-label" %>
@@ -8,7 +18,7 @@
     </div>
   <% end %>
 
-  <div class="form-group mb-3">
-    <%= form.submit rodauth.logout_button, class: "btn btn-warning" %>
+  <div class="form__group btn__box mb-3">
+    <%= form.submit rodauth.logout_button, class: "btn btn--primary" %>
   </div>
 <% end %>

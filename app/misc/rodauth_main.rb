@@ -177,6 +177,8 @@ class RodauthMain < Rodauth::Rails::Auth
 
     create_account_button "Créer votre compte"
 
+    logout_button "Se déconnecter"
+
     reset_password_request_button "Recevoir mon lien de réinitialisation"
 
     reset_password_explanatory_text "...Nous vous enverrons par mail un lien pour modifier votre mot de passe."

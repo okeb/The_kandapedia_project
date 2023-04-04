@@ -20,12 +20,47 @@
   max-width:607px;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  padding-top:0rem;
+  padding-bottom:0rem;
+  &.my {
+    padding-top:3rem;
+    padding-bottom:5rem;
+  }
+  
+  &.mt {
+    padding-top:3rem;
+  }
+    
+  &.mt-m {
+    padding-top:1rem;
+  }
+  
+  &.mb {
+    padding-bottom:5rem;
+  }
+
 
   @include media(tablet) {
     margin-left:auto;
     margin-right: auto;
     width: 80.66%;
     max-width:607px;
+    &.my {
+      padding-top:3rem;
+      padding-bottom:5rem;
+    }
+  
+    &.mt {
+      padding-top:3rem;
+    }
+      
+    &.mt-m {
+      padding-top:1rem;
+    }
+  
+    &.mb {
+      padding-bottom:5rem;
+    }
   }
 
   @include media(hd) {
@@ -33,6 +68,22 @@
     margin-right: auto;
     width: 66.66%;
     max-width:607px;
+    &.my {
+      padding-top:3rem;
+      padding-bottom:5rem;
+    }
+  
+    &.mt {
+      padding-top:3rem;
+    }
+  
+    &.mt-m {
+      padding-top:1rem;
+    }
+  
+    &.mb {
+      padding-bottom:5rem;
+    }
   }
 
 }
