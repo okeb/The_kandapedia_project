@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     # resources :questions do
     #   put 'upvote', to: 'questions#upvote'
     # end
-    resources :profiles
+    resources :profiles do
+      post "follow", to: "profile#follow", as: "follow_profile"
+      post "unfollow", to: "profile#unfollow", as: "unfollow_profile"
+    end
     
     resources :questions do
       put "add_to_readlist", to: 'questions#add_to_readlist'
