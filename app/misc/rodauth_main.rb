@@ -153,9 +153,35 @@ class RodauthMain < Rodauth::Rails::Auth
     new_recovery_code { SecureRandom.uuid }
 
 
-    login_label "Email"
+    login_label "Votre adresse e-mail"
+
+    
+    login_button "Se connecter"
+
+    email_auth_request_button "Recevoir un lien magique de connexion via email"
+
+    # login_form_footer_links_heading "Autres options :"
+    
+    # old_password_label "Votre mot de passe actuel"
+
+    new_password_label "Votre nouveau mot de passe"
+
+    password_confirm_label "Confirmer votre nouveau mot de passe"
+
+
+    password_label "Votre mot de passe"
 
     create_account_route "inscription"
+
+    change_password_button "Modifier votre mot de passe"
+
+    create_account_button "Créer votre compte"
+
+    logout_button "Se déconnecter"
+
+    reset_password_request_button "Recevoir mon lien de réinitialisation"
+
+    reset_password_explanatory_text "...Nous vous enverrons par mail un lien pour modifier votre mot de passe."
 
     prefix "/user"
   end

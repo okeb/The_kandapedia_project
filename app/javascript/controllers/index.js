@@ -7,11 +7,17 @@ import { application } from "./application"
 import CommandPaletteController from "./command_palette_controller"
 application.register("command-palette", CommandPaletteController)
 
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
+
 import EditableController from "./editable_controller"
 application.register("editable", EditableController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import PasswordVisibility from "./password_visibility_controller"
+application.register('password-visibility', PasswordVisibility)
 
 import SelectSkillController from "./select_skill_controller"
 application.register("select-skill", SelectSkillController)

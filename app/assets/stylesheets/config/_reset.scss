@@ -19,24 +19,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-
-  background-color: var(--color-background);
-  color: var(--color-text-body);
-  line-height: var(--line-height-body);
-  font-family: var(--font-family-sans);
 }
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: #FFFFFF;
-    color: var(--color-text-body);
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 5%, 25%);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #222;
-    color: #EEE;
+    background-color: hsl(204, 83%, 2%);
+    color: hsla(0, 0%, 100%, .6);
   }
 }
 
@@ -81,7 +76,9 @@ h6 {
   h4,
   h5,
   h6 {
-    color: #FFF;
+    background-image:linear-gradient(to bottom right,  hsl(0, 0%, 100%), hsla(210, 100%, 95%, 0.472));
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -106,7 +103,11 @@ a {
   text-decoration: none;
   transition: color 200ms;
 
-  &:hover,
+  &:hover {
+    text-decoration: underline;
+    transition: all .3s;
+  }
+
   &:focus,
   &:active {
     color: var(--color-primary-rotate);

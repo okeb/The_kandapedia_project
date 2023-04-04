@@ -1,4 +1,10 @@
-<%= form_with url: rodauth.create_account_path, method: :post, data: { turbo: false } do |form| %>
+<%= form_with url: rodauth.create_account_path, method: :post, data: { turbo: false }, class:"form__container my" do |form| %>
+  <%= link_to root_path, class:"btn-back" do %>
+    <span class="btn-back icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M14.71 15.88L10.83 12l3.88-3.88a.996.996 0 1 0-1.41-1.41L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0c.38-.39.39-1.03 0-1.42z"/></svg>
+    </span>
+    <span class="btn-back text">Accueil</span>
+  <% end %>
   <%
 =begin%>
  <div class="form-group mb-3">
@@ -15,16 +21,22 @@
 <%
 =end%>
 
-  <div class="form-group mb-3">
-    <%= form.label :username, "Pseudo", class: "form-label" %>
-    <%= form.text_field :username, value: params[:username], id: "job", autocomplete: "username", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(:username)}", aria: ({ invalid: true, describedby: "username_error_message" } if rodauth.field_error(:username)) %>
-    <%= content_tag(:span, rodauth.field_error(:username), class: "invalid-feedback", id: "username_error_message") if rodauth.field_error(:username) %>
+  <h2 class="form__title">Inscription</h2>
+  <p class="form__sub-title">Commençons avec un compte gratuit</p>
+
+  <p class="form__text">L’inscription ne vous prendra que 30 secondes. Aucun moyen de paiement n’est requis. Et si vous êtes <%= link_to "déjà inscrit sur Kandapedia, connectez-vous",rodauth.login_path, class:"link" %>.</p>
+
+
+  <div class="form__group mb-3">
+    <%= form.label :username, "Pseudo", class: "form__label" %>
+    <%= content_tag(:div, rodauth.field_error(:username), class: "invalid-feedback", id: "username_error_message") if rodauth.field_error(:username) %>
+    <%= form.text_field :username, value: params[:username], id: "job", autocomplete: "username", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(:username)}", aria: ({ invalid: true, describedby: "username_error_message" } if rodauth.field_error(:username)) %>
   </div>
 
-  <div class="form-group mb-3">
-    <%= form.label "login", rodauth.login_label, class: "form-label" %>
-    <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
-    <%= content_tag(:span, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
+  <div class="form__group mb-3">
+    <%= form.label "login", rodauth.login_label, class: "form__label" %>
+    <%= content_tag(:div, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
+    <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
   </div>
 
   <%
@@ -45,35 +57,36 @@
 =end%>
 
   <% if rodauth.require_login_confirmation? %>
-    <div class="form-group mb-3">
-      <%= form.label "login-confirm", rodauth.login_confirm_label, class: "form-label" %>
-      <%= form.email_field rodauth.login_confirm_param, value: params[rodauth.login_confirm_param], id: "login-confirm", autocomplete: "email", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.login_confirm_param)}", aria: ({ invalid: true, describedby: "login-confirm_error_message" } if rodauth.field_error(rodauth.login_confirm_param)) %>
-      <%= content_tag(:span, rodauth.field_error(rodauth.login_confirm_param), class: "invalid-feedback", id: "login-confirm_error_message") if rodauth.field_error(rodauth.login_confirm_param) %>
+    <div class="form__group mb-3">
+      <%= form.label "login-confirm", rodauth.login_confirm_label, class: "form__label" %>
+      <%= content_tag(:div, rodauth.field_error(rodauth.login_confirm_param), class: "invalid-feedback", id: "login-confirm_error_message") if rodauth.field_error(rodauth.login_confirm_param) %>
+      <%= form.email_field rodauth.login_confirm_param, value: params[rodauth.login_confirm_param], id: "login-confirm", autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_confirm_param)}", aria: ({ invalid: true, describedby: "login-confirm_error_message" } if rodauth.field_error(rodauth.login_confirm_param)) %>
     </div>
   <% end %>
 
   <% if rodauth.create_account_set_password? %>
-    <div class="form-group mb-3">
-      <%= form.label "password", rodauth.password_label, class: "form-label" %>
-      <%= form.password_field rodauth.password_param, value: "", id: "password", autocomplete: rodauth.password_field_autocomplete_value, required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth.field_error(rodauth.password_param)) %>
-      <%= content_tag(:span, rodauth.field_error(rodauth.password_param), class: "invalid-feedback", id: "password_error_message") if rodauth.field_error(rodauth.password_param) %>
+    <div class="form__group mb-3">
+      <%= form.label "password", rodauth.password_label, class: "form__label" %>
+      <p style="margin-top:-7px">Il doit contenir au moins 6 caractères</p>
+      <%= content_tag(:div, rodauth.field_error(rodauth.password_param), class: "invalid-feedback", id: "password_error_message") if rodauth.field_error(rodauth.password_param) %>
+      <%= form.password_field rodauth.password_param, value: "", id: "password", autocomplete: rodauth.password_field_autocomplete_value, required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth.field_error(rodauth.password_param)) %>
     </div>
 
     <% if rodauth.require_password_confirmation? %>
-      <div class="form-group mb-3">
-        <%= form.label "password-confirm", rodauth.password_confirm_label, class: "form-label" %>
-        <%= form.password_field rodauth.password_confirm_param, value: "", id: "password-confirm", autocomplete: "new-password", required: true, class: "form-control #{"is-invalid" if rodauth.field_error(rodauth.password_confirm_param)}", aria: ({ invalid: true, describedby: "password-confirm_error_message" } if rodauth.field_error(rodauth.password_confirm_param)) %>
-        <%= content_tag(:span, rodauth.field_error(rodauth.password_confirm_param), class: "invalid-feedback", id: "password-confirm_error_message") if rodauth.field_error(rodauth.password_confirm_param) %>
+      <div class="form__group mb-3">
+        <%= form.label "password-confirm", rodauth.password_confirm_label, class: "form__label" %>
+        <%= content_tag(:div, rodauth.field_error(rodauth.password_confirm_param), class: "invalid-feedback", id: "password-confirm_error_message") if rodauth.field_error(rodauth.password_confirm_param) %>
+        <%= form.password_field rodauth.password_confirm_param, value: "", id: "password-confirm", autocomplete: "new-password", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.password_confirm_param)}", aria: ({ invalid: true, describedby: "password-confirm_error_message" } if rodauth.field_error(rodauth.password_confirm_param)) %>
       </div>
     <% end %>
 
-    <div class="form-group mb-3">
-      <%= form.label "accepter les conditions d'utilisation", :terms_of_service, class: "form-label" %>
-      <%= form.check_box :terms_of_service, value: params[:terms_of_service], id: "terms_of_service", required: true, class: "form-control" %>
+    <div class="form__group mb-3">
+      <%= form.check_box :terms_of_service, value: params[:terms_of_service], id: "terms_of_service", required: true, class: "form__check-box" %>
+      <%= form.label :terms_of_service, "Cocher pour accepter nos", style:"user-select:none", class: "" %>&nbsp;<%= link_to "Conditions générales d'utilisation", rodauth.verify_account_resend_path, class:"link" %> et notre <%= link_to "Politique de confidentialité", rodauth.verify_account_resend_path, class:"link" %>.
     </div>
   <% end %>
 
-  <div class="form-group mb-3">
-    <%= form.submit rodauth.create_account_button, class: "btn btn-primary" %>
+  <div class="form__group btn__layout mb-3">
+    <%= form.submit rodauth.create_account_button, class: "btn btn--primary" %>
   </div>
 <% end %>

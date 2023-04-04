@@ -1,9 +1,17 @@
-<% unless rodauth.login_form_footer_links.empty? %>
-  <%== rodauth.login_form_footer_links_heading %>
-
-  <ul>
-    <% rodauth.login_form_footer_links.sort.each do |_, link, text| %>
-      <li><%= link_to text, link %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="form__container mb mt-m">
+  <% unless rodauth.login_form_footer_links.empty? %>
+    <h2 style="letter-spacing: -0.025em;">Autre(s) option(s) :</h2>
+    <%#== rodauth.login_form_footer_links_heading %>
+    <ul class="list-disc">
+      
+      <li><%= link_to "Renvoyer l'email de vérification de compte", rodauth.verify_account_resend_path, class:"link" %></li>
+      <%
+=begin%>
+ <% rodauth.login_form_footer_links.sort.each do |_, link, text| %>
+        <li><%= link_to text, link %></li>
+      <% end %> 
+<%
+=end%>
+    </ul>
+  <% end %>
+</div>

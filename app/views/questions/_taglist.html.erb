@@ -1,5 +1,5 @@
-<% if !@question[:tags].empty? %>
+<% if !@question[:tags].empty? && !@question[:tags].nil? %>
   <div style="display:flex; align-items:center; justify-content:flex-start">
-    <p style="margin-right:7px; font-style:italic; opacity:.5"><%= "#" + @question[:tags].gsub!(", ", ", #") %></p>
+    <p style="margin-right:7px; opacity:.5; font-size:.9rem"><%= !@question[:tags].nil? ? "##{@question[:tags].gsub!(", ", ", #")}" : "" %></p>
   </div>
 <% end %>

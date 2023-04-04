@@ -3,6 +3,7 @@
   --font-family-sans: 'Inter', 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   // Classical line heights
+  --line-height-link: 1;
   --line-height-headers: 1.1;
   --line-height-body:    1.5;
 
@@ -15,11 +16,91 @@
   --font-size-2xl: 1.5rem;   // 24px
   --font-size-3xl: 2rem;    // 32px
   --font-size-4xl: 2.5rem; // 40px
+  --font-size-btn: 16px;
 
-  // Three different text colors
-  --color-text-header: hsl(0, 1%, 16%);
-  --color-text-body:   hsl(0, 5%, 25%);
-  --color-text-muted:  hsl(0, 1%, 44%);
+  // Three different text colors and background colors
+  @media (prefers-color-scheme: light) {
+
+      --color-primary:       hsl(214, 100%, 45%);
+      --color-primary--dark: hsl(214, 98%, 35%);
+      --color-primary--active-dark: hsl(41, 100%, 18%);
+      --color-primary--active: hsl(41, 100%, 82%);
+      --color-alert:         hsl(0, 100%, 45%);
+      --color-gradient-white: linear-gradient(to right, var(--color-text-header), var(--color-text-header));
+
+      --color-text-header: hsl(0, 1%, 16%);
+      --color-text-input: hsl(0, 0%, 19%);
+      --color-text-body:   hsl(0, 0%, 19%);
+      --color-text-pseudo: hsl(0, 0%, 57%);
+      --color-text-muted:  hsl(0, 1%, 44%);
+      --color-separator: hsl(0, 0%, 90%);
+      --color-border_input: hsla(197, 20%, 70%, 0.777);
+      --color-primary--hover:   hsla(214, 100%, 45%, 0.74);
+      
+      --bg-color: hsl(0, 0%, 100%);
+      --bg-color__navbar-menu: hsl(0, 0%, 100%);
+      --bg-color-body:hsl(0, 0%, 100%);
+      --bg-color-header: hsla(0, 0%, 100%, 0.777);
+      --bg-color-hover:  hsl(0, 0%, 94%);
+      --bg-color__navbar-menu--hover:  hsl(0, 0%, 94%);
+      --bg-color-input: hsl(0, 0%, 97%);
+
+      // couleur des badge
+      --color-red:  hsl(0, 100%, 50%);
+      --color-red--dark:  hsl(0, 100%, 39%);
+      --color-red--light:  hsl(0, 100%, 94%);
+
+      --btn_default-border-color:hsl(0, 5%, 25%);
+      --btn_default-bg-color: hsl(0, 0%, 94%);
+      --btn_default-bg-hover-color: hsl(0, 0%, 88%);
+
+      --btn_dark-bg-color:hsl(0, 1%, 16%);
+      --btn_dark-text-color: hsl(0, 0%, 94%);
+      --btn_dark-border:transparent;
+      --btn_dark-bg-hover-color: hsl(0, 0%, 32%);
+  }
+
+  @media (prefers-color-scheme: dark) {
+
+      --color-primary:       hsl(214, 100%, 52%);
+      --color-primary--dark:   hsl(213, 100%, 92%);
+      --color-primary--active-dark: hsl(213, 100%, 92%);
+      --color-primary--active: hsl(214, 98%, 35%);
+      --color-alert:         hsl(0, 100%, 51%);
+      --color-gradient-white: linear-gradient(to bottom right,  hsl(0, 0%, 100%), hsla(210, 100%, 95%, 0.472));
+
+      --color-text-header: hsl(0, 0%, 87%);
+      --color-text-input: hsl(0, 0%, 97%);
+      --color-text-body:   hsla(0, 0%, 100%, 0.6);
+      --color-text-pseudo: hsl(0, 0%, 50%);
+      --color-text-muted:  hsl(0, 0%, 81%);
+      --color-separator: hsl(0, 0%, 24%);
+      --color-border_input: hsla(202, 100%, 79%, 0.477);
+      --color-primary--hover:   hsl(204, 79%, 42%);
+
+      
+      --bg-color: hsl(204, 83%, 2%);
+      --bg-color__navbar-menu--hover: hsl(201, 29%, 14%);
+      --bg-color__navbar-menu: hsl(203, 28%, 9%);
+      --bg-color-body: hsl(0, 0%, 13%);
+      --bg-color-header: hsla(0, 0%, 7%, 0.377);
+      --bg-color-hover:  hsl(0, 0%, 23%);
+      --bg-color-input: hsl(203, 80%, 6%);
+      
+      --color-red:  hsl(0, 100%, 35%);
+      --color-red--dark:  hsl(0, 100%, 72%);
+      --color-red--light:  hsl(0, 100%, 20%);
+
+      
+      --btn-defaut-border-color:hsl(0, 0%, 94%);
+      --btn-defaut-bg-color:hsl(0, 0%, 32%);
+      --btn_default-bg-hover-color: hsl(0, 0%, 20%);
+
+      --btn_dark-bg:transparent;
+      --btn_dark-text: hsl(0, 0%, 94%);
+      --btn_dark-border:hsl(0, 0%, 94%) 1px solid;
+      --btn_dark-bg-hover: hsl(0, 0%, 22%);
+  }
 
   // Classical and robust spacing system
   --space-3xs: 0.25rem;  // 4px
@@ -34,8 +115,7 @@
   --space-4xl: 4rem;     // 64px
 
   // Application colors
-  --color-primary:          hsl(350, 67%, 50%);
-  --color-primary-rotate:   hsl(10, 73%, 54%);
+  --color-primary-rotate:   hsl(259, 73%, 54%);
   --color-primary-bg:       hsl(0, 85%, 96%);
   --color-secondary:        hsl(101, 45%, 56%);
   --color-secondary-rotate: hsl(120, 45%, 56%);
@@ -50,11 +130,20 @@
 
   // Border radius
   --border-radius: 0.375rem;
+  --border-radius-m: 0.575rem;
+  --border-radius-l: 0.775rem;
+  --border-radius-full: 100%;
 
   // Border
   --border: solid 2px var(--color-light);
 
   // Shadows
   --shadow-large:  2px 4px 10px hsl(0 0% 0% / 0.1);
-  --shadow-small:  1px 3px 6px hsl(0 0% 0% / 0.1);
+  --shadow-m: 1.4px 1.4px 5.1px rgba(0, 0, 0, 0.02), 4.9px 4.9px 12.4px rgba(0, 0, 0, 0.028), 11.5px 11.5px 23.3px rgba(0, 0, 0, 0.035), 23.2px 23.2px 41.5px rgba(0, 0, 0, 0.042), 44.8px 44.8px 77.7px rgba(0, 0, 0, 0.05), 100px 100px 186px rgba(0, 0, 0, 0.07);
+  --shadow-s: 1.9px 1.1px 2.7px rgba(0, 0, 0, 0.034), 4.9px 2.7px 6.9px rgba(0, 0, 0, 0.045), 9.9px 5.5px 14.2px rgba(0, 0, 0, 0.054), 20.4px 11.3px 29.2px rgba(0, 0, 0, 0.064), 56px 31px 80px rgba(0, 0, 0, 0.09);
+  --shadow-xs: 11.5px 11.5px 23.3px rgba(0, 0, 0, 0.035), 100px 100px 186px rgba(0, 0, 0, 0.07);
+  --shadow-hs: 0px 13.2px 23.3px rgba(0, 0, 0, 0.035), 0px 115px 186px rgba(0, 0, 0, 0.07);
+  --shadow-cs: 0px 0px 23.3px rgba(0, 0, 0, 0.035), 0px 0px 186px rgba(0, 0, 0, 0.07);
+  --shadow-cm: 0px 0px 6.4px rgba(0, 0, 0, 0.022), 0px 0px 16.2px rgba(0, 0, 0, 0.031),  0px 0px 33px rgba(0, 0, 0, 0.039), 0px 0px 67.9px rgba(0, 0, 0, 0.048), 0px 0px 186px rgba(0, 0, 0, 0.07);
+  --shadow-cl: 0px 0px 2.9px rgba(0, 0, 0, 0.015), 0px 0px 6.4px rgba(0, 0, 0, 0.022), 0px 0px 10.7px rgba(0, 0, 0, 0.027),  0px 0px 16.2px rgba(0, 0, 0, 0.031),0px 0px 23.3px rgba(0, 0, 0, 0.035), 0px 0px 33px rgba(0, 0, 0, 0.039), 0px 0px 46.7px rgba(0, 0, 0, 0.043), 0px 0px 67.9px rgba(0, 0, 0, 0.048), 0px 0px 104.6px rgba(0, 0, 0, 0.055), 0px 0px 186px rgba(0, 0, 0, 0.07);
 }
