@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   #before_action :get_user_authenticate, only: %i[ :edit, :update ]
   before_action :charge_profile
+  before_action -> { rodauth.require_authentication }, :set_user
   before_action -> { rodauth.require_authentication }, except: [ :show, :avatar_thumb, :charge_profile, :profile_params ]
   after_action :set_skills, only: %i[ :update ]
 
@@ -11,6 +12,35 @@ class ProfilesController < ApplicationController
 
   def pundit_user
     current_account
+  end
+
+  def follow_profile
+    current_account.send_follow_request_to(@user)
+    redirect_to profiles_path(@profile)
+  end
+
+  def unfollow_profile
+    make_it_an_unfriend_request
+
+    current_account.unfollow(@user)
+    redirect_to profiles_path(@profile)
+  end
+
+  def decline_following
+    current_account.decline_follow_request_of(@user)
+    redirect_to root_path
+  end
+  
+  def accept_following
+    current_account.accept_follow_request_of(@user)
+    make_it_a_friend_request
+
+    redirect_to root_path
+  end
+
+  def cancel_following
+    current_account.remove_follow_request_for(@user)
+    redirect_to root_path
   end
   
   def show
@@ -35,6 +65,19 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def make_it_a_friend_request
+    current_account.send_follow_request_to(@user)
+    @user.accept_follow_request_of(current_account)
+  end
+
+  def make_it_an_unfriend_request
+    @user.unfollow(current_account) if @user.mutual_following_with?(current_account)
+  end
+
+  def set_user
+    @user = Account.find_by(id: @profile.account_id)
+  end
 
   def set_skills
     @profile[:skills] = @profile.skill_list.join ", "

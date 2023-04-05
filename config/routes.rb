@@ -11,7 +11,13 @@ Rails.application.routes.draw do
     #   put 'upvote', to: 'questions#upvote'
     # end
     resources :profiles
-    
+
+    post "/profiles/:id/follow", to: "profiles#follow_profile", as: "follow_profile"
+    post "/profiles/:id/unfollow", to: "profiles#unfollow_profile", as: "unfollow_profile"
+    post "/profiles/:id/accept", to: "profiles#accept_following", as: "accept_following"
+    post "/profiles/:id/decline", to: "profiles#decline_following", as: "decline_following"
+    post "/profiles/:id/cancel", to: "profiles#cancel_following", as: "cancel_following"
+
     resources :questions do
       put "add_to_readlist", to: 'questions#add_to_readlist'
       put "remove_to_readlist", to: 'questions#remove_to_readlist'

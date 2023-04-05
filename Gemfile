@@ -96,3 +96,5 @@ gem "pundit", "~> 2.2"
 gem "impressionist", "~> 2.0"
 
 gem "rqrcode", "~> 2.1"
+
+gem 'followability', github: 'nejdetkadir/followability', branch: 'main'

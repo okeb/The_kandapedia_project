@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   has_one :profile
   acts_as_voter
   acts_as_tagger
+  followability
 
   def vote_weight_on(votable, vote_scope:)
     find_votes(
@@ -13,5 +14,9 @@ class Account < ApplicationRecord
       votable_type: votable.class.base_class.name, 
       vote_scope: vote_scope
     ).pluck(:vote_weight).first
+  end
+
+  def unfollow(user)
+    followerable_relationships.where(followable_id: user.id).destroy_all
   end
 end

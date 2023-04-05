@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/nejdetkadir/followability.git
+  revision: 20819c924271bd74bcd5df845729c9a2906085f6
+  branch: main
+  specs:
+    followability (1.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -312,6 +319,7 @@ DEPENDENCIES
   chroma (~> 0.2.0)
   debug
   erb_lint
+  followability!
   image_processing (~> 1.2)
   impressionist (~> 2.0)
   jbuilder
