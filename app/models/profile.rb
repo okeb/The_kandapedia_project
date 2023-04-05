@@ -15,7 +15,9 @@ class Profile < ApplicationRecord
   end
   
   def avatar_profile
-    self.avatar.variant(resize_to_limit: [250, 250]).processed
+    if !self.avatar.variant(resize_to_limit: [250, 250]).nil?
+      self.avatar.variant(resize_to_limit: [250, 250]).processed
+    end
   end
 
   def get_initial_profile
