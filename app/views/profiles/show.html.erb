@@ -77,7 +77,35 @@
   <% if rodauth.logged_in? %>
 
     <div style="height:55px"></div>
-
+    <% if current_account.sent_follow_request_to?(@user) %>
+      <h3 style="margin-bottom:12px">Vous avez envoyé une demande de suivi à:</h3>
+      <div>
+        <div style="display:flex;justify-content: space-between; border-radius:1rem;border:1px solid #EFEFEF; padding: 12px 14px; margin-bottom:7px">
+          <div style="display:flex; align-items: center;">
+            <div>
+              <div style="width:40px; height:40px; border-radius:100%; margin-right:7px">
+                <% if @user.profile.avatar.attached? %>
+                <%= image_tag(@user.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"30px") %>
+              <% else %>
+                <div style="background-color:<%= @user.profile.color %>; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
+                  <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:.7rem;letter-spacing:-1px">
+                    <%#= user.profile.get_initial_profile %>
+                  </p>
+                </div>
+              <% end %>
+              </div>
+            </div>
+            <div>
+              <p style="display:flex;align-items: center;"><strong><%= link_to "#{@user.profile.lastname} #{@user.profile.firstname}", profile_path(@user), class:"link", style:"font-weight:600; text-decoration:none; color:#222" %></strong></p>
+              <p style="opacity:.5; margin-top:-6px">@<%= @user.profile.username %></p>
+            </div>
+          </div>
+          <div>
+            <%= button_to "Annuler la demande", cancel_following_path(@user), class:"btn" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div style="padding-top:var(--space-m)">
       <% if rodauth.logged_in? && current_account.id == @user.id %>
         <% current_account.follow_requests.each do |request| %>
@@ -130,23 +158,27 @@
                 <p style="opacity:.5; margin-top:-6px">@<%= follower.profile.username %></p>
               </div>
             </div>
-            <div>
-              <%= button_to "Se désabonner", unfollow_profile_path(follower), class:"btn btn--black" %>
-            </div>
           </div>
           
         <% end %>
       <% end %>
+      <% if @user.following?(current_account) %>
+        <div style="display:flex;justify-content: space-between;align-items:center; border-radius:1rem; border:1px solid #EFEFEF; padding: 12px 14px; margin-bottom:7px">
+          <p style="padding:0 7px">Vous suivez déjà <strong><%= "#{@user.profile.lastname} #{@user.profile.firstname}" %></strong></p>
+          <div><%= button_to "Se désabonner", unfollow_profile_path(@user), class:"btn btn--black" %></div>
+        </div>
+      <% end %>
 
       <div style="height:55px"></div>
+        
 
       <div class="flex items-center mb-6 mr-6" style="display:flex">
           
         <% if current_account.following?(@user) %>
-          <%= button_to "Se désabonner", unfollow_profile_path(@user), class:"btn" %>
+          <%#= button_to "Se désabonner", unfollow_profile_path(@user), class:"btn" %>
         <% elsif current_account.sent_follow_request_to?(@user) %>
-          <%= button_to "Annuler la demande", cancel_following_path(@user), class:"btn" %>
-        <% else %>
+          <%#= button_to "Annuler la demande", cancel_following_path(@user), class:"btn" %>
+        <% else %> 
           <% if !@user.sent_follow_request_to?(current_account) && current_account.id != @user.id %>
             <%= button_to "Suivre", follow_profile_path(@user), class:"btn btn--black" %>
           <% end %>
