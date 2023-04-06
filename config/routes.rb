@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
     post "/profiles/:id/follow", to: "profiles#follow_profile", as: "follow_profile"
     post "/profiles/:id/unfollow", to: "profiles#unfollow_profile", as: "unfollow_profile"
+    post "/profiles/:id/blocking", to: "profiles#blocking_profile", as: "blocking_profile"
+    post "/profiles/:id/unblocking", to: "profiles#unblocking_profile", as: "unblocking_profile"
     post "/profiles/:id/accept", to: "profiles#accept_following", as: "accept_following"
     post "/profiles/:id/decline", to: "profiles#decline_following", as: "decline_following"
     post "/profiles/:id/cancel", to: "profiles#cancel_following", as: "cancel_following"
