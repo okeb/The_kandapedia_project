@@ -26,6 +26,20 @@ class ProfilesController < ApplicationController
     redirect_to profiles_path(@profile)
   end
 
+  def blocking_profile
+    make_it_an_unfriend_request
+
+    current_account.block(@user)
+    redirect_to profiles_path(@profile)
+  end
+
+  def unblocking_profile
+    make_it_an_unfriend_request
+
+    current_account.unblock(@user)
+    redirect_to profiles_path(@profile)
+  end
+
   def decline_following
     current_account.decline_follow_request_of(@user)
     redirect_to root_path
