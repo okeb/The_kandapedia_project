@@ -73,6 +73,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 gem "sassc-rails", "~> 2.1"
@@ -80,8 +82,6 @@ gem "sassc-rails", "~> 2.1"
 gem "rodauth-rails", "~> 1.6"
 
 gem "rotp", "~> 6.2"
-
-
 
 gem "mysql-binuuid-rails", "~> 1.3"
 
