@@ -32,6 +32,8 @@ class Profile < ApplicationRecord
       else
         initials = self.username
       end
+    else
+      initials = self.username
     end
 
 

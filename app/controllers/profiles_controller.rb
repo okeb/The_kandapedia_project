@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   #before_action :get_user_authenticate, only: %i[ :edit, :update ]
   before_action :charge_profile
-  before_action -> { rodauth.require_authentication }, :set_user
   before_action -> { rodauth.require_authentication }, except: [ :show, :avatar_thumb, :charge_profile, :profile_params ]
   after_action :set_skills, only: %i[ :update ]
 
@@ -15,31 +14,45 @@ class ProfilesController < ApplicationController
   end
 
   def follow_profile
-    current_account.send_follow_request_to(@user)
+    current_account.send_follow_request_to(@profile.account)
     redirect_to profiles_path(@profile)
   end
 
   def unfollow_profile
     make_it_an_unfriend_request
 
-    current_account.unfollow(@user)
+    current_account.unfollow(@profile.account)
+    redirect_to profiles_path(@profile)
+  end
+
+  def blocking_profile
+    make_it_an_unfriend_request
+
+    current_account.block(@profile.account)
+    redirect_to profiles_path(@profile)
+  end
+
+  def unblocking_profile
+    make_it_an_unfriend_request
+
+    current_account.unblock(@profile.account)
     redirect_to profiles_path(@profile)
   end
 
   def decline_following
-    current_account.decline_follow_request_of(@user)
+    current_account.decline_follow_request_of(@profile.account)
     redirect_to root_path
   end
   
   def accept_following
-    current_account.accept_follow_request_of(@user)
+    current_account.accept_follow_request_of(@profile.account)
     make_it_a_friend_request
 
     redirect_to root_path
   end
 
   def cancel_following
-    current_account.remove_follow_request_for(@user)
+    current_account.remove_follow_request_for(@profile.account)
     redirect_to root_path
   end
   
@@ -67,16 +80,12 @@ class ProfilesController < ApplicationController
   private
 
   def make_it_a_friend_request
-    current_account.send_follow_request_to(@user)
-    @user.accept_follow_request_of(current_account)
+    current_account.send_follow_request_to(@profile.account)
+    @profile.account.accept_follow_request_of(current_account)
   end
 
   def make_it_an_unfriend_request
-    @user.unfollow(current_account) if @user.mutual_following_with?(current_account)
-  end
-
-  def set_user
-    @user = Account.find_by(id: @profile.account_id)
+    @profile.account.unfollow(current_account) if @profile.account.mutual_following_with?(current_account)
   end
 
   def set_skills

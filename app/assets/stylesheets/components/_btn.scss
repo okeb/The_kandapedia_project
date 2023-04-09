@@ -59,6 +59,18 @@
       // border-color:var(--color-primary--hover) !important;
     }
   }
+  &--alert {
+    background-color: var(--color-red);
+    color: white !important;
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    &:active {
+      background-color: var(--color-red--dark);
+      transition: filter 250ms, color 200ms, background-color 300ms;
+    }
+  }
 
   &--default {
     color: var(--color-white);

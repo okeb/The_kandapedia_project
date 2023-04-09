@@ -1,12 +1,15 @@
 <header class="navbar">
-  <div class="navbar__brand">
-    <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__brand_title" %>
+  <div style="display:flex; justify-content:left; align-items:center; column-gap:1.5rem">
+    <div class="navbar__brand">
+      <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__brand_title" %>
+    </div>
+    <input type="search" name="search" id="" style="padding:10px 14px; font-size:1rem; border-radius:14px; border-color:transparent; background-color:rgba(0, 0, 0, .045); width:400px">
   </div>
   <% if rodauth.logged_in? %>
 
     <div class="navbar__name" data-controller="dropdown">
 
-      <button class="navbar__name_button" type="button" data-action="dropdown#toggle click@window->dropdown#hide">
+      <button class="navbar__name_button" data-dropdown-target="navbar__name_button" type="button" data-action="dropdown#toggle click@window->dropdown#hide">
         <div style="" class="navbar__name_avatar-box">
           <%
           if @profile != nil && current_account.id == @profile.account_id
@@ -16,12 +19,7 @@
           end
           %>
           <% if user.avatar.attached? %>
-            <div style="margin-right:4px; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-            <%
-=begin %>
-            <div style="margin-right:4px; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;border: 3px solid <%= user.color %>"> 
-            <% 
-=end %>
+            <div style="height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               <%= image_tag(user.avatar_profile, class: "navbar__name_image",  size:"32px") %>
             </div>
           <% else %>
@@ -32,19 +30,9 @@
             </div>
           <% end %>
         </div>
-        <%
-=begin%>
- <div class="navbar__name-user">
-          <div class="navbar__name_link" data-dropdown-target="navbar__name_button">
-            <%= ("#{user.lastname != nil ? user.lastname.capitalize : ''} #{user.firstname != nil ? user.firstname.capitalize : ''}" == " ") ? user.username.capitalize : "#{user.lastname != nil ? user.lastname.capitalize : ''} #{user.firstname != nil ? user.firstname.capitalize : ''}" %>
-          </div>
-          <div class="navbar__name_pseudo">
-            @<%= user.username.downcase %>
-          </div>
-        </div> 
-<%
-=end%>
+
       </button>
+
       <ul data-dropdown-target="menu" class="hidden navbar__name_menu">
         <li class="account">
           <%= link_to profile_url(user) do %>

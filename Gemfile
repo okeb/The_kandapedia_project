@@ -61,6 +61,8 @@ group :development do
   gem "web-console"
   gem "rubocop"
   gem "erb_lint"
+  gem "better_errors"
+  gem "binding_of_caller"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -80,8 +82,6 @@ gem "sassc-rails", "~> 2.1"
 gem "rodauth-rails", "~> 1.6"
 
 gem "rotp", "~> 6.2"
-
-
 
 gem "mysql-binuuid-rails", "~> 1.3"
 
