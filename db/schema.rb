@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_163414) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_09_073626) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -99,6 +99,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_163414) do
     t.index ["followerable_type", "followerable_id"], name: "index_followability_relationships_on_followerable"
   end
 
+  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "impressions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "impressionable_type"
     t.integer "impressionable_id"
@@ -139,7 +150,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_163414) do
     t.datetime "updated_at", null: false
     t.json "bookmark_list"
     t.json "readlist_list"
+    t.string "slug"
     t.index ["account_id"], name: "index_profiles_on_account_id"
+    t.index ["slug"], name: "index_profiles_on_slug", unique: true
   end
 
   create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
