@@ -61,6 +61,8 @@ group :development do
   gem "web-console"
   gem "rubocop"
   gem "erb_lint"
+  gem "better_errors"
+  gem "binding_of_caller"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
@@ -73,8 +75,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem "better_errors"
-  gem "binding_of_caller"
 end
 
 gem "sassc-rails", "~> 2.1"
