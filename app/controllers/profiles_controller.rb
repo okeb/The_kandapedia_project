@@ -94,7 +94,7 @@ class ProfilesController < ApplicationController
   end
 
   def charge_profile
-    @profile = Profile.find_by(id: params[:id])
+    @profile = Profile.friendly.find(params[:id])
   end
 
   def get_user_authenticate

@@ -98,3 +98,5 @@ gem "impressionist", "~> 2.0"
 gem "rqrcode", "~> 2.1"
 
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
+
+gem 'friendly_id', '~> 5.4.0'

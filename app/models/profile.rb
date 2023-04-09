@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   belongs_to :account
   has_one_attached :avatar
   before_create :add_color
@@ -22,7 +24,7 @@ class Profile < ApplicationRecord
 
   def get_initial_profile
     initials = ""
-    if !lastname.nil? && !self.firstname.nil?
+    if !self.lastname.nil? && !self.firstname.nil?
       if !self.lastname.empty? && !self.firstname.empty?
         long_name = (self.lastname + " " + self.firstname).split(' ')
         long_name.each{ |x|  initials += x[0]}
@@ -42,5 +44,11 @@ class Profile < ApplicationRecord
 
   def add_color
     self.color = Random.bytes(3).unpack1('H*').paint.brighten(23) 
+  end
+
+  private
+
+  def set_name  
+    @name = ((!self.lastname.nil? && !self.lastname.empty?) || (!self.firstname.nil? && !self.firstname.empty?)) ? "#{self.lastname} #{self.firstname}" : "#{self.username}"
   end
 end
