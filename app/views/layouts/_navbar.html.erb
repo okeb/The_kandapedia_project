@@ -26,7 +26,7 @@
           <% else %>
             <div style="background-color:<%= user.color %>; height:35px; width:35px; border-radius:100%; display:flex; align-items:center;  justify-content: center; margin-right:5px">
               <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:.7rem; letter-spacing:-1px">
-                <%= !user.nil ? user.get_initial_profile : "---" %>
+                <%= !user.nil? ? user.get_initial_profile : "---" %>
               </p>
             </div>
           <% end %>
@@ -61,8 +61,8 @@
                 @<%= user.username.downcase %>
               </div>
               <ul class="details">
-              <li><span class="nbre"><%= current_account.followers.count %></span>&nbsp;abonné<%= current_account.followers.count > 1 ? 's': '' %></li>
-              <li><span class="nbre"><%= current_account.follow_requests.count %></span>&nbsp;invitation<%= current_account.follow_requests.count > 1 ? 's': '' %></li>
+                <li><span class="nbre"><%= current_account.followers.count %></span>&nbsp;abonné<%= current_account.followers.count > 1 ? 's': '' %></li>
+                <li><span class="nbre"><%= current_account.follow_requests.count %></span>&nbsp;invitation<%= current_account.follow_requests.count > 1 ? 's': '' %></li>
               </ul>
             </div>
           <% end %>
