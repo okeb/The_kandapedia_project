@@ -1,4 +1,4 @@
-class RodauthMain < Rodauth::Rails::Auth
+class RodauthMain < RodauthBase
   configure do
     # List of authentication features that are loaded.
     enable :create_account, :verify_account, :verify_account_grace_period,

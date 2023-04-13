@@ -34,3 +34,4 @@ en:
   untitled: "Votre question..."
   command_palette:
     placeholder: "Tapez votre recherche..."
+  visionnage_de_la_question_title: "visionnage de la question : %{title}"

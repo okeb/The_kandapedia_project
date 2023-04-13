@@ -29,3 +29,4 @@ en:
           following: 'You are already following to %{klass}'
           already_sent: 'You are already sent follow request'
           blocked: 'You can not send follow request to blocked %{klass}'
+  visionnage_de_la_question_title: "visonary the question: %{title}"
