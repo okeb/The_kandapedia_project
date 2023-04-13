@@ -15,16 +15,16 @@
   <% end %>
   <% if rodauth.field_error(rodauth.login_param) || rodauth.field_error(rodauth.password_param) %>
     <div class="error__explanation">
-      <p class="error__explanation-title"><%= alert %></p>
+      <p class="error__explanation-title"><%= (nbre_error = [rodauth.field_error(rodauth.login_param), rodauth.field_error(rodauth.password_param)].reject(&:nil?).count > 1) ? "#{nbre_error} erreurs lors de la connexion" : "Une erreur de connexion" %></p>
       <ul class="list-disc list-inside">
         <% if rodauth.field_error(rodauth.login_param) %>
           <li>
-            <a href="#login" class="error-link"><%= rodauth.field_error(rodauth.login_param) ? "Probleme de  #{rodauth.login_param}" : "pas de soucis" %></a>
+            <a href="#login" class="error-link"><%= rodauth.field_error(rodauth.login_param) ? "#{rodauth.field_error(rodauth.login_param)} à \"#{params[rodauth.login_param]}\"" : "pas de soucis" %></a>
           </li>
         <% end %>
         <% if rodauth.field_error(rodauth.password_param) %>
           <li>
-            <a href="#password" class="error-link"><%= rodauth.field_error(rodauth.password_param) ? "Probleme de #{rodauth.password_param}" : "pas de soucis" %></a>
+            <a href="#password" class="error-link"><%= rodauth.field_error(rodauth.password_param) ? "#{rodauth.field_error(rodauth.password_param)}" : "pas de soucis" %></a>
           </li>
         <% end %>
       </ul>
@@ -42,9 +42,7 @@
       Mot de passe oublié&nbsp;?&nbsp;<%= link_to "Réinitialisez-le", rodauth.reset_password_request_path,  class: "link" %>
     </li>
   </ul>
-  <%
-=begin%>
+  <!--
  <p>Pour vous connecter à votre compte, remplissez le<%= (!rodauth.skip_password_field_on_login?) ? 's' : '' %> champ<%= (!rodauth.skip_password_field_on_login?) ? 's' : '' %> ci-dessous et cliquez sur le bouton <strong><%= (!rodauth.skip_password_field_on_login?) ? 'Se connecter' : 'Continuer' %></strong>.</p> 
-<%
-=end%>
+  -->
 </div>

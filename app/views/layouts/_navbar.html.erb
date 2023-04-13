@@ -3,6 +3,7 @@
     <div class="navbar__brand">
       <%= link_to "Kandapedia", root_path, class:"--font-size-3xl navbar__brand_title" %>
     </div>
+    <label for=""></label>
     <input type="search" name="search" id="" style="padding:10px 14px; font-size:1rem; border-radius:14px; border-color:transparent; background-color:rgba(0, 0, 0, .045); width:400px">
   </div>
   <% if rodauth.logged_in? %>
@@ -18,14 +19,14 @@
             user = current_account.profile
           end
           %>
-          <% if user.avatar.attached? %>
+          <% if !user.nil? && user.avatar.attached? %>
             <div style="height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               <%= image_tag(user.avatar_profile, class: "navbar__name_image",  size:"32px") %>
             </div>
           <% else %>
             <div style="background-color:<%= user.color %>; height:35px; width:35px; border-radius:100%; display:flex; align-items:center;  justify-content: center; margin-right:5px">
               <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:.7rem; letter-spacing:-1px">
-                <%= user.get_initial_profile %>
+                <%= !user.nil ? user.get_initial_profile : "---" %>
               </p>
             </div>
           <% end %>

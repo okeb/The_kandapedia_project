@@ -1,0 +1,11 @@
+fr:
+  hello: "Bonjour la terre"
+  untitled: "Votre question..."
+  command_palette:
+    placeholder: "Tapez votre recherche..."
+  visionnage_de_la_question_title: "visionnage de la question : %{title}"
+  terms_of_service_error_message : "Vous devez accepter nos politiques d'utilisation"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Le compte ne peux etre créé"

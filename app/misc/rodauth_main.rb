@@ -5,7 +5,7 @@ class RodauthMain < RodauthBase
       :login, :logout, :remember, :email_auth,
       :reset_password, :change_password, :change_password_notify,
       :change_login, :verify_login_change, :close_account,
-      :otp, :recovery_codes
+      :otp, :recovery_codes, :i18n
 
     # See the Rodauth documentation for the list of available config options:
     # http://rodauth.jeremyevans.net/documentation.html
@@ -74,8 +74,8 @@ class RodauthMain < RodauthBase
     # flash_error_key :error # default is :alert
 
     # Override default flash messages.
-    create_account_notice_flash "Your account has been created. Please verify your account by visiting the confirmation link sent to your email address."
-    require_login_error_flash "Login is required for accessing this page"
+    create_account_notice_flash 'Your account has been created. Please verify your account by visiting the confirmation link sent to your email address.'
+    require_login_error_flash 'Login is required for accessing this page'
     # login_notice_flash nil
 
     # ==> Validation
@@ -101,14 +101,17 @@ class RodauthMain < RodauthBase
     # ==> Hooks
     # Validate custom fields in the create account form.
     before_create_account do
-      throw_error_status(422, "email", "must be present") if param("login").empty?
+      throw_error_status(422, 'email', 'must be present') if param('login').empty?
     end
 
     # Perform additional actions after the account is created.
     after_create_account do
-      Profile.create!(account_id: account_id,
-                      username: param("username"), 
-                      terms_of_service: param("terms_of_service"))
+      if param('terms_of_service').to_i != 0
+        Profile.create!(account_id: account_id, username: param('username'), terms_of_service: param('terms_of_service'))
+      else
+        Profile.find_by!(account_id: account_id).destroy
+        throw_error_status(422, 'terms_of_service', "can't be nil")
+      end
     end
 
     # Do additional cleanup after the account is closed.
@@ -118,7 +121,7 @@ class RodauthMain < RodauthBase
 
     # ==> Redirects
     # Redirect to home page after logout.
-    logout_redirect "/"
+    logout_redirect '/'
 
     # Redirect to wherever login redirects to after account verification.
     verify_account_redirect { login_redirect }
@@ -153,16 +156,18 @@ class RodauthMain < RodauthBase
     new_recovery_code { SecureRandom.uuid }
 
 
+=begin
     login_label "Votre adresse e-mail"
 
-    
+
     login_button "Se connecter"
 
     email_auth_request_button "Recevoir un lien magique de connexion via email"
 
     # login_form_footer_links_heading "Autres options :"
-    
+
     # old_password_label "Votre mot de passe actuel"
+
 
     new_password_label "Votre nouveau mot de passe"
 
@@ -182,7 +187,8 @@ class RodauthMain < RodauthBase
     reset_password_request_button "Recevoir mon lien de réinitialisation"
 
     reset_password_explanatory_text "...Nous vous enverrons par mail un lien pour modifier votre mot de passe."
+=end
 
-    prefix "/user"
+    prefix '/user'
   end
 end
