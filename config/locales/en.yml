@@ -31,7 +31,8 @@
 
 en:
   hello: "Hello world"
-  untitled: "Votre question..."
+  untitled: "Your question..."
   command_palette:
-    placeholder: "Tapez votre recherche..."
-  visionnage_de_la_question_title: "visionnage de la question : %{title}"
+    placeholder: "Write your search..."
+  visionnage_de_la_question_title: "look the question : %{title}"
+  terms_of_service_error_message: "You must agree with our usage policy"
