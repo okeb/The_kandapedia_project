@@ -43,11 +43,13 @@
     "@tiptap/extension-text-style": "^2.0.0-beta.199",
     "@tiptap/extension-underline": "^2.0.0-beta.199",
     "@tiptap/extension-youtube": "^2.0.0-beta.199",
+    "date-fns": "^2.29.3",
     "lodash.debounce": "^4.0.8",
     "lowlight": "^2.7.0",
     "ninja-keys": "^1.2.2",
     "slugify": "^1.6.5",
     "stimulus-password-visibility": "^2.1.1",
+    "stimulus-timeago": "^4.1.0",
     "tom-select": "^2.2.2"
   },
   "scripts": {

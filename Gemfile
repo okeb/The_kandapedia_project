@@ -100,3 +100,5 @@ gem "rqrcode", "~> 2.1"
 gem 'followability', github: 'nejdetkadir/followability', branch: 'main'
 
 gem 'friendly_id', '~> 5.4.0'
+
+gem "view_component", "~> 2.82"

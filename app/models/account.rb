@@ -3,6 +3,7 @@ class Account < ApplicationRecord
   enum :status, unverified: 1, verified: 2, closed: 3
 
   has_many :questions, counter_cache: true
+  has_many :candies, counter_cache: true
   has_one :profile
   acts_as_voter
   acts_as_tagger
@@ -14,6 +15,10 @@ class Account < ApplicationRecord
       votable_type: votable.class.base_class.name, 
       vote_scope: vote_scope
     ).pluck(:vote_weight).first
+  end
+
+  def self.with_accounts_count
+    select('accounts.*, COUNT("candies".id) AS candies_count').left_joins(:candies).group('accounts.id')
   end
 
   def unfollow(user)

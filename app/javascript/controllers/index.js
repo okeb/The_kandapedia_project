@@ -16,8 +16,8 @@ application.register("editable", EditableController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
-import PasswordVisibility from "./password_visibility_controller"
-application.register('password-visibility', PasswordVisibility)
+import PasswordVisibilityController from "./password_visibility_controller"
+application.register("password-visibility", PasswordVisibilityController)
 
 import SelectSkillController from "./select_skill_controller"
 application.register("select-skill", SelectSkillController)
@@ -27,6 +27,15 @@ application.register("select-tag", SelectTagController)
 
 import SetPrivateController from "./set_private_controller"
 application.register("set-private", SetPrivateController)
+
+
+import StimulusTimeagoController from "./stimulus_timeago_controller"
+application.register("stimulus-timeago", StimulusTimeagoController)
+
+
+import Timeago from "stimulus-timeago"
+application.register('timeago', Timeago)
+
 
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)
