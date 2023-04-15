@@ -1,4 +1,6 @@
 class RodauthMailer < ApplicationMailer
+
+  default from: 'from@kandapedia.com'
   def verify_account(name, account_id, key)
     @email_link = email_link(name, :verify_account, account_id, key)
     @account = find_account(name, account_id)
@@ -27,19 +29,19 @@ class RodauthMailer < ApplicationMailer
     mail to: @account.email, subject: rodauth(name).password_changed_email_subject
   end
 
-  # def email_auth(name, account_id, key)
-  #   @email_link = email_link(name, :email_auth, account_id, key)
-  #   @account = find_account(name, account_id)
+  def email_auth(name, account_id, key)
+    @email_link = email_link(name, :email_auth, account_id, key)
+    @account = find_account(name, account_id)
 
-  #   mail to: @account.email, subject: rodauth(name).email_auth_email_subject
-  # end
+    mail to: @account.email, subject: rodauth(name).email_auth_email_subject
+  end
 
-  # def unlock_account(name, account_id, key)
-  #   @email_link = email_link(name, :unlock_account, account_id, key)
-  #   @account = find_account(name, account_id)
+  def unlock_account(name, account_id, key)
+    @email_link = email_link(name, :unlock_account, account_id, key)
+    @account = find_account(name, account_id)
 
-  #   mail to: @account.email, subject: rodauth(name).unlock_account_email_subject
-  # end
+    mail to: @account.email, subject: rodauth(name).unlock_account_email_subject
+  end
 
   private
 
