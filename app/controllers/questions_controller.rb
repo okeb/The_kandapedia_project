@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   def pundit_user
     current_account
   end
-  
+
   # GET /questions or /questions.json
   def index
     @questions = Question.includes(account: :profile)
@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
       @question.upvote_from current_account, vote_scope: :bookmark
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
   end
 
@@ -60,7 +60,7 @@ class QuestionsController < ApplicationController
       increment_likes_counter(@question)
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
   end
 
@@ -76,7 +76,7 @@ class QuestionsController < ApplicationController
       increment_likes_counter(@question)
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
   end
 
@@ -92,9 +92,9 @@ class QuestionsController < ApplicationController
       increment_likes_counter(@question)
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
-    
+
   end
 
   def add_wrong
@@ -107,7 +107,7 @@ class QuestionsController < ApplicationController
       @question.downvote_by current_account, vote_scope: :appreciation, vote_weight: 1
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
   end
 
@@ -121,7 +121,7 @@ class QuestionsController < ApplicationController
       @question.downvote_by current_account, vote_scope: :appreciation, vote_weight: 2
     end
     respond_to do |format|
-        format.html { redirect_to @question }
+      format.html { redirect_to @question }
     end
   end
 
@@ -132,13 +132,13 @@ class QuestionsController < ApplicationController
 
   # get the global appreciation value of @question
   def get_global_appreciation_value
-    upvote_global_value = (@question.get_upvotes(vote_scope: :appr_awesome).sum(:vote_weight)).to_i + (@question.get_upvotes(vote_scope: :appr_perfect).sum(:vote_weight)).to_i +  (@question.get_upvotes(vote_scope: :appr_nice).sum(:vote_weight)).to_i   
+    upvote_global_value = (@question.get_upvotes(vote_scope: :appr_awesome).sum(:vote_weight)).to_i + (@question.get_upvotes(vote_scope: :appr_perfect).sum(:vote_weight)).to_i +  (@question.get_upvotes(vote_scope: :appr_nice).sum(:vote_weight)).to_i
 
     downvote_global_value = (@question.get_downvotes(vote_scope: :appr_wrong).sum(:vote_weight)).to_i - (@question.get_downvotes(vote_scope: :appr_bad).sum(:vote_weight)).to_i
 
     upvote_global_value - downvote_global_value
   end
-  
+
   # add the question to a readlater list of the user
   def add_to_readlist
     if current_account.voted_for? @question, vote_scope: :readlist
@@ -166,7 +166,7 @@ class QuestionsController < ApplicationController
       # format.turbo_stream
     end
   end
-  
+
 
   # GET /questions/new
   def new
@@ -206,7 +206,7 @@ class QuestionsController < ApplicationController
     @question =Question.find_by(slug: params[:question_id])
     respond_to do |format|
       if @question.update(question_params_without_tags)
-        @question[:tags] = @question.tag_list.join(", ")
+        @question[:tags] = @question.tag_list.join(', ')
         @question.save!
         format.html { redirect_to @question }
         format.turbo_stream
@@ -221,113 +221,113 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: "Question was successfully destroyed." }
+      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
     end
   end
 
   private
-  
+
   require 'json'
 
-    def add_bookmark_list
-      current_account.questions_count += 1
+  def add_bookmark_list
+    current_account.questions_count += 1
+    current_account.save!
+  end
+
+  def remove_bookmark_list(question, profile)
+    bookmark_list = JSON.parse(profile.bookmark_list)
+    id_question = question.id
+    if bookmark_list.include? id_question
+      profile.bookmark_list
       current_account.save!
     end
+  end
 
-    def remove_bookmark_list(question, profile)
-      bookmark_list = JSON.parse(profile.bookmark_list)
-      id_question = question.id
-      if bookmark_list.include? id_question
-        profile.bookmark_list 
-        current_account.save!
-      end
-    end
+  def increment_question_counter
+    current_account.questions_count += 1
+    current_account.save!
+  end
 
-    def increment_question_counter
-      current_account.questions_count += 1
-      current_account.save!
-    end
+  def decrement_question_counter
+    current_account.questions_count -= 1
+    current_account.save!
+  end
 
-    def decrement_question_counter
-      current_account.questions_count -= 1
-      current_account.save!
-    end
-    
-    def increment_likes_counter(item)
-      item.likes_count += 1
-      item.save!
-    end
+  def increment_likes_counter(item)
+    item.likes_count += 1
+    item.save!
+  end
 
-    def decrement_likes_counter(item)
-      item.likes_count -= 1
-      item.save!
-    end
+  def decrement_likes_counter(item)
+    item.likes_count -= 1
+    item.save!
+  end
 
-    def set_tags
-      @question[:tags] = @question.tag_list.join(", ")
-      @question.save!
-    end
+  def set_tags
+    @question[:tags] = @question.tag_list.join(', ')
+    @question.save!
+  end
 
-    # remove all appreciation by the current account to the question @question
-    def remove_appreciation
-      if current_account.voted_for? @question, vote_scope: :appreciation
-        @question.unvote_by current_account, vote_scope: :appreciation
-      end
+  # remove all appreciation by the current account to the question @question
+  def remove_appreciation
+    if current_account.voted_for? @question, vote_scope: :appreciation
+      @question.unvote_by current_account, vote_scope: :appreciation
     end
+  end
 
-    # get the word to precise the appreciation [ awesome, perfect, nice, wrong, bad ]
-    def get_appreciation
-      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 3)
-        "awesome"
-      end
-      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
-        "perfect"
-      end
-      if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
-        "nice"
-      end
-      if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
-        "wrong"
-      end
-      if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
-        "bad"
-      end
+  # get the word to precise the appreciation [ awesome, perfect, nice, wrong, bad ]
+  def get_appreciation
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 3)
+      'awesome'
     end
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
+      'perfect'
+    end
+    if (current_account.voted_up_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
+      'nice'
+    end
+    if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 1)
+      'wrong'
+    end
+    if (current_account.voted_down_on? @question, vote_scope: :appreciation) && (current_account.vote_weight_on(@question, vote_scope: :appreciation) === 2)
+      'bad'
+    end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question_by_slug
-      @question = Question.find_by(slug: params[:id])
-      if (@question == nil)
-        redirect_to questions_path
-      else
-        @question
-      end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question_by_slug
+    @question = Question.find_by(slug: params[:id])
+    if (@question == nil)
+      redirect_to questions_path
+    else
+      @question
     end
+  end
 
     # get the right question to vote
-    def find_question_for_vote
-      unless (Question.find_by(slug: params[:question_id]))
-        redirect_to questions_path
-      end
-      @question = Question.find_by(slug: params[:question_id])
+  def find_question_for_vote
+    unless (Question.find_by(slug: params[:question_id]))
+      redirect_to questions_path
     end
+    @question = Question.find_by(slug: params[:question_id])
+  end
 
-    def give_new_slug
-      @question.slug
-    end
+  def give_new_slug
+    @question.slug
+  end
 
-    def get_user_authenticate
-      if rodauth.logged_in?
-        @current_user = current_account
-      end
+  def user_authenticate
+    if rodauth.logged_in?
+      @current_user = current_account
     end
-    
+  end
 
-    # Only allow a list of trusted parameters through.
-    def question_params
-      params.require(:question).permit(:title, :body, :is_private, :position, :parent_id)
-    end
-    def question_params_without_tags
-      params.require(:question).permit(:title, :body, :is_private, :position, :parent_id, :tag_list, :likes_count, :tags)
-    end
+
+  # Only allow a list of trusted parameters through.
+  def question_params
+    params.require(:question).permit(:title, :body, :is_private, :position, :parent_id)
+  end
+  def question_params_without_tags
+    params.require(:question).permit(:title, :body, :is_private, :position, :parent_id, :tag_list, :likes_count, :tags)
+  end
 end

@@ -5,7 +5,7 @@ class RodauthApp < Rodauth::Rails::App
 
   # secondary configuration
   # configure RodauthAdmin, :admin
-
+  # account_lockouts' doesn't exist
   route do |r|
     rodauth.load_memory # autologin remembered users
 
@@ -21,9 +21,8 @@ class RodauthApp < Rodauth::Rails::App
     #   rodauth.require_account
     # end
 
-    if rodauth.uses_two_factor_authentication?
-      rodauth.require_two_factor_authenticated
-    end
+    rodauth.require_two_factor_authenticated if rodauth.uses_two_factor_authentication?
+
     # ==> Secondary configurations
     # r.rodauth(:admin) # route admin rodauth requests
   end

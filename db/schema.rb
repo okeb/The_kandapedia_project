@@ -177,6 +177,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
     t.string "authorised_users"
     t.text "tags"
     t.integer "views_count", default: 0
+    t.integer "likes_count", default: 0
     t.integer "position"
     t.integer "is_private", default: 0
     t.boolean "is_published", default: false
@@ -191,7 +192,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
     t.integer "cached_weighted_appreciation_score", default: 0
     t.integer "cached_weighted_appreciation_total", default: 0
     t.float "cached_weighted_appreciation_average", default: 0.0
-    t.integer "likes_count", default: 0
     t.index ["account_id"], name: "index_questions_on_account_id"
     t.index ["parent_id"], name: "index_questions_on_parent_id"
   end
