@@ -1,21 +1,12 @@
 class RodauthMain < RodauthBase
   configure do
     # List of authentication features that are loaded.
-    enable :create_account, :verify_account, :verify_account_grace_period,
+    enable :verify_account, :verify_account_grace_period,
            # :jwt,
-           :remember, :confirm_password
-
-    # See the Rodauth documentation for the list of available config options:
-    # http://rodauth.jeremyevans.net/documentation.html
-
-    # ==> General
-    # The secret key used for hashing public-facing tokens for various features.
-    # Defaults to Rails `secret_key_base`, but you can use your own secret key.
-    # hmac_secret "d81de22f9bb96e7cc3fa27db371484df479dd98b32bb1e43d9408ae842b3f758ae8bae4a633af3dbc8b949d4e61664642236be68fcaf6da519ab3e49ee5e0810"
+           :confirm_password
 
     # Specify the controller used for view rendering and CSRF verification.
     rails_controller { RodauthController }
-
 
     # Store account status in an integer column without foreign key constraint.
     account_status_column :status
@@ -68,7 +59,6 @@ class RodauthMain < RodauthBase
 
     # Extend user's remember period when remembered via a cookie
     # extend_remember_deadline? true
-
     # ==> Hooks
     # Validate custom fields in the create account form.
     # before_create_account do

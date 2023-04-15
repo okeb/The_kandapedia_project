@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base  
+class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
     rodauth.rails_account
   end
 
-  helper_method :current_account  
+  helper_method :current_account
 
 end
