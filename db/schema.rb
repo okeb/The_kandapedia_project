@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_09_073626) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -56,6 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_073626) do
     t.string "email", null: false
     t.string "password_hash"
     t.integer "questions_count", default: 0, null: false
+    t.integer "candies_count", default: 0
+    t.string "type", default: "user", null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
@@ -85,6 +87,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_073626) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "candies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "body", limit: 444
+    t.integer "scope", default: 0
+    t.integer "position", default: 1
+    t.integer "view", default: 0
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_candies_on_account_id"
   end
 
   create_table "followability_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -238,6 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_073626) do
   add_foreign_key "account_verification_keys", "accounts", column: "id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "candies", "accounts"
   add_foreign_key "profiles", "accounts"
   add_foreign_key "questions", "accounts"
   add_foreign_key "questions", "questions", column: "parent_id"
