@@ -1,10 +1,11 @@
-<div class="container">
+<div class="form__container my">
     <% if notice %>
       <div class="alert alert-success"><%= notice %></div>
     <% end %>
     <% if alert %>
       <div class="alert alert-danger"><%= alert %></div>
     <% end %>
+  <p><%= session.to_h %></p>
   <img src="https://vite-ruby.netlify.app/logo.svg" width="150px" />
   <h1>Kandapedia</h1>
   <p>L'encyclopedie participative qui repond à toutes vos questions (ou presque)</p>

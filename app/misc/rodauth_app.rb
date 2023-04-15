@@ -1,6 +1,7 @@
 class RodauthApp < Rodauth::Rails::App
   # primary configuration
   configure RodauthMain
+  configure RodauthAdmin, :admin
 
   # secondary configuration
   # configure RodauthAdmin, :admin
@@ -9,6 +10,7 @@ class RodauthApp < Rodauth::Rails::App
     rodauth.load_memory # autologin remembered users
 
     r.rodauth # route rodauth requests
+    r.rodauth(:admin) # route admin rodauth requests
 
     # ==> Authenticating requests
     # Call `rodauth.require_account` for requests that you want to
@@ -19,6 +21,9 @@ class RodauthApp < Rodauth::Rails::App
     #   rodauth.require_account
     # end
 
+    if rodauth.uses_two_factor_authentication?
+      rodauth.require_two_factor_authenticated
+    end
     # ==> Secondary configurations
     # r.rodauth(:admin) # route admin rodauth requests
   end
