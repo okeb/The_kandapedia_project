@@ -7,7 +7,13 @@
   <% else %>
     <div class="form__group mb-3">
       <%= form.label "login", rodauth.login_label, class: "form__label" %>
-      <%= content_tag(:div, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
+      <% if rodauth.field_error(rodauth.login_param) %>
+        <p class= "invalid-feedback" id="login_error_message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.378 4.661c1.143-2.057 4.101-2.057 5.245 0l6.6 11.882c1.111 2-.335 4.457-2.622 4.457H5.399c-2.287 0-3.733-2.457-2.622-4.457l6.6-11.882zM12 8a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zm1 9a1 1 0 1 1-2 0a1 1 0 0 1 2 0z" fill="currentColor"/></g></svg>
+          <span><%= rodauth.field_error(rodauth.login_param) %></span>
+        </p>
+      <% end %>
+      <%#= content_tag(:div, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
       <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
     </div>
   <% end %>
@@ -15,7 +21,14 @@
   <% unless rodauth.skip_password_field_on_login? %>
     <div class="form__group mb-3">
       <%= form.label "Votre mot de password", rodauth.password_label, class: "form__label" %>
-      <%= content_tag(:div, rodauth.field_error(rodauth.password_param), class: "invalid-feedback", id: "password_error_message") if rodauth.field_error(rodauth.password_param) %>
+      <% if rodauth.field_error(rodauth.password_param) %>
+        <div class= "invalid-feedback" id="password_error_message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.378 4.661c1.143-2.057 4.101-2.057 5.245 0l6.6 11.882c1.111 2-.335 4.457-2.622 4.457H5.399c-2.287 0-3.733-2.457-2.622-4.457l6.6-11.882zM12 8a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1zm1 9a1 1 0 1 1-2 0a1 1 0 0 1 2 0z" fill="currentColor"/></g></svg>
+          &nbsp;
+          <%= rodauth.field_error(rodauth.password_param) %>
+        </div>      
+      <% end %>
+      <%#= content_tag(:div, rodauth.field_error(rodauth.password_param), class: "invalid-feedback", id: "password_error_message") if rodauth.field_error(rodauth.password_param) %>
       <div style="display:flex; align-items:center; position:relative" data-controller="password-visibility">
         <%= form.password_field rodauth.password_param, value: "", id: "password", autocomplete: rodauth.password_field_autocomplete_value, data: { password_visibility_target: 'input'}, spellcheck: false, class: "form__input with-reveal #{"is-invalid" if rodauth.field_error(rodauth.password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth.field_error(rodauth.password_param)) %>
         <button class="form__password-btn-reveal" type="button" data-action="password-visibility#toggle" style="margin-left:-9px; padding-top:3px; background-color:transparent; position:absolute; right:15px; border-color:transparent">
@@ -28,14 +41,12 @@
         </button> 
       </div>
     </div>
-    <%
-=begin%>
- <div class="form__group mb-3">
+    <!--
+    <div class="form__group mb-3">
       <%= form.check_box :terms_of_service, value: params[:terms_of_service], id: "terms_of_service", required: true, class: "form__check-box" %>
       <%= form.label :terms_of_service, "Se souvenir de moi", class: "" %>
-    </div> 
-<%
-=end%>
+    </div>
+    -->
 
   <% end %>
 

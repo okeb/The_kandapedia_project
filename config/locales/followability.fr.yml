@@ -1,0 +1,32 @@
+---
+en:
+  followability:
+    errors:
+      block:
+        unblock:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+        block:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+          blocked_by: "Vous ne pouvez pas bloquer quelqu'un qui vous a bloqué"
+          already_blocked: '%{klass} est déjà bloqué'
+          not_blocked_for_blocking: "Vous ne pouvez pas débloquer %{klass} car il n'a pas été bloqué."
+      follow:
+        unfollow:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+          empty_relation: "Vous ne pouvez pas annuler le suivi de %{klass} parce qu'il n'a pas été suivi."
+        decline_follow_request_of:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+          empty_relation: "Vous ne pouvez pas refuser de suivre la demande de %{klass} parce qu'elle n'a pas été envoyée"
+        accept_follow_request_of:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+          empty_relation: "Vous ne pouvez pas accepter la demande de suivi de %{klass} car elle n'a pas été envoyée"
+        remove_follow_request_for:
+          empty_relation: "Vous ne pouvez pas supprimer la demande de suivi de %{klass} car elle n'a pas été envoyée."
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+        send_follow_request_to:
+          myself: 'Vous ne pouvez pas exécuter cette action vous-même'
+          blocked_by: 'Vous ne pouvez pas envoyer de demande de suivi à une personne qui vous a bloqué.'
+          following: 'Vous suivez déjà %{klass}'
+          already_sent: 'Vous avez déjà reçu une demande de suivi'
+          blocked: 'Vous ne pouvez pas envoyer de demande de suivi à %{klass} que vous avez bloqué'
+  visionnage_de_la_question_title: "visionnez la question: %{title}"

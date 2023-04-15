@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
+  namespace :admin do
+    root to: 'home#index'
+  end
+
   constraints Rodauth::Rails.authenticated do
     # ... authenticated routes ...
     # resources :questions do
