@@ -31,13 +31,13 @@
   </div>
 
   <div style="height:25px"></div>
-  <% if current_account.questions_count != 0 && current_account.id == @profile.account_id %>
+  <% if current_account.questions_count != 0 && current_account.id == @profile.profileable_id %>
     <h1>Mes questions</h1>
     <div style="height:55px"></div>
     <% if current_account.questions_count > 0 %>
       <% @questions.each do |question| %>
         <p style="display:flex; align-items:center">
-          <% if rodauth.logged_in? && @profile.account_id == current_account.id %>
+          <% if rodauth.logged_in? && @profile.profileable_id == current_account.id %>
 
             <% if question.is_published? %>
               <span style="margin:0 4px">
@@ -69,7 +69,7 @@
         </p>
       <% end %>
     <% end %>
-  <% elsif current_account.id == @profile.account_id %>
+  <% elsif current_account.id == @profile.profileable.id %>
     <h1>Mes questions</h1>
     <div style="height:55px"></div>
     <p class="">Vous n'avez pas de question.</p>
@@ -77,17 +77,17 @@
   <% if rodauth.logged_in? %>
 
     <div style="height:55px"></div>
-    <% if current_account.sent_follow_request_to?(@profile.account) %>
+    <% if current_account.sent_follow_request_to?(@profile.profileable) %>
       <h3 style="margin-bottom:12px">Vous avez envoyé une demande de suivi à:</h3>
       <div>
         <div style="display:flex;justify-content: space-between; border-radius:1rem;border:1px solid #EFEFEF; padding: 12px 14px; margin-bottom:7px">
           <div style="display:flex; align-items: center;">
             <div>
               <div style="width:40px; height:40px; border-radius:100%; margin-right:7px">
-                <% if @profile.account.profile.avatar.attached? %>
-                <%= image_tag(@profile.account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"30px") %>
+                <% if @profile.avatar.attached? %>
+                <%= image_tag(@profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"30px") %>
               <% else %>
-                <div style="background-color:<%= @profile.account.profile.color %>; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
+                <div style="background-color:<%= @profile.color %>; height:40px; width:40px; border-radius:100%; display:flex; align-items:center;  justify-content: center;">
                   <p style="text-align:center; font-weight:800; color:black; margin:auto; font-size:.7rem;letter-spacing:-1px">
                     <%#= user.profile.get_initial_profile %>
                   </p>
@@ -96,18 +96,18 @@
               </div>
             </div>
             <div>
-              <p style="display:flex;align-items: center;"><strong><%= link_to "#{@profile.account.profile.lastname} #{@profile.account.profile.firstname}", profile_path(@profile.account), class:"link", style:"font-weight:600; text-decoration:none; color:#222" %></strong></p>
-              <p style="opacity:.5; margin-top:-6px">@<%= @profile.account.profile.username %></p>
+              <p style="display:flex;align-items: center;"><strong><%= link_to "#{@profile.lastname} #{@profile.firstname}", profile_path(@profile.profileable), class:"link", style:"font-weight:600; text-decoration:none; color:#222" %></strong></p>
+              <p style="opacity:.5; margin-top:-6px">@<%= @profile.username %></p>
             </div>
           </div>
           <div>
-            <%= button_to "Annuler la demande", cancel_following_path(@profile.account), class:"btn" %>
+            <%= button_to "Annuler la demande", cancel_following_path(@profile.profileable), class:"btn" %>
           </div>
         </div>
       </div>
     <% end %>
     <div style="padding-top:var(--space-m)">
-      <% if (rodauth.logged_in? && current_account.id == @profile.account.id) || (@profile.account.sent_follow_request_to?(current_account)) %>
+      <% if (rodauth.logged_in? && current_account.id == @profile.profileable.id) || (@profile.profileable.sent_follow_request_to?(current_account)) %>
         <% current_account.follow_requests.each do |request| %>
 
           <div style="display:flex;justify-content: space-between; border-radius:1rem;border:1px solid #EFEFEF; padding: 12px 14px; margin-bottom:7px">
@@ -162,13 +162,13 @@
               </div>
             </div>
             <div style="display:flex; align-items:center; column-gap:7px">
-                  <% if !current_account.block(@profile.account) %>
-                    <%= button_to "Bloquer", blocking_profile_path(@profile.account), class:"btn btn--alert" %>
-                    <% if !current_account.following?(@profile.account) %>
-                      <%= button_to "Se désabonner", unfollow_profile_path(@profile.account), class:"btn btn--black" %>
+                  <% if !current_account.block(@profile.profileable) %>
+                    <%= button_to "Bloquer", blocking_profile_path(@profile.profileable), class:"btn btn--alert" %>
+                    <% if !current_account.following?(@profile.profileable) %>
+                      <%= button_to "Se désabonner", unfollow_profile_path(@profile.profileable), class:"btn btn--black" %>
                     <% end %>
                   <% else %>
-                    <%= button_to "Débloquer", unblocking_profile_path(@profile.account), class:"btn btn--alert" %>
+                    <%= button_to "Débloquer", unblocking_profile_path(@profile.profileable), class:"btn btn--alert" %>
                   <% end %>
                 </div>
           </div>
@@ -176,17 +176,17 @@
         <% end %>
       <% end %>
       
-      <% if @profile.account.mutual_following_with?(current_account) || current_account.blocked?(@profile.account) %>
+      <% if @profile.profileable.mutual_following_with?(current_account) || current_account.blocked?(@profile.profileable) %>
         <div style="display:flex;justify-content: space-between;align-items:center; border-radius:1rem; border:1px solid #EFEFEF; padding: 12px 14px; margin-bottom:7px">
-          <p style="padding:0 7px"><%= current_account.block(@profile.account) ? "Vous avez bloqué " : "Vous suivez déjà " %><strong><%= "#{@profile.account.profile.lastname} #{@profile.account.profile.firstname}" %></strong></p>
+          <p style="padding:0 7px"><%= current_account.block(@profile.profileable) ? "Vous avez bloqué " : "Vous suivez déjà " %><strong><%= "#{@profile.lastname} #{@profile.firstname}" %></strong></p>
           <div style="display:flex; align-items:center; column-gap:7px">
-            <% if !current_account.blocked?(@profile.account) %>
-              <%= button_to "Bloquer", blocking_profile_path(@profile.account), class:"btn btn--alert" %>
-              <% if current_account.following?(@profile.account) %>
-                <%= button_to "Se désabonner", unfollow_profile_path(@profile.account), class:"btn btn--black" %>
+            <% if !current_account.blocked?(@profile.profileable) %>
+              <%= button_to "Bloquer", blocking_profile_path(@profile.profileable), class:"btn btn--alert" %>
+              <% if current_account.following?(@profile.profileable) %>
+                <%= button_to "Se désabonner", unfollow_profile_path(@profile.profileable), class:"btn btn--black" %>
               <% end %>
-            <% elsif current_account.blocked?(@profile.account) %>
-              <%= button_to "Débloquer", unblocking_profile_path(@profile.account), class:"btn btn--alert" %>
+            <% elsif current_account.blocked?(@profile.profileable) %>
+              <%= button_to "Débloquer", unblocking_profile_path(@profile.profileable), class:"btn btn--alert" %>
             <% end %>
           </div>
         </div>
@@ -197,28 +197,28 @@
 
       <div class="flex items-center mb-6 mr-6" style="display:flex; column-gap:7px">
           
-        <% if current_account.following?(@profile.account) %>
-          <%#= button_to "Se désabonner", unfollow_profile_path(@profile.account), class:"btn" %>
-        <% elsif current_account.sent_follow_request_to?(@profile.account) %>
-          <%#= button_to "Annuler la demande", cancel_following_path(@profile.account), class:"btn" %>
+        <% if current_account.following?(@profile.profileable) %>
+          <%#= button_to "Se désabonner", unfollow_profile_path(@profile.profileable), class:"btn" %>
+        <% elsif current_account.sent_follow_request_to?(@profile.profileable) %>
+          <%#= button_to "Annuler la demande", cancel_following_path(@profile.profileable), class:"btn" %>
         <% else %> 
-          <% if !@profile.account.sent_follow_request_to?(current_account) && current_account.id != @profile.account.id %>
-            <% if !current_account.blocked?(@profile.account) %>
-              <%= button_to "Bloquer", blocking_profile_path(@profile.account), class:"btn btn--alert" %>
+          <% if !@profile.profileable.sent_follow_request_to?(current_account) && current_account.id != @profile.profileable.id %>
+            <% if !current_account.blocked?(@profile.profileable) %>
+              <%= button_to "Bloquer", blocking_profile_path(@profile.profileable), class:"btn btn--alert" %>
             <% end %>
 
-           <%#= button_to "Suivre", follow_profile_path(@profile.account), class:"btn btn--black" %> 
+           <%#= button_to "Suivre", follow_profile_path(@profile.profileable), class:"btn btn--black" %> 
 
           <% else %>
           <% end %>
-            <% if !current_account.mutual_following_with?(@profile.account)  && !@profile.account.sent_follow_request_to?(current_account) && !current_account.blocked?(@profile.account) %>
-              <%= button_to "Suivre", follow_profile_path(@profile.account), class:"btn btn--black" %>
+            <% if !current_account.mutual_following_with?(@profile.profileable)  && !@profile.profileable.sent_follow_request_to?(current_account) && !current_account.blocked?(@profile.profileable) %>
+              <%= button_to "Suivre", follow_profile_path(@profile.profileable), class:"btn btn--black" %>
             <% end %>
         <% end %>
 
 
-        <% if current_account.id == @profile.account_id %>
-          <%= link_to "Modifier le profil", edit_profile_path(@profile.account), class: "btn btn--primary" %>
+        <% if current_account.id == @profile.profileable_id %>
+          <%= link_to "Modifier le profil", edit_profile_path(@profile.profileable), class: "btn btn--primary" %>
           <div style="height:10px; width:10px"></div>
           <%= button_to "Déconnexion", rodauth.logout_path, method: :post, class: "btn btn--primary" %>
         <% end %>

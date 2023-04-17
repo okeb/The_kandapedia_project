@@ -36,3 +36,4 @@ en:
     placeholder: "Write your search..."
   visionnage_de_la_question_title: "look the question : %{title}"
   terms_of_service_error_message: "You must agree with our usage policy"
+  unicity_mail_type: "the email must be unique"

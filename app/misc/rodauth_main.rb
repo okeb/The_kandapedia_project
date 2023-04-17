@@ -8,6 +8,9 @@ class RodauthMain < RodauthBase
     # Specify the controller used for view rendering and CSRF verification.
     rails_controller { RodauthController }
 
+    # Amount invalid logins allowed before your account is locked
+    max_invalid_logins 10
+
     # Store account status in an integer column without foreign key constraint.
     account_status_column :status
 
@@ -15,7 +18,7 @@ class RodauthMain < RodauthBase
     account_password_hash_column :password_hash
 
     # Set password when creating account instead of when verifying.
-    verify_account_set_password? false
+  verify_account_set_password? false
 
     # Delete the account record when the user has closed their account.
     delete_account_on_close? true
@@ -66,14 +69,17 @@ class RodauthMain < RodauthBase
     # end
 
     # Perform additional actions after the account is created.
-    # after_create_account do
-    #   if param('terms_of_service').to_i != 0
-    #     Profile.create!(account_id: account_id, username: param('username'), terms_of_service: param('terms_of_service'))
-    #   else
-    #     Profile.find_by!(account_id: account_id).destroy
-    #     throw_error_status(422, 'terms_of_service', "can't be nil")
-    #   end
-    # end
+    after_create_account do
+      @username = if !param('username').nil? && !param('username').empty?
+                    param('username')
+                  else
+                    "Nouvel #{account_type} #{account_id}"
+                  end
+      @account = Account.find_by(id: account_id)
+
+      @profile = @account.create_profile(username: @username, terms_of_service: param('terms_of_service'))
+      @profile.save!
+    end
 
     # Do additional cleanup after the account is closed.
     # after_close_account do

@@ -8,13 +8,15 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'home#index'
+    # ... authenticated admin routes ...
+    constraints Rodauth::Rails.authenticated(:admin) do
+      get '/dashboard/', to: 'home#dashboard', as: 'dashboard'
+    end
   end
 
+  # ... authenticated routes ...
   constraints Rodauth::Rails.authenticated do
-    # ... authenticated routes ...
-    # resources :questions do
-    #   put 'upvote', to: 'questions#upvote'
-    # end
+
     resources :profiles
 
     post '/profiles/:id/follow', to: 'profiles#follow_profile', as: 'follow_profile'

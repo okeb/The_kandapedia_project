@@ -9,3 +9,4 @@ fr:
     errors:
       messages:
         record_invalid: "Le compte ne peux etre créé"
+        unicity_mail_type: "Un compte existe déja avec cet email"

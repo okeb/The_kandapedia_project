@@ -7,6 +7,14 @@ class CreateRodauth < ActiveRecord::Migration[7.0]
       t.string :password_hash
     end
 
+    create_table :admin_accounts do |t|
+      t.integer :status, null: false, default: 1
+      t.string :email, null: false
+      t.index :email, unique: true
+      # t.string :type, null: false, default: 'user'
+      t.string :password_hash
+    end
+
     # Used by the password reset feature
     create_table :account_password_reset_keys, id: false do |t|
       t.bigint :id, primary_key: true

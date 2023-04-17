@@ -10,17 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_045633) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
     t.datetime "email_last_sent", default: -> { "CURRENT_TIMESTAMP(6)" }, null: false
   end
 
+  create_table "account_lockouts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "key", null: false
+    t.datetime "deadline", null: false
+    t.datetime "email_last_sent"
+  end
+
   create_table "account_login_change_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "login", null: false
     t.datetime "deadline", null: false
+  end
+
+  create_table "account_login_failures", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "number", default: 1, null: false
   end
 
   create_table "account_otp_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -87,6 +97,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admin_accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "status", default: 1, null: false
+    t.string "email", null: false
+    t.string "password_hash"
+    t.string "type", default: "user", null: false
+    t.index ["email"], name: "index_admin_accounts_on_email", unique: true
   end
 
   create_table "candies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -158,13 +176,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
     t.text "bio"
     t.text "skills"
     t.boolean "terms_of_service"
-    t.bigint "account_id", null: false
+    t.string "profileable_type", null: false
+    t.bigint "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "bookmark_list"
     t.json "readlist_list"
     t.string "slug"
-    t.index ["account_id"], name: "index_profiles_on_account_id"
+    t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
     t.index ["slug"], name: "index_profiles_on_slug", unique: true
   end
 
@@ -243,7 +262,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter"
   end
 
+  add_foreign_key "account_lockouts", "accounts", column: "id"
   add_foreign_key "account_login_change_keys", "accounts", column: "id"
+  add_foreign_key "account_login_failures", "accounts", column: "id"
   add_foreign_key "account_otp_keys", "accounts", column: "id"
   add_foreign_key "account_password_reset_keys", "accounts", column: "id"
   add_foreign_key "account_recovery_codes", "accounts", column: "id"
@@ -252,7 +273,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_15_093443) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "candies", "accounts"
-  add_foreign_key "profiles", "accounts"
   add_foreign_key "questions", "accounts"
   add_foreign_key "questions", "questions", column: "parent_id"
   add_foreign_key "taggings", "tags"

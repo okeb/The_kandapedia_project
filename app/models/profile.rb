@@ -1,54 +1,55 @@
+# frozen_string_literal: true
+
 class Profile < ApplicationRecord
   extend FriendlyId
   friendly_id :username, use: :slugged
-  belongs_to :account
+  belongs_to :profileable, polymorphic: true
   has_one_attached :avatar
   before_create :add_color
 
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :skills
   acts_as_tagger
-  
+
   validates_uniqueness_of :username, uniqueness: { case_sensitive: false }
-  validates :terms_of_service, acceptance: { message: 'must be abided' }
+  validates :terms_of_service, acceptance: { message: I18n.t("activerecord.errors.models.user.attributes.terms_of_service.acceptance") }
 
   def avatar_thumb
-    self.avatar.variant(resize_to_limit: [100, 100]).processed
+    avatar.variant(resize_to_limit: [100, 100]).processed
   end
-  
+
   def avatar_profile
-    if !self.avatar.variant(resize_to_limit: [250, 250]).nil?
-      self.avatar.variant(resize_to_limit: [250, 250]).processed
-    end
+    avatar.variant(resize_to_limit: [250, 250])&.processed
   end
 
   def get_initial_profile
-    initials = ""
-    if !self.lastname.nil? && !self.firstname.nil?
-      if !self.lastname.empty? && !self.firstname.empty?
-        long_name = (self.lastname + " " + self.firstname).split(' ')
-        long_name.each{ |x|  initials += x[0]}
-        if initials.length < 2
-          initials = self.username
-        end
+    initials = ''
+    if !lastname.nil? && !firstname.nil?
+      if !lastname.empty? && !firstname.empty?
+        long_name = "#{lastname} #{firstname}".split(' ')
+        long_name.each { |x| initials += x[0] }
+        initials = username if initials.length < 2
       else
-        initials = self.username
+        initials = username
       end
     else
-      initials = self.username
+      initials = username
     end
-
 
     initials[0..2].upcase
   end
 
   def add_color
-    self.color = Random.bytes(3).unpack1('H*').paint.brighten(23) 
+    self.color = Random.bytes(3).unpack1('H*').paint.brighten(23)
   end
 
   private
 
-  def set_name  
-    @name = ((!self.lastname.nil? && !self.lastname.empty?) || (!self.firstname.nil? && !self.firstname.empty?)) ? "#{self.lastname} #{self.firstname}" : "#{self.username}"
+  def set_name
+    @name = if (!lastname.nil? && !lastname.empty?) || (!firstname.nil? && !firstname.empty?)
+              "#{lastname} #{firstname}"
+            else
+              username.to_s
+            end
   end
 end

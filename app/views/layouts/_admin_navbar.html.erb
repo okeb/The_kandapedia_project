@@ -58,10 +58,6 @@
               <div class="navbar__name_pseudo  user">
                 @<%= user.username.downcase %>
               </div>
-              <ul class="details">
-                <li><span class="nbre"><%= current_account.followers.count %></span>&nbsp;abonné<%= current_account.followers.count > 1 ? 's': '' %></li>
-                <li><span class="nbre"><%= current_account.follow_requests.count %></span>&nbsp;invitation<%= current_account.follow_requests.count > 1 ? 's': '' %></li>
-              </ul>
             </div>
           <% end %>
         </li>
