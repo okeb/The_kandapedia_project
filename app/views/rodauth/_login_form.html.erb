@@ -2,7 +2,7 @@
   <% if rodauth.skip_login_field_on_login? %>
     <div class="form__group mb-3">
       <%= form.label "login", rodauth.login_label, class: "form__label" %>
-      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", readonly: true, class: "form__input plaintext" %>
+      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", readonly: true, class: "form__input plaintext", autofocus: true %>
     </div>
   <% else %>
     <div class="form__group mb-3">
@@ -14,7 +14,7 @@
         </p>
       <% end %>
       <%#= content_tag(:div, rodauth.field_error(rodauth.login_param), class: "invalid-feedback", id: "login_error_message") if rodauth.field_error(rodauth.login_param) %>
-      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login", autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
+      <%= form.email_field rodauth.login_param, value: params[rodauth.login_param], id: "login",autofocus: true, autocomplete: "email", required: true, class: "form__input #{"is-invalid" if rodauth.field_error(rodauth.login_param)}", aria: ({ invalid: true, describedby: "login_error_message" } if rodauth.field_error(rodauth.login_param)) %>
     </div>
   <% end %>
 

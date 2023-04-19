@@ -1,0 +1,9 @@
+.modal.visible {
+  background-color: var(--bg-color__navbar-menu) ;
+  .modal-content {
+    background-color: var(--bg-color__navbar-menu) ;
+    .ninja-selected{
+      background-color: var(--bg-color__navbar-menu--hover);
+    }
+  }
+}

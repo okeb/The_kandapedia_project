@@ -63,6 +63,7 @@ group :development do
   gem "erb_lint"
   gem "better_errors"
   gem "binding_of_caller"
+  gem "scss_lint", require: false 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
