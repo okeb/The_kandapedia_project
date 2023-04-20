@@ -28,14 +28,11 @@ application.register("select-tag", SelectTagController)
 import SetPrivateController from "./set_private_controller"
 application.register("set-private", SetPrivateController)
 
-
-import StimulusTimeagoController from "./stimulus_timeago_controller"
-application.register("stimulus-timeago", StimulusTimeagoController)
-
-
 import Timeago from "stimulus-timeago"
 application.register('timeago', Timeago)
 
+import StimulusTimeagoController from "./stimulus_timeago_controller"
+application.register("stimulus-timeago", StimulusTimeagoController)
 
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)

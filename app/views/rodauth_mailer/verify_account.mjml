@@ -1,0 +1,84 @@
+<mjml>
+  <mj-head>
+    <mj-title>Connexion à Kandapedia - Kandapedia</mj-title>
+    <mj-font name="DM sans" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"></mj-font>
+    <mj-font name="Tilt Prism" href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap"></mj-font>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="35px" color="#0063E6" font-family="Tilt Prism">KDPDIA</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-family="DM sans" font-size="28px">Connexion à Kandapedia.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-width="1px" border-style="solid" border-color="lightgrey"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Quelqu'un a demandé un lien de connexion pour le compte avec cette adresse e-mail.</mj-text>
+        <mj-spacer height="10px"></mj-spacer>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Ce lien est utilisable qu'une fois et expirera dans une heure.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left" border-radius="14px" font-size="17px" inner-padding="17px 21px">
+          <a href="<%= @email_link %" style="background-color:#0063E6; border-radius:14px; font-family:'DM sans'; padding:17px 21px; color:white; text-decoration: none">Se connecter</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-family="DM sans" font-size="17px" line-height="1.4" color="#aaaaaa">Si vous n'avez pas demandé ce lien de connexion, ignorez ce message.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-divider border-width="1px" border-style="solid" border-color="lightgrey"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-right="25px">
+      <mj-column>
+        <mj-text font-family="DM sans" font-size="30px" line-height="1.3" color="#aaaaaa" font-weight="900" letter-spacing="-1px" padding-right="0px" padding-left="25px" align="left">Kandapedia</mj-text>
+      </mj-column>
+      <mj-column></mj-column>
+      <mj-group>
+        <mj-column>
+          <mj-button font-family="DM sans" font-size="17px" line-height="1.3" color="#aaaaaa" background-color="transparent"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M23.268 5.313c-.35-2.578-2.617-4.61-5.304-5.004C17.51.242 15.792 0 11.813 0h-.03c-3.98 0-4.835.242-5.288.309C3.882.692 1.496 2.518.917 5.127C.64 6.412.61 7.837.661 9.143c.074 1.874.088 3.745.26 5.611c.118 1.24.325 2.47.62 3.68c.55 2.237 2.777 4.098 4.96 4.857c2.336.792 4.849.923 7.256.38c.265-.061.527-.132.786-.213c.585-.184 1.27-.39 1.774-.753a.057.057 0 0 0 .023-.043v-1.809a.052.052 0 0 0-.02-.041a.053.053 0 0 0-.046-.01a20.282 20.282 0 0 1-4.709.545c-2.73 0-3.463-1.284-3.674-1.818a5.593 5.593 0 0 1-.319-1.433a.053.053 0 0 1 .066-.054c1.517.363 3.072.546 4.632.546c.376 0 .75 0 1.125-.01c1.57-.044 3.224-.124 4.768-.422c.038-.008.077-.015.11-.024c2.435-.464 4.753-1.92 4.989-5.604c.008-.145.03-1.52.03-1.67c.002-.512.167-3.63-.024-5.545zm-3.748 9.195h-2.561V8.29c0-1.309-.55-1.976-1.67-1.976c-1.23 0-1.846.79-1.846 2.35v3.403h-2.546V8.663c0-1.56-.617-2.35-1.848-2.35c-1.112 0-1.668.668-1.67 1.977v6.218H4.822V8.102c0-1.31.337-2.35 1.011-3.12c.696-.77 1.608-1.164 2.74-1.164c1.311 0 2.302.5 2.962 1.498l.638 1.06l.638-1.06c.66-.999 1.65-1.498 2.96-1.498c1.13 0 2.043.395 2.74 1.164c.675.77 1.012 1.81 1.012 3.12z" />
+          </svg></mj-button>
+        </mj-column>
+        <mj-column>
+          <mj-button font-family="DM sans" font-size="17px" line-height="1.3" color="#aaaaaa" background-color="transparent"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669c1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+          </svg></mj-button>
+        </mj-column>
+        <mj-column>
+          <mj-button font-family="DM sans" font-size="17px" line-height="1.3" color="#aaaaaa" background-color="transparent"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
+          </svg></mj-button>
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section>
+      <mj-group>
+        <mj-column>
+          <mj-text font-family="DM sans" line-height="1.3" color="#aaaaaa"><a href="" style="color:#aaaaaa">Blog</a></mj-text>
+        </mj-column>
+        <mj-column>
+          <mj-text font-family="DM sans" line-height="1.3" color="#aaaaaa"><a href="" style="color:#aaaaaa">Centre d'aide</a></mj-text>
+        </mj-column>
+        <mj-column>
+          <mj-text font-family="DM sans" line-height="1.3" color="#aaaaaa"><a href="" style="color:#aaaaaa">Contactez-nous</a></mj-text>
+        </mj-column>
+      </mj-group>
+    </mj-section>
+  </mj-body>
+</mjml>
