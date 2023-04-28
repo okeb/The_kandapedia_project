@@ -1,0 +1,75 @@
+<div>
+    <%= content_tag :div, style:"display:flex; justify-content:start; column-gap: 14px; margin: 0; margin-top:-1px; padding: 12px 24px 0 24px" do %>
+      <a href="<%= profile_url(@kandy.account.profile) %>" style="text-decoration:none; border-radius:7px;">
+        <div style=" display:flex; align-items:center;  justify-content: center;">
+          <% if @kandy.account.profile.avatar.attached? %>
+            <div class="picture_author" style="height: 47px; width: 47px; margin:0;">
+              <%= image_tag(@kandy.account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"27px") %>
+            </div>
+          <% else %>
+            <div class="initial_author"
+                style="background-color:<%= @kandy.account.profile.color %>; height:47px; width:47px;">
+              <p style="font-size:18px">
+                <%= @kandy.account.profile.get_initial_profile %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </a>
+      
+      <div style="border-radius:7px; width:100%; margin:0; padding: 0;">
+        <div style="display:flex; column-gap: 3px;margin-bottom:7px">
+          <a href="<%= profile_url(@kandy.account.profile) %>" style="text-decoration:none">
+            <div style="display:flex; justify-items:center; text-decoration:none">
+              <p class="name_author">
+                <%= (!@kandy.account.profile.lastname.nil? || !@kandy.account.profile.firstname.nil?) ? @kandy.account.profile.lastname.capitalize : @kandy.account.profile.username.capitalize %>
+              </p>
+                <% if @kandy.account.profile.is_verified == "verified" %>
+                  <span class="icons" style="margin-top: 2px; margin-left: 2px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 20 20"><path fill="hsl(204, 88%, 53%)" d="m8.46 1.897l.99.39a1.5 1.5 0 0 0 1.099 0l.99-.39a2.418 2.418 0 0 1 3.102 1.285l.424.975a1.5 1.5 0 0 0 .777.777l.975.424a2.418 2.418 0 0 1 1.285 3.103l-.39.99a1.5 1.5 0 0 0 0 1.098l.39.99a2.418 2.418 0 0 1-1.285 3.102l-.975.424a1.499 1.499 0 0 0-.777.777l-.424.975a2.418 2.418 0 0 1-3.103 1.285l-.99-.39a1.5 1.5 0 0 0-1.098 0l-.99.39a2.418 2.418 0 0 1-3.102-1.285l-.424-.975a1.5 1.5 0 0 0-.777-.777l-.975-.424a2.418 2.418 0 0 1-1.285-3.103l.39-.99a1.5 1.5 0 0 0 0-1.098l-.39-.99a2.418 2.418 0 0 1 1.285-3.102l.975-.424a1.5 1.5 0 0 0 .777-.777l.424-.975a2.418 2.418 0 0 1 3.103-1.285Zm4.166 5.77l-3.648 4.104l-1.625-1.625a.5.5 0 0 0-.707.707l2 2a.5.5 0 0 0 .727-.021l4-4.5a.5.5 0 0 0-.747-.665Z" /></svg>
+                  </span>
+                <% end %>
+              <p class="username_author" style="opacity: .5">
+                <%= " @#{@kandy.account.profile.username.downcase}" %>
+              </p>
+            </div>
+          </a>
+          <p class="username_author" style="opacity:.3; font-size: x-small; margin-top: auto; margin-bottom: auto">&bull;</p>
+          <p class="username_author" style="opacity:.4; font-size: small; margin-top: auto; margin-bottom: auto"><%= timeago(@kandy.created_at) %></p>
+          <p class="username_author" style="opacity:.4; font-size: small; margin-top: auto; margin-bottom: auto">
+          </p>
+        </div>
+        <p class="" style="font-size:15px; background-color: transparent; line-height: 21px;"><%= link_to @kandy.body, candy_url(@kandy), style:"text-decoration:none; color:var(--color-text-body)" %>
+        </p>
+        <div class="image" style="width: 100%; border-radius: 21px; overflow: hidden; margin: 14px 0 14px 0">
+          <!--            <img style="object-fit: cover; object-position: center;width:100%; height:100%;" src="https://images.pexels.com/photos/1289363/pexels-photo-1289363.jpeg?auto=compress&cs=tinysrgb&w=800" alt="portrait visage de jeune femme">-->
+        </div>
+        <div style="margin: 21px 7px; display: flex; column-gap: 28px; align-items: center">
+          <div style="display: flex; column-gap: 7px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span style="font-size: x-small; margin:auto 0">12</span>
+          </div>
+          <div style="display: flex; column-gap: 7px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 256 256">
+              <path fill="currentColor" d="M168 24V8a8 8 0 0 1 16 0v16a8 8 0 0 1-16 0Zm35.83 17a8 8 0 0 0 11-2.66l8-13.11a8 8 0 1 0-13.66-8.33l-8 13.1a8 8 0 0 0 2.65 11Zm47.44 12.59a8 8 0 0 0-10.06-5.16l-15 4.85a8 8 0 0 0 2.45 15.62a8.1 8.1 0 0 0 2.46-.39l15-4.85a8 8 0 0 0 5.14-10.11Zm-30 39.94a79.71 79.71 0 0 1-12.6 96.47a80 80 0 0 1-146.19 18l-35-60.63a26 26 0 0 1 19.18-38.77l-4-6.94A26 26 0 0 1 61 63a26 26 0 0 1 11.39-31.37a26 26 0 0 1 30.81 3.58A26 26 0 0 1 147.08 37l12 20.79a26 26 0 0 1 43.17 2.78Zm-27.68 91.08a63.65 63.65 0 0 0-6.4-48.61l-19-32.91a10 10 0 0 0-17.75 9.18L161.86 132a8 8 0 1 1-13.86 8l-35-60.47a10 10 0 0 0-17.37 9.87l24.62 42.6a8 8 0 1 1-13.85 8L73.83 83.66a10 10 0 1 0-17.32 10l16 27.72l20 34.64a8 8 0 1 1-13.86 8l-20-34.64a10 10 0 0 0-17.32 10l35 60.63a64 64 0 0 0 117.25-15.44Z"/>
+            </svg>
+            <span style="font-size: x-small; margin:auto 0">98</span>
+          </div>
+          <div style="display: flex; column-gap: 7px">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 20 20">
+              <g fill="currentColor">
+                <path stroke-width="1.5" d="M5.05 14.95a1 1 0 1 1 1.414-1.414A5 5 0 0 0 15 10a1 1 0 1 1 2 0a7 7 0 0 1-11.95 4.95Z"/>
+                <path stroke-width="1.5" d="M13.559 12.832a1 1 0 1 1-1.11-1.664l3-2a1 1 0 1 1 1.11 1.664l-3 2Z"/>
+                <path stroke-width="1.5" d="M18.832 12.445a1 1 0 0 1-1.664 1.11l-2-3a1 1 0 1 1 1.664-1.11l2 3Zm-3.975-7.594a1 1 0 1 1-1.414 1.414a5 5 0 0 0-8.536 3.536a1 1 0 1 1-2 0a7 7 0 0 1 11.95-4.95Z"/>
+                <path stroke-width="1.5" d="M6.349 6.969a1 1 0 0 1 1.11 1.664l-3.001 2a1 1 0 1 1-1.11-1.664l3-2Z"/>
+                <path stroke-width="1.5" d="M1.075 7.356a1 1 0 1 1 1.664-1.11l2 3a1 1 0 1 1-1.664 1.11l-2-3Z"/>
+              </g>
+            </svg>
+            <span style="font-size: x-small; margin:auto 0">7</span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+</div>

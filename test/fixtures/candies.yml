@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyString
+  scope: 1
+  position: 1
+  view: 1
+  account: one
+
+two:
+  body: MyString
+  scope: 1
+  position: 1
+  view: 1
+  account: two

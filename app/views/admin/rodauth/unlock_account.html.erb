@@ -1,0 +1,15 @@
+<%= form_with url: rodauth(:admin).unlock_account_path, method: :post, data: { turbo: false }, class: 'form__container my' do |form| %>
+  <%== rodauth(:admin).unlock_account_explanatory_text %>
+
+  <% if rodauth(:admin).unlock_account_requires_password? %>
+    <div class="form-group">
+      <%= form.label "password", rodauth(:admin).password_label, class: "form__label" %>
+      <%= form.password_field rodauth(:admin).password_param, value: "", id: "password", autocomplete: rodauth(:admin).password_field_autocomplete_value, required: true, class: "form__input #{"is-invalid" if rodauth(:admin).field_error(rodauth(:admin).password_param)}", aria: ({ invalid: true, describedby: "password_error_message" } if rodauth(:admin).field_error(rodauth(:admin).password_param)) %>
+      <%= content_tag(:span, rodauth(:admin).field_error(rodauth(:admin).password_param), class: "invalid-feedback", id: "password_error_message") if rodauth(:admin).field_error(rodauth(:admin).password_param) %>
+    </div>
+  <% end %>
+
+  <div class="btn__box">
+    <%= form.submit rodauth(:admin).unlock_account_button, class: "btn btn__primary" %>
+  </div>
+<% end %>

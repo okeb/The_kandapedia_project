@@ -1,0 +1,5 @@
+<div class="form__container mt">
+  <% if rodauth(:admin).field_error(rodauth(:admin).password_param) && rodauth(:admin).features.include?(:reset_password) %>
+    <%= render template: "admin/rodauth/reset_password_request", layout: false %>
+  <% end %>
+</div>

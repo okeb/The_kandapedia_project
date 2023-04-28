@@ -1,0 +1,63 @@
+
+<div class="form__container my">
+  
+  <div style="border:.5px solid var(--color-kandy__border); margin: 0; padding: 12px 24px 0 24px">
+    
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 21px">
+      
+      <div style="display:flex; align-items: center;column-gap: 3px; margin:auto 0">
+
+        <%= link_to  profile_url(@candy.account.profile), style:"text-decoration:none; border-radius:7px;" do %>
+          <div style=" display:flex; align-items:center;  justify-content: center;">
+            <% if @candy.account.profile.avatar.attached? %>
+              <div class="picture_author" style="height: 47px; width: 47px; margin:0;">
+                <%= image_tag(@candy.account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"27px") %>
+              </div>
+            <% else %>
+              <div class="initial_author"
+                   style="background-color:<%= @candy.account.profile.color %>; height:47px; width:47px;">
+                <p style="font-size:18px">
+                  <%= @candy.account.profile.get_initial_profile %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= link_to  profile_url(@candy.account.profile), style:"text-decoration:none" do %>
+          <div style="justify-items:center; text-decoration:none; margin-left:7px">
+            <p style="padding:0;">
+              <div class="name_author" style="margin:0; font-size:16px; line-height: 14px">
+                <%= (!@candy.account.profile.lastname.nil? || !@candy.account.profile.firstname.nil?) ? "#{ @candy.account.profile.lastname.capitalize } #{ @candy.account.profile.firstname.capitalize }" : @candy.account.profile.username.capitalize %>
+              </div>
+            </p>
+            <p>
+              <div class="username_author" style="opacity: .5; margin: 0; padding-left:0;font-size:16px">
+                <%= "@#{@candy.account.profile.username.downcase}" %>
+              </div>
+            </p>
+          </div>
+        <% end %>
+      </div>
+      
+      <div style="">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"  style="margin: 0 auto">
+          <g fill="none" stroke="#424242" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <circle cx="12" cy="12" r="1"/>
+            <circle cx="19" cy="12" r="1"/>
+            <circle cx="5" cy="12" r="1"/>
+          </g>
+        </svg>
+      </div>
+      
+    </div>
+    
+
+    <p class="" style="font-size:21px; margin-bottom:21px; background-color: transparent"><%= @candy.body %></p>
+
+    <div style="object-fit: cover; object-position: center;width:100%; height:100%; margin: 14px 0 21px;border-radius: 14px; overflow: hidden">
+      <img src="https://images.pexels.com/photos/4192655/pexels-photo-4192655.jpeg?auto=compress&cs=tinysrgb&w=800" alt="portrait visage de jeune femme">
+    </div>
+    <p class="username_author" style="opacity:.4; font-size: small; margin-top: auto; margin-bottom: auto"><%= timeago(@candy.created_at) %></p>
+  </div>
+</div>
