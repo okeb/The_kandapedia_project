@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_045633) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_21_081645) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -183,6 +183,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_045633) do
     t.json "bookmark_list"
     t.json "readlist_list"
     t.string "slug"
+    t.integer "is_verified", default: 0
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
     t.index ["slug"], name: "index_profiles_on_slug", unique: true
   end

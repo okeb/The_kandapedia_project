@@ -7,6 +7,8 @@ class Profile < ApplicationRecord
   has_one_attached :avatar
   before_create :add_color
 
+  enum :is_verified, unverified: 0, verified: 1, closed: 2, checking: 3, baanned: 4
+
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :skills
   acts_as_tagger

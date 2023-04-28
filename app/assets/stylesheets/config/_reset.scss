@@ -23,14 +23,14 @@ body {
 
 @media (prefers-color-scheme: light) {
   body {
-    background-color: hsl(0, 0%, 100%);
-    color: hsl(0, 5%, 25%);
+    background-color: #fffefe;
+    color: #033049FF;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: hsl(204, 83%, 2%);
+    background-color: #010609FF;
     color: hsla(0, 0%, 100%, .6);
   }
 }

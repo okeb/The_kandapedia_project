@@ -1,5 +1,5 @@
 class ProfilePolicy < ApplicationPolicy
-  attr_reader :account, :profile
+  attr_reader :profile
 
   def initialize(account, profile)
     @account = account
@@ -11,10 +11,10 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def edit?
-    (@account != nil) && @profile.account_id == @account.id
+    (@account != nil) && @profile.profileable_id == @account.id
   end
   
   def update?
-    (@account != nil) && @profile.account_id == @account.id
+    (@account != nil) && @profile.profileable_id == @account.id
   end
 end

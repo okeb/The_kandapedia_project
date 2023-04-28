@@ -17,50 +17,50 @@ class ProfilesController < ApplicationController
   end
 
   def follow_profile
-    current_account.send_follow_request_to(@profile.account)
+    current_account.send_follow_request_to(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
 
   def unfollow_profile
     make_it_an_unfriend_request
 
-    current_account.unfollow(@profile.account)
+    current_account.unfollow(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
 
   def blocking_profile
     make_it_an_unfriend_request
 
-    current_account.block(@profile.account)
+    current_account.block(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
 
   def unblocking_profile
     make_it_an_unfriend_request
 
-    current_account.unblock(@profile.account)
+    current_account.unblock(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
 
   def decline_following
-    current_account.decline_follow_request_of(@profile.account)
+    current_account.decline_follow_request_of(@profile.profileable)
     redirect_to root_path
   end
 
   def accept_following
-    current_account.accept_follow_request_of(@profile.account)
+    current_account.accept_follow_request_of(@profile.profileable)
     make_it_a_friend_request
 
     redirect_to root_path
   end
 
   def cancel_following
-    current_account.remove_follow_request_for(@profile.account)
+    current_account.remove_follow_request_for(@profile.profileable)
     redirect_to root_path
   end
 
   def show
-    # @questions = Question.all.where(account_id: @profile.account_id)
+    # @questions = Question.all.where(account_id: @profile.profileable_id)
     profile_id = @profile.id
     @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
     # @profile = current_account.profile if @profile == nil
@@ -85,12 +85,12 @@ class ProfilesController < ApplicationController
   private
 
   def make_it_a_friend_request
-    current_account.send_follow_request_to(@profile.account)
-    @profile.account.accept_follow_request_of(current_account)
+    current_account.send_follow_request_to(@profile.profileable)
+    @profile.profileable.accept_follow_request_of(current_account)
   end
 
   def make_it_an_unfriend_request
-    @profile.account.unfollow(current_account) if @profile.account.mutual_following_with?(current_account)
+    @profile.profileable.unfollow(current_account) if @profile.profileable.mutual_following_with?(current_account)
   end
 
   def set_skills
