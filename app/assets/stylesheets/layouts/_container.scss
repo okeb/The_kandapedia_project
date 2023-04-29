@@ -27,15 +27,16 @@
     display: block;
     left: 0;
     overflow-y: auto;
-    padding-left: var(--space-4xl);
+    padding-left: var(--space-6xl);
     padding-right: var(--space-2xl);
     position: fixed;
-    top: 120px;
+    top: 0;
     width: 25%;
     z-index: 30;
     
     & .menu__principal {
       box-sizing: border-box;
+      padding-top: var(--space-s);
       display: block;
       position: relative;
     }
@@ -48,11 +49,10 @@
     border-top-color: transparent;
     display: block;
     height: auto;
-    margin-left: 25%;
-    margin-right: 33%;
+    margin: 0 33% 0 25%;
     overflow-y: auto;
-    padding-left: var(--space-m);
-    padding-right: var(--space-m);
+    padding: 0;
+    position: relative;
     width: 42%;
   }
   & .right__part {
@@ -61,10 +61,10 @@
     display: block;
     overflow-y: auto;
     padding-left: var(--space-2xl);
-    padding-right: var(--space-4xl);
+    padding-right: var(--space-6xl);
     position: fixed;
     right: 0;
-    top: 120px;
+    top: 0;
     width: 33%;
     z-index: 20;
     
