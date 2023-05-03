@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profileable: one
+  profileable_type: Profileable
+
+two:
+  profileable: two
+  profileable_type: Profileable

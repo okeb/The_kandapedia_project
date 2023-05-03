@@ -7,42 +7,42 @@
     left: 0;
     right: 0;
     margin-top: 0;
-    backdrop-filter: blur(17px);
+    backdrop-filter: blur(14px);
     background-color: var(--bg-color-header);
     padding: var(--space-m) var(--space-2xl);
     margin-bottom: var(--space-xxl);
 
     &__brand {
-        font-weight: bold;
-        font-size: var(--font-size-xl);
-        color: var(--color-text-header);
+      color: var(--color-text-header);
+      font-size: var(--font-size-2xl);
+      font-weight: bold;
 
-        &_title {
-          color:var(--color-primary);
-          margin-left: var(--space-l);
-          margin-right: auto;
-          text-decoration: none !important;
-          font-family: 'Climate Crisis', cursive;
-        }
+      &_title {
+        color:var(--color-primary);
+        font-family: 'Dela Gothic One', cursive;
+        margin-left: var(--space-l);
+        margin-right: auto;
+        text-decoration-line: none !important;
+      }
     }
 
     &__name {
-        font-weight: bold;
-        margin-left: auto;
+      align-items:center;
+      color: var(--color-text-header);
+      display:flex;
+      font-weight: bold;
+      justify-content:end;
+      margin-left: auto;
+      margin-right: var(--space-s);
+      position: relative;
+      &_avatar-box {
         display:flex; 
-        align-items:center; 
-        justify-content:end; 
-        position: relative;
-        margin-right: var(--space-s);
-        color: var(--color-text-header);
-        &_avatar-box {
-          display:flex; 
-          align-items:center;  
-          justify-content: center;
-        }
-        &_name {
-          display:flex;
-          justify-items: left;
+        align-items:center;  
+        justify-content: center;
+      }
+      &_name {
+        display:flex;
+        justify-items: left;
           padding:2px;
         }
 

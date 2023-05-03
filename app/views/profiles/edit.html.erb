@@ -16,7 +16,7 @@
 
 @media (prefers-color-scheme: light) {
   .text_area {
-    background-color: (var(--color-white));
+    background-color: var(--color-white);
   }
 }
 
@@ -32,10 +32,10 @@
 }
 </style>
 <div class="container">
-  <%= form_for @profile, as: :profile, url: profile_path(current_account.profile), method: :patch, html: { class: "edit_profile", id: "edit_profile_#{current_account.profile.account_id}" } do |f| %>
+  <%= form_for @profile, as: :profile, url: profile_path(current_account.profile), method: :patch, html: { class: "edit_profile", id: "edit_profile_#{current_account.profile.profileable_id}" } do |f| %>
 
     <div style="padding-bottom:var(--space-m)">
-        <h4><%= @profile.account.email %></h4>
+        <h4><%= @profile.profileable.email %></h4>
     </div>
     
     <div style="padding-bottom:var(--space-m)">

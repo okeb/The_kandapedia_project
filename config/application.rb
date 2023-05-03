@@ -14,6 +14,8 @@ module MyApp
     config.i18n.default_locale = :fr
 
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+    config.action_mailer.default_options = { from: 'from@kandapedia.com' }
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

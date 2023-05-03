@@ -1,0 +1,9 @@
+<%= form_with url: rodauth(:admin).unlock_account_request_path, method: :post, data: { turbo: false }, class:'form__container my' do |form| %>
+  <%= form.hidden_field rodauth(:admin).login_param, value: params[rodauth(:admin).login_param] %>
+
+  <%== rodauth(:admin).unlock_account_request_explanatory_text %>
+
+  <div class="form-group mb-3">
+    <%= form.submit rodauth(:admin).unlock_account_request_button, class: "btn btn__primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<%= form_with url: rodauth(:admin).logout_path, method: :post, data: { turbo: false }, class:'form__container my' do |form| %>
+  <% if rodauth(:admin).features.include?(:active_sessions) %>
+    <div class="form-group mb-3">
+      <div class="form-check">
+        <%= form.check_box rodauth(:admin).global_logout_param, id: "global-logout", class: "form-check-input" %>
+        <%= form.label "global-logout", rodauth(:admin).global_logout_label, class: "form-check-label" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-3">
+    <%= form.submit rodauth(:admin).logout_button, class: "btn btn--black" %>
+  </div>
+<% end %>

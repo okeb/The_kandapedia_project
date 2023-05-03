@@ -1,0 +1,29 @@
+
+<div class=""
+style="padding: 119px 21px 0;border-bottom: 1px solid var(--color-border)"
+>
+  <% if rodauth.logged_in? %>
+    <%= form_with(model: @candy) do |form| %>
+
+      <div class="form__group">
+        <%= form.label :body, "Qu'avez-vous à dire aujourd'hui?", class: "form__label-kandy" %>
+        <%= form.text_area :body, class: "form__input", rows: "4" %>
+      </div>
+      
+      <div class="form__group">
+        <%= select_tag 'scope', options_for_select([['public','public_scope' ], ['privé', 2 ], ['protégé', 3 ]], 'public_scope'), class: 'form__select-kandy' %>
+      </div>
+  
+      <div class="form__box-btn" style="justify-content: end; display: flex">
+        <%#= form.submit "Publier", class: "btn btn--primary" %>
+        <button type="submit" class="btn btn--primary" style="display:flex; column-gap: 4px">
+          <svg viewBox="0 0 16 16" aria-hidden="true" height="17px" width="17px" style="margin-top:auto; margin-bottom: auto">
+            <path fill="#FFF" d="M5.338 9.805c.11.418.439.747.857.857C7.282 10.948 8 11.44 8 12s-.718 1.052-1.805 1.338c-.418.11-.747.439-.857.857C5.052 15.281 4.56 16 4 16s-1.052-.718-1.338-1.805a1.205 1.205 0 0 0-.856-.857C.718 13.052 0 12.56 0 12s.718-1.052 1.806-1.338c.417-.11.746-.439.856-.857C2.948 8.718 3.441 8 4 8c.56 0 1.052.718 1.338 1.805Z"></path>
+            <path fill="#FFF" d="M12.717 2.432c.1.42.43.75.85.852C15.026 3.633 16 4.27 16 5s-.975 1.367-2.432 1.716c-.42.101-.75.432-.851.852C12.367 9.025 11.729 10 11 10c-.729 0-1.367-.975-1.716-2.432-.101-.42-.431-.75-.851-.852C6.975 6.367 6 5.73 6 5c0-.73.975-1.367 2.433-1.717.42-.1.75-.43.85-.85C9.634.974 10.272 0 11 0c.73 0 1.367.975 1.717 2.432Z"></path></svg>
+          Publier
+        </button>
+      </div>
+      <div style="height: 21px; padding: 0; margin: 0"></div>
+    <% end %>
+  <% end %>
+</div>

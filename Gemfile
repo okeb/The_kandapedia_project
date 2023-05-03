@@ -107,3 +107,7 @@ gem "view_component", "~> 2.82"
 gem "rodauth-i18n", "~> 0.7.0"
 
 gem 'mjml-rails', require: 'mjml'
+
+gem "postmark-rails", "~> 0.22.1"
+
+gem "mailjet", "~> 1.7"
