@@ -111,3 +111,5 @@ gem 'mjml-rails', require: 'mjml'
 gem "postmark-rails", "~> 0.22.1"
 
 gem "mailjet", "~> 1.7"
+
+gem "shrine", "~> 3.4"
