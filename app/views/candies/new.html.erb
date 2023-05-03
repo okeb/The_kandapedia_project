@@ -16,6 +16,12 @@
       
       <%= form.radio_button :scope, 3, class: "form__input", value: 3 %>
       <%= form.label :scope_3, 'protégé', class: "form__label" %>
+      
+    </div>
+    
+    <div class="form__group">
+      <%= form.hidden_field :image, value: @candy.cached_image_data, class: "form__input" %>
+      <%= form.file_field :image, class: "form__input" %>
     </div>
     
     <div class="form__box-btn" style="justify-content: end; display: flex">

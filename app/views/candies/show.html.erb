@@ -56,7 +56,10 @@
     <p class="" style="font-size:21px; margin-bottom:21px; background-color: transparent"><%= @candy.body %></p>
 
     <div style="object-fit: cover; object-position: center;width:100%; height:100%; margin: 14px 0 21px;border-radius: 14px; overflow: hidden">
-      <img src="https://images.pexels.com/photos/4192655/pexels-photo-4192655.jpeg?auto=compress&cs=tinysrgb&w=800" alt="portrait visage de jeune femme">
+      <% if @candy.image_data? %>
+        <%= image_tag @candy.image_url(:large), style: "object-fit: cover; object-position: center;width:100%; height:100%;" %>
+      <% end %>
+<!--      <img src="https://images.pexels.com/photos/4192655/pexels-photo-4192655.jpeg?auto=compress&cs=tinysrgb&w=800" alt="portrait visage de jeune femme">-->
     </div>
     <p class="username_author" style="opacity:.4; font-size: small; margin-top: auto; margin-bottom: auto"><%= timeago(@candy.created_at) %></p>
   </div>

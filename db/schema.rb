@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_21_081645) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_03_154210) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -115,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_081645) do
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "image_data"
     t.index ["account_id"], name: "index_candies_on_account_id"
   end
 

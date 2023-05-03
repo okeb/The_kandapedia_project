@@ -68,6 +68,6 @@ class CandiesController < ApplicationController
   end
 
   def candy_params
-    params.require(:candy).permit(:body, :scope, :view, :position, :account_id)
+    params.require(:candy).permit(:body, :scope, :view, :position, :account_id, :image)
   end
 end
