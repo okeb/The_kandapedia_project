@@ -8,7 +8,7 @@ class ImageUploader < Shrine
   plugin :store_dimensions
   plugin :validation_helpers
   plugin :remove_invalid
-  plugin :delete_promoted
+  # plugin :delete_promoted
   plugin :delete_raw
   # plugin :pretty_location
   
@@ -35,7 +35,7 @@ class ImageUploader < Shrine
       @filename = File.basename(extract_filename(io).to_s, '.*')
     end
     
-    extension = ".#{io.extension}" if io.is_a?(UploadFile) && io.extension
+    extension = ".#{io.extension}" if io.is_a?(UploadedFile) && io.extension
     extension ||= File.extname(extract_filename(io).to_s).downcase
     version = context[:version] === :original ? '' : "_#{context[:version]}"
     uniqid = "-#{generate_uid(io)}"

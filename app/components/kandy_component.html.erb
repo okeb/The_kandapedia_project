@@ -44,7 +44,9 @@
         <p class="" style="font-size:15px; background-color: transparent; line-height: 21px;"><%= link_to @kandy.body, candy_url(@kandy), style:"text-decoration:none; color:var(--color-text-body-high)" %>
         </p>
         <div class="image" style="width: 100%; border-radius: 21px; overflow: hidden; margin: 14px 0 14px 0">
-          <!--            <img style="object-fit: cover; object-position: center;width:100%; height:100%;" src="https://images.pexels.com/photos/1289363/pexels-photo-1289363.jpeg?auto=compress&cs=tinysrgb&w=800" alt="portrait visage de jeune femme">-->
+                      <% if @kandy.image_data? %>
+                        <%= image_tag @kandy.image_url(:medium), style: "object-fit: cover; object-position: center;width:100%; height:100%;" %>
+                      <% end %>
         </div>
         <div style="margin: 21px 7px; display: flex; column-gap: 35px; align-items: center">
           <div style="display: flex; column-gap: 7px; color: var(--color-text-body)">
