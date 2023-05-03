@@ -48,6 +48,24 @@
       --color-gradient-white: linear-gradient(to right, var(--color-text-header), var(--color-text-header));
 
       --color-text-header: hsl(0, 1%, 16%);
+      --color-text__button-kandy:  #ffffff;
+      --color-text-dark-body: rgba(192, 192, 192);
+      --color-text-dark-title: rgba(244, 244, 245);
+      --color-text-light-title: #111827;
+    
+      --color-text-light-subtitle: #6B7280;
+      --color-text-light-body: #374151;
+      --color-text-light-title-menu: #374151;
+      --color-text-light-link: #4f46e5;
+      --color-text-light-item-menu: #4B5563;
+      --color-text-light-item-menu-hover: #111827;
+      --color-text-light-item-menu-footer: #9CA3AF;
+    
+      //autre proposition dark mode 
+      --color__text-title: rgb(212, 212, 212);
+      --color__text-pseudo: rgb(108, 108, 108);
+      --color__text-body: rgb(154, 154, 154);
+    
       --color-text-input: hsl(0, 0%, 19%);
       --color-text-body: hsl(202, 92%, 15%);
       --color-text-body-high: hsl(202, 92%, 15%);
@@ -59,12 +77,13 @@
       
       //--bg-color: hsl(0, 100%, 100%);
       --bg-color: #fffefe;
+      --bg-color__button-kandy: black;
       --bg-color-input__search: rgba(0, 0, 0, .045);
       --bg-color__navbar-menu: hsl(0, 0%, 100%);
-      --bg-color-body:hsl(0, 0%, 100%);
+      --bg-color-body: hsl(0, 0%, 100%);
       --bg-color-header: hsla(0, 0%, 100%, 0.777);
       --bg-color-hover:  hsl(0, 0%, 94%);
-      --bg-color-hover-high:  hsl(0, 0%, 97%);
+      --bg-color-hover-high:  hsl(0, 0%, 94%);
       --color-kandy__border: hsla(201, 29%,14%, 0.4);
       --bg-color__navbar-menu--hover:  hsl(0, 0%, 94%);
       --bg-color-input: hsl(0, 0%, 97%);
@@ -125,6 +144,7 @@
       --color-kandy__border: hsl(0, 0%, 22%);
 
       --bg-color: hsl(204, 83%, 2%);
+      --bg-color__button-kandy: #e7e9ea;
       --bg-color-input__search: rgba(255, 255, 255, .045);
       --bg-color__navbar-menu--hover: hsl(201, 29%, 14%);
       --bg-color__navbar-menu: hsl(203, 28%, 9%);

@@ -29,7 +29,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left" border-radius="14px" font-size="17px" inner-padding="17px 21px">
+        <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left" font-size="17px">
           <a href="<%= @email_link %" style="background-color:#0063E6; border-radius:14px; font-family:'DM sans'; padding:17px 21px; color:white; text-decoration: none">Se connecter</a>
         </mj-text>
       </mj-column>
