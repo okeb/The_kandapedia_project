@@ -113,3 +113,5 @@ gem "postmark-rails", "~> 0.22.1"
 gem "mailjet", "~> 1.7"
 
 gem "shrine", "~> 3.4"
+
+gem "mini_magick", "~> 4.11"
