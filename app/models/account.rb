@@ -5,6 +5,7 @@ class Account < ApplicationRecord
 
   has_many :questions, counter_cache: true, dependent: :destroy
   has_many :candies, counter_cache: true, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy
   has_one :profile, as: :profileable
   acts_as_voter
   acts_as_tagger
