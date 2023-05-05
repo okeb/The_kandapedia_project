@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
-    @profile = Profile.find_by(account_id: @question.account_id)
+    @profile = Profile.find_by(profileable_id: @question.account_id)
     impressionist(@question, "visionnage de la question : #{@question.title}")
   end
 

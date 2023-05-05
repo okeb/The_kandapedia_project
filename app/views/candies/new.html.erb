@@ -1,22 +1,15 @@
 
-<div class="">
+<div style=" margin-left:auto; margin-right: auto; width: 700px; margin-top:10px">
   <h1>Dites nous quelque chose</h1>
   <%= form_with(model: @candy) do |form| %>
   
     <div class="form__group">
       <%= form.label :body, class: "form__label" %>
       <%= form.text_area :body, class: "form__input", rows: "4" %>
-    </div>  
+    </div>
+    
     <div class="form__group">
-      <%= form.radio_button :scope, 'public_scope', class: "form__input", checked: true, value: 'public_scope' %>
-      <%= form.label :scope_1, 'public', class: "form__label" %>
-      
-      <%= form.radio_button :scope, 2, class: "form__input", value: 2 %>
-      <%= form.label :scope_2, 'privé', class: "form__label" %>
-      
-      <%= form.radio_button :scope, 3, class: "form__input", value: 3 %>
-      <%= form.label :scope_3, 'protégé', class: "form__label" %>
-      
+      <%= select_tag 'scope', options_for_select([['public', 1 ], ['privé', 2 ], ['protégé', 3 ]], 'public_scope'), class: 'form__select-kandy' %>
     </div>
     
     <div class="form__group">
@@ -24,7 +17,7 @@
       <%= form.file_field :image, class: "form__input" %>
     </div>
     
-    <div class="form__box-btn" style="justify-content: end; display: flex">
+    <div class="form__box-btn" style="justify-content: end; display: flex; margin-top:25px">
       <%#= form.submit "Publier", class: "btn btn--primary" %>
       <button type="submit" class="btn btn--primary" style="display:flex; column-gap: 4px">
         <svg viewBox="0 0 16 16" aria-hidden="true" height="17px" width="17px" style="margin-top:auto; margin-bottom: auto">

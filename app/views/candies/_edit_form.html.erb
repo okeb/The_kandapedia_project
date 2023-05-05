@@ -11,7 +11,12 @@ style="padding: 119px 21px 0;border-bottom: 1px solid var(--color-border)"
       </div>
       
       <div class="form__group">
-        <%= select_tag 'scope', options_for_select([['public','public_scope' ], ['privé', 2 ], ['protégé', 3 ]], 'public_scope'), class: 'form__select-kandy' %>
+        <%= select_tag 'scope', options_for_select([['public', 1 ], ['privé', 2 ], ['protégé', 3 ]], 'public_scope'), class: 'form__select-kandy' %>
+      </div>
+
+      <div data-controller="kandy-tiptap">
+        <input name="body" data-kandy-tiptap-target="input" hidden />
+        <div data-kandy-tiptap-target="body"></div>
       </div>
   
       <div class="form__box-btn" style="justify-content: end; display: flex">

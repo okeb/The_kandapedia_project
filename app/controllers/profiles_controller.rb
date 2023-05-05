@@ -60,10 +60,10 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    # @questions = Question.all.where(account_id: @profile.profileable_id)
-    profile_id = @profile.id
-    @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
-    # @profile = current_account.profile if @profile == nil
+    @questions = Question.all.where(account_id: @profile.profileable_id)
+    # profile_id = @profile.id
+    # @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
+    @profile = current_account.profile if @profile == nil
   end
 
   def edit

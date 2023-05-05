@@ -9,8 +9,7 @@ class ImageUploader < Shrine
   plugin :validation_helpers
   plugin :remove_invalid
   # plugin :delete_promoted
-  plugin :delete_raw
-  # plugin :pretty_location
+  plugin :delete_raw, storages: [:store]
   
   Attacher.validate do
     validate_mime_type_inclusion %w[image/jpeg image/png image/gif]
@@ -22,7 +21,7 @@ class ImageUploader < Shrine
     versions = {original: io}
     io.download do |original|
       pipeline = ImageProcessing::MiniMagick.source(original)
-      versions[:avatar] = pipeline.resize_to_fill!(64, 64)
+      # versions[:avatar] = pipeline.resize_to_fill!(64, 64)
       versions[:large] = pipeline.resize_to_limit!(1200, 1200)
       versions[:medium] = pipeline.resize_to_limit!(720, 720)
       versions[:small] = pipeline.resize_to_limit!(360, 360)

@@ -36,3 +36,6 @@ application.register("stimulus-timeago", StimulusTimeagoController)
 
 import TiptapController from "./tiptap_controller"
 application.register("tiptap", TiptapController)
+
+import KandyTiptapController from "./kandy_tiptap_controller"
+application.register("kandy-tiptap", KandyTiptapController)
