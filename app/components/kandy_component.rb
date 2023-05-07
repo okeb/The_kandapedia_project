@@ -3,8 +3,10 @@
 class KandyComponent < ViewComponent::Base
   include ApplicationHelper
 
-  def initialize(kandy:)
+  def initialize(kandy:, current_account:, rodauth:)
     @kandy = kandy
+    @current_account = current_account
+    @rodauth = rodauth
   end
 
 end

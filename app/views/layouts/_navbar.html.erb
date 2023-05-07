@@ -122,7 +122,7 @@
             </div>
             <div class="badge">
               <div>
-                <span class="red_badge">34</span>
+                <span class="red_badge"><%= @unread_notif.count >= 9 ? '9+' : @unread_notif.count %></span>
               </div>
             </div>
           <% end %>

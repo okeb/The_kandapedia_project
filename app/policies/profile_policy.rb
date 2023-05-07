@@ -13,7 +13,7 @@ class ProfilePolicy < ApplicationPolicy
   def edit?
     (@account != nil) && @profile.profileable_id == @account.id
   end
-  
+
   def update?
     (@account != nil) && @profile.profileable_id == @account.id
   end
