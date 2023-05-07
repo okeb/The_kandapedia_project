@@ -50,13 +50,28 @@ a.menu__principal-item {
   text-decoration-line: none;
 
 }
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid grey;
+  border-radius: var(--border-radius-l);
+  background: var(--color-primary);
+  padding: 7px 14px;
+  color: white;
+  border-color: transparent;
+  transition: background-color 500ms;
+  &:hover {
+    transition: background-color 300ms;
+    background-color: var(--color-primary--dark);
+  }
+}
 
 .menu__principal-number {
   background-color: var(--color-text-body-high);
   border-radius: 7px;
-  color: var(--bg-color);
+  color: var(--color-text-body);
   font-size: .7rem;
   font-weight: bold;
+  min-width: 25px;
+  text-align: center;
   margin: auto 0;
   padding: 2px 4px;
   &.yellow {
@@ -99,7 +114,8 @@ a.menu__principal-item {
   padding-left: 45px;
   font-size: small;
   border-radius:40px;
-  border: 1px solid var(--color-background);
+  border-color: transparent;
+  //border: 1px solid var(--color-background);
   background-color:rgba(206,207,213,.27);
   backdrop-filter: blur(2px);
   outline: none;

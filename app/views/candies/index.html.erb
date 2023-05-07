@@ -80,17 +80,27 @@
            <span class="menu__principal-number yellow">24</span>
          </a>
        </li>
+       <% if rodauth.logged_in? %>
        <li>
          <a href="" class="menu__principal-item">
            <div class="menu__principal-item--a">
              <div style="color:var(--color-text-body-high);">
-               <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="currentColor"><path d="M12.75 6a.75.75 0 0 0-1.5 0v4a.75.75 0 0 0 1.5 0V6Z"/><path fill-rule="evenodd" d="M4.25 9a7.75 7.75 0 1 1 15.5 0v.704c0 .697.206 1.378.593 1.958l1.148 1.723c1.334 2 .316 4.718-2.003 5.35c-.755.206-1.517.38-2.284.523l-.002.005c-.769 2.052-2.824 3.487-5.202 3.487s-4.433-1.435-5.202-3.487l-.002-.005a28.47 28.47 0 0 1-2.284-.523c-2.319-.632-3.337-3.35-2.003-5.35l1.148-1.723a3.53 3.53 0 0 0 .593-1.958V9Zm4.373 10.537a28.46 28.46 0 0 0 6.753 0c-.71 1.021-1.947 1.713-3.376 1.713c-1.429 0-2.666-.692-3.377-1.713ZM12 2.75A6.25 6.25 0 0 0 5.75 9v.704a5.03 5.03 0 0 1-.845 2.79l-1.148 1.723a2.021 2.021 0 0 0 1.15 3.071a26.96 26.96 0 0 0 14.187 0a2.02 2.02 0 0 0 1.15-3.07l-1.15-1.724a5.03 5.03 0 0 1-.844-2.79V9A6.25 6.25 0 0 0 12 2.75Z" clip-rule="evenodd"/></g></svg>
+               <% if false # en cas de refus de notifications %>
+                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="currentColor"><path d="M10 9.75a.75.75 0 1 1 0-1.5h4a.75.75 0 0 1 .53 1.28l-2.72 2.72H14a.75.75 0 0 1 0 1.5h-4a.75.75 0 0 1-.53-1.28l2.72-2.72H10Z"/><path fill-rule="evenodd" d="M4.25 9a7.75 7.75 0 1 1 15.5 0v.704c0 .697.206 1.378.593 1.958l1.148 1.723c1.334 2 .316 4.718-2.003 5.35c-.755.206-1.517.38-2.284.523l-.002.005c-.769 2.052-2.824 3.487-5.202 3.487s-4.433-1.435-5.202-3.487l-.002-.005a28.47 28.47 0 0 1-2.284-.523c-2.319-.632-3.337-3.35-2.003-5.35l1.148-1.723a3.53 3.53 0 0 0 .593-1.958V9Zm4.373 10.537c.711 1.021 1.948 1.713 3.377 1.713c1.429 0 2.665-.692 3.376-1.713a28.46 28.46 0 0 1-6.753 0ZM12 2.75A6.25 6.25 0 0 0 5.75 9v.704a5.03 5.03 0 0 1-.845 2.79l-1.148 1.723a2.021 2.021 0 0 0 1.15 3.071a26.96 26.96 0 0 0 14.187 0a2.02 2.02 0 0 0 1.15-3.07l-1.15-1.724a5.03 5.03 0 0 1-.844-2.79V9A6.25 6.25 0 0 0 12 2.75Z" clip-rule="evenodd"/></g></svg>
+               <% else %>
+                 <% if @unread_notif.count > 0 %>
+                   <div style="border-radius: 100%; background-color: red; position: relative; left: 14px; top: -1px; width: 10px; height: 10px"></div>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" style="margin-top:-10px"><g fill="currentColor"><path d="M12.75 6a.75.75 0 0 0-1.5 0v4a.75.75 0 0 0 1.5 0V6Z"/><path fill-rule="evenodd" d="M4.25 9a7.75 7.75 0 1 1 15.5 0v.704c0 .697.206 1.378.593 1.958l1.148 1.723c1.334 2 .316 4.718-2.003 5.35c-.755.206-1.517.38-2.284.523l-.002.005c-.769 2.052-2.824 3.487-5.202 3.487s-4.433-1.435-5.202-3.487l-.002-.005a28.47 28.47 0 0 1-2.284-.523c-2.319-.632-3.337-3.35-2.003-5.35l1.148-1.723a3.53 3.53 0 0 0 .593-1.958V9Zm4.373 10.537a28.46 28.46 0 0 0 6.753 0c-.71 1.021-1.947 1.713-3.376 1.713c-1.429 0-2.666-.692-3.377-1.713ZM12 2.75A6.25 6.25 0 0 0 5.75 9v.704a5.03 5.03 0 0 1-.845 2.79l-1.148 1.723a2.021 2.021 0 0 0 1.15 3.071a26.96 26.96 0 0 0 14.187 0a2.02 2.02 0 0 0 1.15-3.07l-1.15-1.724a5.03 5.03 0 0 1-.844-2.79V9A6.25 6.25 0 0 0 12 2.75Z" clip-rule="evenodd"/></g></svg>
+                 <% else %>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 1.25A7.75 7.75 0 0 0 4.25 9v.704a3.53 3.53 0 0 1-.593 1.958L2.51 13.385c-1.334 2-.316 4.718 2.003 5.35c.755.206 1.517.38 2.284.523l.002.005C7.567 21.315 9.622 22.75 12 22.75s4.433-1.435 5.202-3.487l.002-.005a28.472 28.472 0 0 0 2.284-.523c2.319-.632 3.337-3.35 2.003-5.35l-1.148-1.723a3.53 3.53 0 0 1-.593-1.958V9A7.75 7.75 0 0 0 12 1.25Zm3.376 18.287a28.46 28.46 0 0 1-6.753 0c.711 1.021 1.948 1.713 3.377 1.713c1.429 0 2.665-.692 3.376-1.713ZM5.75 9a6.25 6.25 0 1 1 12.5 0v.704c0 .993.294 1.964.845 2.79l1.148 1.723a2.02 2.02 0 0 1-1.15 3.071a26.96 26.96 0 0 1-14.187 0a2.021 2.021 0 0 1-1.15-3.07l1.15-1.724a5.03 5.03 0 0 0 .844-2.79V9Z" clip-rule="evenodd"/></svg>                 <% end %>
+               <% end %>
              </div>
              <p class="menu__principal-item--p">Notifications</p>
            </div>
-           <span class="menu__principal-number grey">36</span>
+           <span class="menu__principal-number red"><%= @unread_notif.count >= 9 ? '9+' : @unread_notif.count %></span>
          </a>
        </li>
+       <% end %>
        <% if rodauth.logged_in? %>
          <%
            if @profile != nil && current_account.id == @profile.profileable.id
@@ -203,7 +213,7 @@
     
     <div style="">
       <% @candies.each do |kandy| %>
-        <%= render KandyComponent.new(kandy: kandy) %>
+        <%= render KandyComponent.new(kandy: kandy, current_account: current_account, rodauth: rodauth) %>
       <% end %>
     </div>
   </div>

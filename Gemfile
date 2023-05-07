@@ -117,3 +117,5 @@ gem "shrine", "~> 3.4"
 gem "mini_magick", "~> 4.11"
 
 gem "noticed", "~> 1.6"
+
+gem "fastimage", "~> 2.2"

@@ -133,6 +133,7 @@ GEM
       rubocop
       smart_properties
     erubi (1.11.0)
+    fastimage (2.2.6)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -396,6 +397,7 @@ DEPENDENCIES
   chroma (~> 0.2.0)
   debug
   erb_lint
+  fastimage (~> 2.2)
   followability!
   friendly_id (~> 5.4.0)
   image_processing (~> 1.2)

@@ -10,7 +10,7 @@ class Account < ApplicationRecord
   acts_as_voter
   acts_as_tagger
   followability
-  
+
   def vote_weight_on(votable, vote_scope:)
     find_votes(
       votable_id: votable.id,
