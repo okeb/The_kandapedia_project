@@ -22,6 +22,18 @@
 
   // Three different text colors and background colors
   @media (prefers-color-scheme: light) {
+    
+      --yellow__colorLight: rgb(114, 114, 0);
+      --red__colorLight: rgba(255, 0, 0, 0.17);
+      --green__colorLight: rgba(173, 255, 47, 0.16);
+    
+      --yellow__colorMiddle: rgba(114, 114, 0, 0.21);
+      --red__colorMiddle: rgba(255, 0, 0, 0.21);
+      --green__colorMiddle: rgba(173, 255, 47, 0.21);
+
+      --yellow__colorDark: #ffffd0;
+      --red__colorDark: red;
+      --green__colorDark: greenyellow;
 
       --color-purple: hsl(255, 61%, 52%);
       --color-purple--light: hsl(297, 59%, 64%);
@@ -107,6 +119,18 @@
 
   @media (prefers-color-scheme: dark) {
 
+      --yellow__colorLight: rgba(255, 255, 0, 0.16);
+      --red__colorLight: rgba(255, 0, 0, 0.17);
+      --green__colorLight: rgba(173, 255, 47, 0.16);
+
+      --yellow__colorMiddle: rgba(114, 114, 0, 0.21);
+      --red__colorMiddle: rgba(255, 0, 0, 0.21);
+      --green__colorMiddle: rgba(173, 255, 47, 0.21);
+
+      --yellow__colorDark: yellow;
+      --red__colorDark: red;
+      --green__colorDark: greenyellow;
+      --color-text__button-kandy:  #222222;
       --color-purple: hsl(255, 61%, 52%);
       --color-purple--light: hsl(297, 59%, 64%);
       --color-purple--dark: hsl(290, 42%, 31%);

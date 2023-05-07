@@ -7,7 +7,10 @@ class Profile < ApplicationRecord
   has_one_attached :avatar
   before_create :add_color
 
-  enum :is_verified, unverified: 0, verified: 1, closed: 2, checking: 3, baanned: 4
+  enum :is_verified, unverified: 0, verified: 1, closed: 2, checking: 3, banned: 4
+
+  scope :verified, -> { is_verified == "verified"}
+  scope :blocked, -> { is_verified == "blocked"}
 
   acts_as_ordered_taggable
   acts_as_ordered_taggable_on :skills

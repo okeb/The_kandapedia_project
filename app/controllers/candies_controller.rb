@@ -5,11 +5,12 @@ class CandiesController < ApplicationController
 
   after_action :increment_candy_counter, only: %i[create]
   after_action :decrement_candy_counter, only: %i[destroy]
+  
   # ActsAsTaggableOn.remove_unused_tags = true
   # ActsAsTaggableOn.force_lowercase = true
 
   def index
-    @candies = Candy.includes(account: [:profile])
+    @candies = Candy.includes(account: [:profile]).desc
   end
 
   def show
@@ -59,6 +60,7 @@ class CandiesController < ApplicationController
     current_account.candies_count -= 1
     current_account.save!
   end
+
 
   def user_authenticate
     return unless rodauth.logged_in?

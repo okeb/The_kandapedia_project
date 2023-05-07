@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class ProfilesController < ApplicationController
-  before_action :user_authenticate, only: %i[edit update]
   before_action :charge_profile
+  before_action :user_authenticate, only: %i[edit update]
   before_action lambda {
                   rodauth.require_authentication
                 }, except: %i[show avatar_thumb charge_profile profile_params]
@@ -60,10 +60,10 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    # @questions = Question.all.where(account_id: @profile.profileable_id)
-    profile_id = @profile.id
-    @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
-    # @profile = current_account.profile if @profile == nil
+    @questions = Question.all.where(account_id: @profile.profileable_id)
+    # profile_id = @profile.id
+    # @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
+    @profile = current_account.profile if @profile === nil
   end
 
   def edit
@@ -99,7 +99,15 @@ class ProfilesController < ApplicationController
   end
 
   def charge_profile
-    @profile = Profile.friendly.find(params[:id])
+    if rodauth.prefix === "/user"
+      @profile = Profile.friendly.where(profileable_id: params[:id], profileable_type: "Account").first
+    else
+      @profile = Profile.friendly.where(profileable_id: params[:id], profileable_type: "AdminAccount").first
+    end
+    
+    if @profile.nil? && !params[:id].nil?
+      @profile = Profile.friendly.find(params[:id])
+    end
   end
 
   def user_authenticate
