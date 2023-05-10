@@ -241,9 +241,15 @@
               <div style='display:flex; justify-content: start; column-gap: 7px; align-items: center'>
                 <div style=" display:flex; align-items:center;">
                   <% if current_account.profile.avatar.attached? %>
-                    <div class="picture_author" style="height: 32px; width: 32px; margin:0;">
-                      <%= image_tag(current_account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"32px") %>
-                    </div>
+                    <% if current_account.type == 'user' %>
+                      <div class="picture_author" style="height: 32px; width: 32px; margin:0;">
+                        <%= image_tag(current_account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"32px") %>
+                      </div>
+                    <% else %>
+                      <div class="maskSquircle">
+                        <%= image_tag(current_account.profile.avatar_profile) %>
+                      </div>
+                    <% end %>
                   <% else %>
                     <div class="initial_author"
                          style="background-color:<%= @kandy.account.profile.color %>; height:32px; width:32px;">
@@ -259,9 +265,18 @@
                       <%= (!current_account.profile.lastname.nil? || !current_account.profile.firstname.nil?) ? "#{current_account.profile.lastname.capitalize} #{current_account.profile.firstname.capitalize}" : current_account.profile.username.capitalize %>
                     </p>
                     <% if current_account.profile.verified? %>
-                    <span class="icons" style="margin-top: 2px; margin-left: 2px">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
-                    </span>
+                      <% case current_account.type %>
+                      <% when 'user' %>
+                        <span class="icons" style="margin-top: 2px; margin-left: 2px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
+                      </span>
+                      <% when 'enterprise' %>
+                        <span class="icons" style="margin-top: 2px; margin-left: 2px;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="orangered" d="M9.836 2.034c.112.038.222.084.329.136l1.283.632a1.25 1.25 0 0 0 1.104 0l1.283-.632a2.75 2.75 0 0 1 3.681 1.253l.074.162l.063.167l.46 1.353c.125.368.414.656.781.781l1.354.46a2.75 2.75 0 0 1 1.581 3.819l-.631 1.283a1.25 1.25 0 0 0 0 1.104l.631 1.283a2.75 2.75 0 0 1-1.581 3.818l-1.354.46a1.25 1.25 0 0 0-.78.781l-.461 1.354a2.75 2.75 0 0 1-3.818 1.581l-1.283-.631a1.25 1.25 0 0 0-1.104 0l-1.283.631a2.75 2.75 0 0 1-3.818-1.581l-.46-1.354a1.25 1.25 0 0 0-.782-.78l-1.353-.461a2.75 2.75 0 0 1-1.582-3.818l.632-1.283a1.25 1.25 0 0 0 0-1.104l-.632-1.283a2.75 2.75 0 0 1 1.582-3.818l1.353-.46a1.25 1.25 0 0 0 .781-.782l.46-1.353a2.75 2.75 0 0 1 3.49-1.718Zm5.633 6.935l-5.419 5.42l-1.974-2.37a.75.75 0 1 0-1.152.96l2.5 3a.75.75 0 0 0 1.106.051l6-6a.75.75 0 1 0-1.06-1.06Z"/></svg>
+                        </span>
+                      <% else %>
+                        <span></span>
+                      <% end %>
                     <% end %>
                     <% if current_account.profile.is_verified == "blocked" %>
                     <span class="icons" style="margin-top: 2px; margin-left: 2px">
@@ -282,7 +297,7 @@
               </div>
               <div style="display: flex; align-items: center; justify-content: end">
                 
-                <p style="color:var(--color-primary); font-weight: 500; font-size: 14px;padding: 5px 14px; border-radius: 21px;">Suivre</p>
+                <p style="color:var(--color-primary); font-weight: 500; font-size: 14px; padding: 5px 14px; border-radius: 21px;">Suivre</p>
 <!--                <p style="color:white; font-weight: 500; font-size: 14px;padding: 5px 14px; border-radius: 21px; background-color: black">Suivre</p>-->
               </div>
             </div>
@@ -293,7 +308,14 @@
       <div style="margin:21px 0; padding: 14px 7px">
         <h3 style="margin:21px 0">À la une...</h3>
         <ul style="row-gap: 21px;display:grid; list-style: none">
-          <li>lol</li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center">
+              <div>lool</div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
           <li>looooool</li>
           <li>loooooooool</li>
           <li>looool</li>
