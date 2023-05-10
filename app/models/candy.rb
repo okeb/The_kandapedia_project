@@ -1,9 +1,13 @@
 class Candy < ApplicationRecord
+  attribute :uuid, MySQLBinUUID::Type.new
+  before_create { self.uuid = ApplicationRecord.generate_uuid }
   belongs_to :account
-  belongs_to :question, class_name: "Question", optional: true
+  include ImageUploader::Attachment(:image)
   validates :body, presence: true, length: { maximum: 400 }
   validates :scope, presence: true
-  include ImageUploader::Attachment(:image)
+  
+
+  acts_as_votable
 
   after_create_commit :notify_friends
 
@@ -12,8 +16,13 @@ class Candy < ApplicationRecord
 
   enum :scope, none_scope: 0, public_scope: 1, protected_scope: 2, private_scope: 3, deleted_scope: 4
 
-  scope :desc, -> { order(created_at: :desc) }
+  scope :desc, -> { order(note: :desc, created_at: :desc) }
 
+  def to_param
+    "#{uuid}"
+  end
+
+  private
 
   def notify_friends
     @account = Account.find(self.account.id)

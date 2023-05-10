@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_193210) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_10_051038) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -108,15 +108,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_193210) do
   end
 
   create_table "candies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.binary "uuid", limit: 16
     t.string "body", limit: 444
     t.integer "scope", default: 0
-    t.integer "position", default: 1
+    t.bigint "parent_id"
+    t.integer "position", default: 0
     t.integer "view", default: 0
+    t.decimal "note", precision: 10, scale: 2, default: "1.0"
+    t.integer "boost", default: 0
+    t.integer "like", default: 0
+    t.text "image_data"
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "image_data"
     t.index ["account_id"], name: "index_candies_on_account_id"
+    t.index ["parent_id"], name: "index_candies_on_parent_id"
   end
 
   create_table "followability_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -287,6 +293,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_193210) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "candies", "accounts"
+  add_foreign_key "candies", "candies", column: "parent_id"
   add_foreign_key "questions", "accounts"
   add_foreign_key "questions", "questions", column: "parent_id"
   add_foreign_key "taggings", "tags"

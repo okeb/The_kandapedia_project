@@ -16,6 +16,11 @@ class ProfilesController < ApplicationController
     current_account
   end
 
+  def see_profile
+    current_account.send_follow_request_to(@profile.profileable)
+    redirect_to profiles_path(@profile)
+  end
+
   def follow_profile
     current_account.send_follow_request_to(@profile.profileable)
     redirect_to profiles_path(@profile)
@@ -60,9 +65,9 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @questions = Question.all.where(account_id: @profile.profileable_id)
     # profile_id = @profile.id
     # @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
+    @questions = Question.all.where(account_id: @profile.profileable_id)
     @profile = current_account.profile if @profile === nil
   end
 

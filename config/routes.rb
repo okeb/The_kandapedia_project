@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
     resources :profiles
 
+    post '/profiles/:id/see', to: 'profiles#see_profile', as: 'see_profile'
     post '/profiles/:id/follow', to: 'profiles#follow_profile', as: 'follow_profile'
     post '/profiles/:id/unfollow', to: 'profiles#unfollow_profile', as: 'unfollow_profile'
     post '/profiles/:id/blocking', to: 'profiles#blocking_profile', as: 'blocking_profile'
@@ -38,6 +39,13 @@ Rails.application.routes.draw do
       put 'nice_question', to: 'questions#add_nice'
       put 'wrong_question', to: 'questions#add_wrong'
       put 'bad_question', to: 'questions#add_bad'
+    end
+    
+    resources :candies do
+      put 'bookmark', to: 'candies#toggle_to_bookmark'
+      put 'like', to: 'candies#toggle_to_like'
+      put 'boost', to: 'candies#toggle_to_boost'
+      put 'view', to: 'candies#toggle_to_view'
     end
   end
 
