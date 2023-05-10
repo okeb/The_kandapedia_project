@@ -9,3 +9,4 @@ class CreateRelations < ActiveRecord::Migration[7.0]
 
     add_index :relations, %i[liker_id liked_id], unique: true
   end
+end
