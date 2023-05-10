@@ -39,6 +39,14 @@ Rails.application.routes.draw do
       put 'wrong_question', to: 'questions#add_wrong'
       put 'bad_question', to: 'questions#add_bad'
     end
+    
+    resources :candies do
+      put 'author', to: 'candies#see_the_author'
+      put 'bookmark', to: 'candies#toggle_to_bookmark'
+      put 'like', to: 'candies#toggle_to_like'
+      put 'boost', to: 'candies#toggle_to_boost'
+      put 'view', to: 'candies#toggle_to_view'
+    end
   end
 
 end

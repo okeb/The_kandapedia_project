@@ -18,12 +18,16 @@ class ProfilesController < ApplicationController
 
   def follow_profile
     current_account.send_follow_request_to(@profile.profileable)
+    current_account.activity_rate += 0.01
+    current_account.save!
     redirect_to profiles_path(@profile)
   end
 
   def unfollow_profile
     make_it_an_unfriend_request
 
+    current_account.activity_rate -= 0.01
+    current_account.save!
     current_account.unfollow(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
@@ -31,6 +35,8 @@ class ProfilesController < ApplicationController
   def blocking_profile
     make_it_an_unfriend_request
 
+    current_account.activity_rate -= 0.002
+    current_account.save!
     current_account.block(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
@@ -38,16 +44,22 @@ class ProfilesController < ApplicationController
   def unblocking_profile
     make_it_an_unfriend_request
 
+    current_account.activity_rate += 0.002
+    current_account.save!
     current_account.unblock(@profile.profileable)
     redirect_to profiles_path(@profile)
   end
 
   def decline_following
+    current_account.activity_rate += 0.002
+    current_account.save!
     current_account.decline_follow_request_of(@profile.profileable)
     redirect_to root_path
   end
 
   def accept_following
+    current_account.activity_rate += 0.01
+    current_account.save!
     current_account.accept_follow_request_of(@profile.profileable)
     make_it_a_friend_request
 
@@ -55,14 +67,19 @@ class ProfilesController < ApplicationController
   end
 
   def cancel_following
+    current_account.activity_rate -= 0.02
+    current_account.save!
     current_account.remove_follow_request_for(@profile.profileable)
     redirect_to root_path
   end
 
   def show
-    @questions = Question.all.where(account_id: @profile.profileable_id)
     # profile_id = @profile.id
     # @questions = Question.joins(profile: { account: :profile }).where('profiles.id = ?', profile_id)
+    @questions = Question.all.where(account_id: @profile.profileable_id)
+    @kandies = Candy.all.where(account_id: @profile.profileable_id)
+    @profile.profileable.activity_rate -= 0.0001
+    @profile.profileable.save!
     @profile = current_account.profile if @profile === nil
   end
 
@@ -87,10 +104,20 @@ class ProfilesController < ApplicationController
   def make_it_a_friend_request
     current_account.send_follow_request_to(@profile.profileable)
     @profile.profileable.accept_follow_request_of(current_account)
+    current_account.activity_rate += 0.1
+    current_account.save!
+    @profile.profileable.activity_rate += 0.0005
+    @profile.profileable.save!
   end
 
   def make_it_an_unfriend_request
-    @profile.profileable.unfollow(current_account) if @profile.profileable.mutual_following_with?(current_account)
+    return unless @profile.profileable.mutual_following_with?(current_account)
+
+    @profile.profileable.unfollow(current_account)
+    current_account.activity_rate += 0.1
+    current_account.save!
+    @profile.profileable.activity_rate -= 0.001
+    @profile.profileable.save!
   end
 
   def set_skills
@@ -104,10 +131,11 @@ class ProfilesController < ApplicationController
     else
       @profile = Profile.friendly.where(profileable_id: params[:id], profileable_type: "AdminAccount").first
     end
-    
-    if @profile.nil? && !params[:id].nil?
-      @profile = Profile.friendly.find(params[:id])
-    end
+
+    return unless @profile.nil? && !params[:id].nil?
+
+    @profile = Profile.friendly.find(params[:id])
+
   end
 
   def user_authenticate

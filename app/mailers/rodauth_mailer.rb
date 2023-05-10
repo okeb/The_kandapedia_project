@@ -11,15 +11,7 @@ class RodauthMailer < ApplicationMailer
       to: @account.email,
       from: 'oliver@kandapedia.com',
       track_opens: 'true',
-      message_stream: 'outbound',
-      delivery_method_options: {
-        api_key: Rails.application.credentials.mailjet_api_key,
-        secret_key: Rails.application.credentials.mailjet_api_key.mailjet_secret_key
-      })
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    #  end
+      message_stream: 'outbound')
   end
 
   def email_auth(name, account_id, key)
@@ -31,15 +23,7 @@ class RodauthMailer < ApplicationMailer
       to: @account.email,
       from: 'oliver@kandapedia.com',
       track_opens: 'true',
-      message_stream: 'outbound',
-      delivery_method_options: {
-        api_key: Rails.application.credentials.mailjet_api_key,
-        secret_key: Rails.application.credentials.mailjet_api_key.mailjet_secret_key
-      })
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    #  end
+      message_stream: 'outbound')
   end
 
   def reset_password(name, account_id, key)
@@ -51,15 +35,7 @@ class RodauthMailer < ApplicationMailer
       to: @account.email,
       from: 'oliver@kandapedia.com',
       track_opens: 'true',
-      message_stream: 'outbound',
-      delivery_method_options: {
-        api_key: Rails.application.credentials.mailjet_api_key,
-        secret_key: Rails.application.credentials.mailjet_api_key.mailjet_secret_key
-      })
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    #  end
+      message_stream: 'outbound')
   end
 
   def verify_login_change(name, account_id, key)
@@ -74,10 +50,6 @@ class RodauthMailer < ApplicationMailer
       track_opens: 'true',
       message_stream: 'outbound'
     )
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    #  end
   end
 
   def password_changed(name, account_id)
@@ -90,10 +62,6 @@ class RodauthMailer < ApplicationMailer
       track_opens: 'true',
       message_stream: 'outbound'
     )
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    # end
   end
 
   def unlock_account(name, account_id, key)
@@ -105,15 +73,8 @@ class RodauthMailer < ApplicationMailer
       to: @account.email,
       from: 'oliver@kandapedia.com',
       track_opens: 'true',
-      message_stream: 'outbound',
-      delivery_method_options: {
-        api_key: Rails.application.credentials.mailjet_api_key,
-        secret_key: Rails.application.credentials.mailjet_api_key.mailjet_secret_key
-      })
-    # ) do |format|
-    #   format.mjml
-    #   format.text
-    #  end
+      message_stream: 'outbound'
+    )
   end
 
   private

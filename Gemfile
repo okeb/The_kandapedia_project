@@ -63,12 +63,15 @@ group :development do
   gem "erb_lint"
   gem "better_errors"
   gem "binding_of_caller"
-  gem "scss_lint", require: false 
+  gem "scss_lint", require: false
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 end
 
 group :test do
@@ -119,3 +122,7 @@ gem "mini_magick", "~> 4.11"
 gem "noticed", "~> 1.6"
 
 gem "fastimage", "~> 2.2"
+
+gem "guard", "~> 2.18", :group => :development
+
+gem "guard-rspec", "~> 4.7", :group => :development

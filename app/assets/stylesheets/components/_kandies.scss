@@ -10,6 +10,63 @@
   }
 }
 
+.m-kandy {
+  &__buttonBookmark {
+    align-items: center;
+    color: var(--color-text-body);
+    column-gap: 7px;
+    display: flex;
+    justify-content: end;
+    .button_to {
+      align-items: center;
+      display: flex;
+      margin-bottom: auto;
+      margin-top: auto;
+    }
+  }
+  
+  &__profileLink {
+    background-color:transparent; 
+    border-color:transparent; 
+    cursor:pointer;
+    &:hover {
+      text-decoration: underline;
+      .username_author {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.bookmark {
+  background-color: transparent;
+  border-color: transparent;
+  display: inline-flex;
+  cursor: pointer;
+  color: var(--color-text-body);
+  margin: auto;
+  transition: all 500ms;
+  &:hover {
+    color: var(--color-primary);
+    transition: all 300ms;
+  }
+}
+
+.like {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--color-text-body);
+  display: flex;
+  cursor: pointer;
+  column-gap: 7px;
+  margin: 0 auto;
+  transition: all 500ms;
+  &:hover {
+    color: var(--color-primary);
+    transition: all 300ms;
+  }
+}
+
 .top__layout {
   backdrop-filter: blur(14px);
   background-color: var(--bg-color-header);

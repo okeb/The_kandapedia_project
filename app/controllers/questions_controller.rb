@@ -245,20 +245,26 @@ class QuestionsController < ApplicationController
 
   def increment_question_counter
     current_account.questions_count += 1
+    current_account.activity_rate += 0.1
     current_account.save!
   end
 
   def decrement_question_counter
     current_account.questions_count -= 1
+    current_account.activity_rate -= 0.1
     current_account.save!
   end
 
   def increment_likes_counter(item)
+    current_account.activity_rate += 0.007
+    current_account.save!
     item.likes_count += 1
     item.save!
   end
 
   def decrement_likes_counter(item)
+    current_account.activity_rate -= 0.007
+    current_account.save!
     item.likes_count -= 1
     item.save!
   end

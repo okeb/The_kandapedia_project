@@ -14,6 +14,7 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.integer :is_private, default: 0
       t.boolean :is_published, default: false
       t.references :parent, null: true, foreign_key: { to_table: :questions }
+      
 
       t.timestamps
     end
