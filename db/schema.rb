@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_10_080157) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_10_104621) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -236,6 +236,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_080157) do
     t.index ["parent_id"], name: "index_questions_on_parent_id"
   end
 
+  create_table "relations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "liker_id", null: false
+    t.bigint "liked_id", null: false
+    t.decimal "relation_strength", precision: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["liked_id"], name: "index_relations_on_liked_id"
+    t.index ["liker_id", "liked_id"], name: "index_relations_on_liker_id_and_liked_id", unique: true
+    t.index ["liker_id"], name: "index_relations_on_liker_id"
+  end
+
   create_table "taggings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tag_id"
     t.string "taggable_type"
@@ -297,5 +308,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_080157) do
   add_foreign_key "candies", "candies", column: "parent_id"
   add_foreign_key "questions", "accounts"
   add_foreign_key "questions", "questions", column: "parent_id"
+  add_foreign_key "relations", "accounts", column: "liked_id"
+  add_foreign_key "relations", "accounts", column: "liker_id"
   add_foreign_key "taggings", "tags"
 end
