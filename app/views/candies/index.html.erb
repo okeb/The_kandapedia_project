@@ -77,7 +77,7 @@
              </div>
              <p class="menu__principal-item--p">Messages</p>
            </div>
-           <span class="menu__principal-number yellow">24</span>
+           <span class="menu__principal-number yellow">0</span>
          </a>
        </li>
        <% if rodauth.logged_in? %>
@@ -228,13 +228,13 @@
         </div>
       <% else %>
         <div style="display:grid; row-gap:14px; margin: 21px 0;padding:28px 42px; background-color: var(--bg-color-light); border-radius:var(--border-radius-l)">
-          <h4 style="">Cessez d'être sur la touche</h4>
+          <p style="color:var(--color-text-header);font-size:1.15rem; font-weight: 600">Cessez d'être sur la touche</p>
           <p style="font-size: var(--font-size-s)">Nous avons tous quelque chose à raconter. créer votre compte pour raconter la votre.</p>
           <button class="btn btn--black">S'inscrire 🚀</button>
         </div>
       <% end %>
       <div style="margin:21px 0; padding: 28px 7px">
-        <h3 style="margin:21px 0">Suggestions pour vous</h3>
+        <p style="margin:21px 0; color:var(--color-text-body);font-size:1.15rem; font-weight: 600">Suggestions pour vous</p>
         <ul style="row-gap: 14px;display:grid; list-style: none">
           <li>
             <div style="display: flex; align-items: center; justify-content: space-between">
@@ -261,7 +261,7 @@
                 </div>
                 <div style="display:grid; row-gap:0">
                   <div style="display:flex; justify-items:center; text-decoration:none">
-                    <p style="font-size:14px; font-weight: 600; margin:0; padding: 0">
+                    <p style="font-size:14px; font-weight: 600; margin:0; padding: 0; color:var(--color-text-body-high)">
                       <%= (!current_account.profile.lastname.nil? || !current_account.profile.firstname.nil?) ? "#{current_account.profile.lastname.capitalize} #{current_account.profile.firstname.capitalize}" : current_account.profile.username.capitalize %>
                     </p>
                     <% if current_account.profile.verified? %>
@@ -290,7 +290,7 @@
                     </span>
                     <% end %>
                   </div>
-                  <div style="opacity: .7; font-size: 12px; font-weight: 400">
+                  <div style="opacity: .77; color:var(--color-text-body-high);font-size: 12px; font-weight: 400">
                     <p style="margin-top:-3px">Suivi(e) par Peter Oscar...</p>
                   </div>
                 </div>
