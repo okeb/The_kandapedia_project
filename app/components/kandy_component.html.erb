@@ -19,7 +19,7 @@
       
       <div style="border-radius:7px; width:100%; margin:0; padding: 0;">
         <div style="display:flex; column-gap: 3px;margin-bottom:7px">
-          <%= button_to candy_author_url(@kandy), class: 'm-kandy__profileLink' do %>
+          <%= button_to candy_author_url(@kandy), class: 'm-kandy__profileLink', method: :put do %>
             <div style="display:flex; justify-items:center; text-decoration:none">
               <p class="name_author">
                 <%= (!@kandy.account.profile.lastname.nil? || !@kandy.account.profile.firstname.nil?) ? "#{@kandy.account.profile.lastname.capitalize} #{@kandy.account.profile.firstname.capitalize}" : @kandy.account.profile.username.capitalize %>
