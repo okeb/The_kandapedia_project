@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
     resources :profiles
 
-    post '/profiles/:id/see', to: 'profiles#see_profile', as: 'see_profile'
     post '/profiles/:id/follow', to: 'profiles#follow_profile', as: 'follow_profile'
     post '/profiles/:id/unfollow', to: 'profiles#unfollow_profile', as: 'unfollow_profile'
     post '/profiles/:id/blocking', to: 'profiles#blocking_profile', as: 'blocking_profile'
@@ -42,6 +41,7 @@ Rails.application.routes.draw do
     end
     
     resources :candies do
+      put 'author', to: 'candies#see_the_author'
       put 'bookmark', to: 'candies#toggle_to_bookmark'
       put 'like', to: 'candies#toggle_to_like'
       put 'boost', to: 'candies#toggle_to_boost'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_10_051038) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_10_080157) do
   create_table "account_email_auth_keys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "deadline", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_051038) do
     t.integer "status", default: 1, null: false
     t.string "email", null: false
     t.string "password_hash"
+    t.decimal "activity_rate", precision: 10, scale: 2, default: "1.0"
     t.integer "questions_count", default: 0, null: false
     t.integer "candies_count", default: 0
     t.string "type", default: "user", null: false

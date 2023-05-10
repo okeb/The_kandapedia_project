@@ -21,7 +21,12 @@ class CandiesController < ApplicationController
     @Profile = @account.profile
     if rodauth.logged_in?
       unless current_account.voted_up_on? @candy, vote_scope: :view
-        increment_candy_view @candy
+        if current_account.voted_up_on? @candy, vote_scope: :author
+          increment_candy_view @candy, 0, 'add'
+        else
+          increment_candy_view @candy
+        end
+
         @candy.upvote_from current_account, vote_scope: :view
       end
     else
@@ -66,6 +71,24 @@ class CandiesController < ApplicationController
   end
 
   def destroy; end
+
+  def see_the_author
+    @candy = Candy.find_by(uuid: params[:candy_id])
+    unless current_account.voted_up_on? @candy, vote_scope: :author
+      if current_account.voted_up_on? @candy, vote_scope: :view
+        decrement_candy_note(@candy, 11)
+        increment_candy_note(@candy, 12)
+        @candy.save!
+      else
+        increment_candy_note(@candy, 24)
+        @candy.save!
+      end
+      @candy.upvote_from current_account, vote_scope: :author
+    end
+
+    @profile = Profile.find_by(profileable_id: @candy.account_id, profileable_type: 'Account')
+    redirect_to @profile
+  end
 
   def toggle_to_bookmark
     @candy = Candy.find_by(uuid: params[:candy_id])
@@ -116,46 +139,58 @@ class CandiesController < ApplicationController
 
   def increment_candy_counter
     current_account.candies_count += 1
+    current_account.activity_rate += 0.05
     current_account.save!
   end
 
   def decrement_candy_counter
     current_account.candies_count -= 1
+    current_account.activity_rate -= 0.05
     current_account.save!
   end
 
   def increment_candy_view(candy, value_add = 0, option = '')
-    if value_add != 0
+    if option != ''
       increment_candy_note(candy, value_add, option)
     else
       increment_candy_note(candy, 22)
     end
     candy.view += 1
     candy.save!
+    current_account.activity_rate += 0.003
+    current_account.save!
   end
 
   def increment_candy_like candy
     increment_candy_note(candy, 30)
     candy.like += 1
     candy.save!
+    current_account.activity_rate += 0.005
+    current_account.save!
   end
 
   def decrement_candy_like candy
     decrement_candy_note(candy, 30)
     candy.like -= 1
     candy.save!
+    current_account.activity_rate -= 0.005
+    current_account.save!
   end
 
   def increment_candy_boost candy
     increment_candy_note(candy, 20)
     candy.boost += 1
     candy.save!
+    current_account.activity_rate += 0.0025
+    current_account.save!
   end
 
   def decrement_candy_boost candy
     decrement_candy_note(candy, 20)
     candy.boost -= 1
     candy.save!
+    current_account.activity_rate -= 0.0025
+    current_account.save!
   end
 
   def increment_candy_note(candy, value, option = '')

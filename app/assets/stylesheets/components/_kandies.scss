@@ -10,17 +10,31 @@
   }
 }
 
-.m-kandy__buttonBookmark {
-  align-items: center;
-  color: var(--color-text-body);
-  column-gap: 7px;
-  display: flex;
-  justify-content: end;
-  .button_to {
+.m-kandy {
+  &__buttonBookmark {
     align-items: center;
+    color: var(--color-text-body);
+    column-gap: 7px;
     display: flex;
-    margin-bottom: auto;
-    margin-top: auto;
+    justify-content: end;
+    .button_to {
+      align-items: center;
+      display: flex;
+      margin-bottom: auto;
+      margin-top: auto;
+    }
+  }
+  
+  &__profileLink {
+    background-color:transparent; 
+    border-color:transparent; 
+    cursor:pointer;
+    &:hover {
+      text-decoration: underline;
+      .username_author {
+        text-decoration: none;
+      }
+    }
   }
 }
 
