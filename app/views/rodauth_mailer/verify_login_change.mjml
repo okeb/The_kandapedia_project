@@ -12,7 +12,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-family="DM sans" font-size="28px">Connexion à Kandapedia.</mj-text>
+        <mj-text font-family="DM sans" font-size="28px">Démande de chagement de titre.</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
@@ -22,21 +22,24 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Quelqu'un a demandé un lien de connexion pour le compte avec cette adresse e-mail.</mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Une personne possédant un compte a demandé à ce que son identifiant soit remplacé par cette adresse électronique :
+          .</mj-text>
         <mj-spacer height="10px"></mj-spacer>
-        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Ce lien est utilisable qu'une fois et expirera dans une heure.</mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Ancienne adresse: <span style="font-weight: 600"><%= @account.email %></span></mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">nouvelle adresse: <span style="font-weight: 600"><%= @new_email %></span></mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Si Si vous avez demandé ce changement d'identifiant, veuillez cliquez sur le bouton ci-dessous</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left"  font-size="17px">
+        <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left" font-size="17px">
           <a href="<%= @email_link %>" style="background-color:#0063E6; border-radius:14px; font-family:'DM sans'; padding:17px 21px; color:white; text-decoration: none">Se connecter</a>
         </mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-family="DM sans" font-size="17px" line-height="1.4" color="#aaaaaa">Si vous n'avez pas demandé ce lien de connexion, ignorez ce message.</mj-text>
+        <mj-text font-family="DM sans" font-size="17px" line-height="1.4" color="#aaaaaa">si vous n'avez pas demandé ce changement de login, veuillez ignorer ce message.  .</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>

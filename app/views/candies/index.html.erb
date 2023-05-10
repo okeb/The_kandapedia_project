@@ -227,14 +227,17 @@
           Cessez d'etre sur la touche" 
         </div>
       <% else %>
-        <div style="display:grid; row-gap:14px; margin: 21px 0;padding:28px 42px; background-color: var(--bg-color-light); border-radius:var(--border-radius-l)">
-          <p style="color:var(--color-text-header);font-size:1.15rem; font-weight: 600">Cessez d'être sur la touche</p>
-          <p style="font-size: var(--font-size-s)">Nous avons tous quelque chose à raconter. créer votre compte pour raconter la votre.</p>
-          <button class="btn btn--black">S'inscrire 🚀</button>
+        <div style="display:grid; row-gap:14px; margin: 28px 0;padding:21px; background-color: var(--bg-color-light); border-radius:var(--border-radius-l)">
+          <p style="color:var(--color-text-header);font-size:1.15rem; font-weight: 600">Cessez d'être sur la touche...</p>
+          <p style="font-size: var(--font-size-s)">Nous avons tous quelque chose à raconter. Créer votre compte pour raconter la votre.</p>
+          <button class="btn btn--black">Ouvrir un compte 🚀</button>
         </div>
       <% end %>
-      <div style="margin:21px 0; padding: 28px 7px">
-        <p style="margin:21px 0; color:var(--color-text-body);font-size:1.15rem; font-weight: 600">Suggestions pour vous</p>
+      <div style="margin:14px 0; padding: 21px; border: 1px solid var(--bg-color-light); border-radius: var(--border-radius-l)">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom:  21px">
+          <p style="margin: auto 0; padding: 0 0 2px;color:var(--color-text-body);font-size:1.1rem; font-weight: 600">Suggestions pour vous</p>
+          <p style="font-size:.7rem; color:var(--color-text-body-high);font-weight: bold;padding: 5px 7px;  margin: auto 0;border-radius: 21px; ">Voir plus</p>
+        </div>
         <ul style="row-gap: 14px;display:grid; list-style: none">
           <li>
             <div style="display: flex; align-items: center; justify-content: space-between">
@@ -290,7 +293,7 @@
                     </span>
                     <% end %>
                   </div>
-                  <div style="opacity: .77; color:var(--color-text-body-high);font-size: 12px; font-weight: 400">
+                  <div style="opacity: .6; color:var(--color-text-body-high);font-size: 12px; font-weight: 400">
                     <p style="margin-top:-3px">Suivi(e) par Peter Oscar...</p>
                   </div>
                 </div>
@@ -305,20 +308,100 @@
           <li>looooool</li>
         </ul>
       </div>
-      <div style="margin:21px 0; padding: 14px 7px">
-        <h3 style="margin:21px 0">À la une...</h3>
+      <div style="margin:21px 0; padding: 21px">
+        <p style="margin:21px 0; color:var(--color-text-body);font-size:1.1rem; font-weight: 600">À la une...</p>
         <ul style="row-gap: 21px;display:grid; list-style: none">
           <li>
-            <div style="display: flex; justify-content: space-between; align-items: center">
-              <div>lool</div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #apocalypse
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
           </li>
-          <li>looooool</li>
-          <li>loooooooool</li>
-          <li>looool</li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #GoogleI/O
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #yehoshouamashiah
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #tv2vie
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #dico-biblique
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #Lamed
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <p style="color:var(--color-text-body-high); font-weight: 600">
+                  #Cenat&nina👩🏾‍❤️‍💋‍👨🏾
+                </p>
+                <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
