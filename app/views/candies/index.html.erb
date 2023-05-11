@@ -223,14 +223,10 @@
   <div class="right__part">
     <div style="color:var(--color-text-body)">
       <% unless rodauth.logged_in? %>
-        <div class="margin: 12px 21px">
-          Cessez d'etre sur la touche" 
-        </div>
-      <% else %>
         <div style="display:grid; row-gap:14px; margin: 28px 0;padding:21px; background-color: var(--bg-color-light); border-radius:var(--border-radius-l)">
           <p style="color:var(--color-text-header);font-size:1.15rem; font-weight: 600">Cessez d'être sur la touche...</p>
           <p style="font-size: var(--font-size-s)">Nous avons tous quelque chose à raconter. Créer votre compte pour raconter la votre.</p>
-          <button class="btn btn--black">Ouvrir un compte 🚀</button>
+          <%= link_to "Ouvrir un compte 🚀", rodauth.create_account_path,  class: "btn btn--black", style: "text-align:center" %>
         </div>
       <% end %>
       <div style="margin:14px 0; padding: 21px; border: 1px solid var(--bg-color-light); border-radius: var(--border-radius-l)">
@@ -239,73 +235,80 @@
           <p style="font-size:.7rem; color:var(--color-text-body-high);font-weight: bold;padding: 5px 7px;  margin: auto 0;border-radius: 21px; ">Voir plus</p>
         </div>
         <ul style="row-gap: 14px;display:grid; list-style: none">
-          <li>
-            <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style='display:flex; justify-content: start; column-gap: 7px; align-items: center'>
-                <div style=" display:flex; align-items:center;">
-                  <% if current_account.profile.avatar.attached? %>
-                    <% if current_account.type == 'user' %>
-                      <div class="picture_author" style="height: 32px; width: 32px; margin:0;">
-                        <%= image_tag(current_account.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"32px") %>
-                      </div>
-                    <% else %>
-                      <div class="maskSquircle">
-                        <%= image_tag(current_account.profile.avatar_profile) %>
-                      </div>
-                    <% end %>
-                  <% else %>
-                    <div class="initial_author"
-                         style="background-color:<%= @kandy.account.profile.color %>; height:32px; width:32px;">
-                      <p style="font-size:14px">
-                        <%= current_account.profile.get_initial_profile %>
-                      </p>
-                    </div>
-                  <% end %>
-                </div>
-                <div style="display:grid; row-gap:0">
-                  <div style="display:flex; justify-items:center; text-decoration:none">
-                    <p style="font-size:14px; font-weight: 600; margin:0; padding: 0; color:var(--color-text-body-high)">
-                      <%= (!current_account.profile.lastname.nil? || !current_account.profile.firstname.nil?) ? "#{current_account.profile.lastname.capitalize} #{current_account.profile.firstname.capitalize}" : current_account.profile.username.capitalize %>
-                    </p>
-                    <% if current_account.profile.verified? %>
-                      <% case current_account.type %>
-                      <% when 'user' %>
-                        <span class="icons" style="margin-top: 2px; margin-left: 2px">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
-                      </span>
-                      <% when 'enterprise' %>
-                        <span class="icons" style="margin-top: 2px; margin-left: 2px;">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="orangered" d="M9.836 2.034c.112.038.222.084.329.136l1.283.632a1.25 1.25 0 0 0 1.104 0l1.283-.632a2.75 2.75 0 0 1 3.681 1.253l.074.162l.063.167l.46 1.353c.125.368.414.656.781.781l1.354.46a2.75 2.75 0 0 1 1.581 3.819l-.631 1.283a1.25 1.25 0 0 0 0 1.104l.631 1.283a2.75 2.75 0 0 1-1.581 3.818l-1.354.46a1.25 1.25 0 0 0-.78.781l-.461 1.354a2.75 2.75 0 0 1-3.818 1.581l-1.283-.631a1.25 1.25 0 0 0-1.104 0l-1.283.631a2.75 2.75 0 0 1-3.818-1.581l-.46-1.354a1.25 1.25 0 0 0-.782-.78l-1.353-.461a2.75 2.75 0 0 1-1.582-3.818l.632-1.283a1.25 1.25 0 0 0 0-1.104l-.632-1.283a2.75 2.75 0 0 1 1.582-3.818l1.353-.46a1.25 1.25 0 0 0 .781-.782l.46-1.353a2.75 2.75 0 0 1 3.49-1.718Zm5.633 6.935l-5.419 5.42l-1.974-2.37a.75.75 0 1 0-1.152.96l2.5 3a.75.75 0 0 0 1.106.051l6-6a.75.75 0 1 0-1.06-1.06Z"/></svg>
-                        </span>
+          
+          <% if !@relations.nil? && @relations.count > 0 %>
+            <% @relations.each do |relation| %>
+              <% @relation_number = 5  %>
+              <% (rodauth.logged_in? && relation.respond_to?(:liked))? @relation = relation.liked : @relation = relation  %>
+              <li>
+                <div style="display: flex; align-items: center; justify-content: space-between">
+                  <div style='display:flex; justify-content: start; column-gap: 7px; align-items: center'>
+                    <div style=" display:flex; align-items:center;">
+                      <% if @relation.profile.avatar.attached? %>
+                        <% if @relation.type == 'user' %>
+                          <div class="picture_author" style="height: 32px; width: 32px; margin:0;">
+                            <%= image_tag(@relation.profile.avatar_profile, style: "object-fit: cover; object-position: center;width:100%; height:100%; border-radius:100%", size:"32px") %>
+                          </div>
+                        <% else %>
+                          <div class="maskSquircle">
+                            <%= image_tag(@relation.profile.avatar_profile) %>
+                          </div>
+                        <% end %>
                       <% else %>
-                        <span></span>
+                        <div class="initial_author"
+                             style="background-color:<%= @relation.profile.color %>; height:32px; width:32px;">
+                          <p style="font-size:14px">
+                            <%= @relation.profile.get_initial_profile %>
+                          </p>
+                        </div>
                       <% end %>
-                    <% end %>
-                    <% if current_account.profile.is_verified == "blocked" %>
-                    <span class="icons" style="margin-top: 2px; margin-left: 2px">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-purple)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
-  
-                    </span>
-                    <% end %>
-                    <% if current_account.profile.is_verified == "blocked" %>
-                    <span class="icons" style="margin-top: 2px; margin-left: 2px">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M10.594 2.319a3.261 3.261 0 0 1 2.812 0c.387.185.74.487 1.231.905l.078.066c.238.203.313.265.389.316c.193.13.41.219.637.264c.09.018.187.027.499.051l.101.008c.642.051 1.106.088 1.51.23a3.27 3.27 0 0 1 1.99 1.99c.142.404.178.868.23 1.51l.008.101c.024.312.033.41.051.499c.045.228.135.445.264.638c.051.075.113.15.316.388l.066.078c.419.49.72.844.905 1.23c.425.89.425 1.924 0 2.813c-.184.387-.486.74-.905 1.231l-.066.078a4.758 4.758 0 0 0-.316.389c-.13.193-.219.41-.264.637c-.018.09-.026.187-.051.499l-.009.101c-.05.642-.087 1.106-.23 1.51a3.26 3.26 0 0 1-1.989 1.99c-.404.142-.868.178-1.51.23l-.101.008a4.757 4.757 0 0 0-.499.051a1.755 1.755 0 0 0-.637.264a4.83 4.83 0 0 0-.39.316l-.077.066c-.49.419-.844.72-1.23.905a3.261 3.261 0 0 1-2.813 0c-.387-.184-.74-.486-1.231-.905a95.175 95.175 0 0 0-.078-.066a4.779 4.779 0 0 0-.388-.316a1.746 1.746 0 0 0-.638-.264a4.759 4.759 0 0 0-.499-.051l-.101-.009c-.642-.05-1.106-.087-1.51-.23a3.261 3.261 0 0 1-1.99-1.989c-.142-.404-.179-.868-.23-1.51l-.008-.101a4.76 4.76 0 0 0-.051-.499a1.756 1.756 0 0 0-.264-.637a4.74 4.74 0 0 0-.316-.39l-.066-.077c-.418-.49-.72-.844-.905-1.23a3.261 3.261 0 0 1 0-2.813c.185-.387.487-.74.905-1.231l.066-.078a4.76 4.76 0 0 0 .316-.388c.13-.193.219-.41.264-.638c.018-.09.027-.187.051-.499l.008-.101c.051-.642.088-1.106.23-1.51a3.261 3.261 0 0 1 1.99-1.99c.404-.142.868-.179 1.51-.23l.101-.008a4.47 4.47 0 0 0 .499-.051c.228-.045.445-.135.638-.264c.075-.051.15-.113.388-.316l.078-.066c.49-.418.844-.72 1.23-.905Zm2.163 1.358a1.756 1.756 0 0 0-1.514 0c-.185.088-.38.247-.981.758l-.03.025c-.197.168-.34.291-.497.396c-.359.24-.761.407-1.185.49c-.185.037-.373.052-.632.073l-.038.003c-.787.063-1.036.089-1.23.157c-.5.177-.894.57-1.07 1.071c-.07.194-.095.443-.158 1.23l-.003.038c-.02.259-.036.447-.072.632c-.084.424-.25.826-.49 1.185c-.106.157-.229.3-.397.498l-.025.029c-.511.6-.67.796-.758.98a1.756 1.756 0 0 0 0 1.515c.088.185.247.38.758.981l.025.03c.168.197.291.34.396.497c.24.359.407.761.49 1.184c.037.186.052.374.073.633l.003.038c.063.787.089 1.036.157 1.23c.177.5.57.894 1.071 1.07c.194.07.443.095 1.23.158l.038.003c.259.02.447.036.632.072c.424.084.826.25 1.185.49c.157.106.3.229.498.397l.029.025c.6.511.796.67.98.758a1.756 1.756 0 0 0 1.515 0c.185-.088.38-.247.981-.758l.03-.025c.197-.168.34-.291.497-.396a3.26 3.26 0 0 1 1.184-.49a5.53 5.53 0 0 1 .633-.073l.038-.003c.787-.063 1.036-.089 1.23-.157c.5-.177.894-.57 1.07-1.071c.07-.194.095-.444.158-1.23l.003-.038a5.53 5.53 0 0 1 .072-.633c.084-.423.25-.825.49-1.184c.106-.157.229-.3.397-.498l.025-.029c.511-.6.67-.796.758-.98a1.756 1.756 0 0 0 0-1.515c-.088-.185-.247-.38-.758-.981l-.025-.03c-.168-.197-.291-.34-.396-.497a3.262 3.262 0 0 1-.49-1.185a5.531 5.531 0 0 1-.073-.632l-.003-.038c-.063-.787-.089-1.036-.157-1.23c-.177-.5-.57-.894-1.071-1.07c-.194-.07-.444-.095-1.23-.158l-.038-.003a5.568 5.568 0 0 1-.633-.072a3.262 3.262 0 0 1-1.184-.49c-.157-.106-.3-.229-.498-.397l-.029-.025c-.6-.511-.796-.67-.98-.758Zm3.287 5.282a.752.752 0 0 1 0 1.065l-5.017 5.017a.753.753 0 0 1-1.064 0l-2.007-2.007A.753.753 0 1 1 9.02 11.97l1.475 1.474L14.98 8.96a.753.753 0 0 1 1.064 0Z" clip-rule="evenodd"/></svg>
-                    </span>
-                    <% end %>
+                    </div>
+                    <div style="display:grid; row-gap:0">
+                      <div style="display:flex; justify-items:center; text-decoration:none">
+                        <p style="font-size:14px; font-weight: 600; margin:0; padding: 0; color:var(--color-text-body-high)">
+                          <%= (!@relation.profile.lastname.nil? || !@relation.profile.firstname.nil?) ? "#{@relation.profile.lastname.capitalize} #{@relation.profile.firstname.capitalize}" : @relation.profile.username.capitalize %>
+                        </p>
+                        <% if @relation.profile.verified? %>
+                          <% case @relation.type %>
+                        <% when 'user' %>
+                            <span class="icons" style="margin-top: 2px; margin-left: 2px">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
+                          </span>
+                          <% when 'enterprise' %>
+                            <span class="icons" style="margin-top: 2px; margin-left: 2px;">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="orangered" d="M9.836 2.034c.112.038.222.084.329.136l1.283.632a1.25 1.25 0 0 0 1.104 0l1.283-.632a2.75 2.75 0 0 1 3.681 1.253l.074.162l.063.167l.46 1.353c.125.368.414.656.781.781l1.354.46a2.75 2.75 0 0 1 1.581 3.819l-.631 1.283a1.25 1.25 0 0 0 0 1.104l.631 1.283a2.75 2.75 0 0 1-1.581 3.818l-1.354.46a1.25 1.25 0 0 0-.78.781l-.461 1.354a2.75 2.75 0 0 1-3.818 1.581l-1.283-.631a1.25 1.25 0 0 0-1.104 0l-1.283.631a2.75 2.75 0 0 1-3.818-1.581l-.46-1.354a1.25 1.25 0 0 0-.782-.78l-1.353-.461a2.75 2.75 0 0 1-1.582-3.818l.632-1.283a1.25 1.25 0 0 0 0-1.104l-.632-1.283a2.75 2.75 0 0 1 1.582-3.818l1.353-.46a1.25 1.25 0 0 0 .781-.782l.46-1.353a2.75 2.75 0 0 1 3.49-1.718Zm5.633 6.935l-5.419 5.42l-1.974-2.37a.75.75 0 1 0-1.152.96l2.5 3a.75.75 0 0 0 1.106.051l6-6a.75.75 0 1 0-1.06-1.06Z"/></svg>
+                            </span>
+                          <% else %>
+                            <span></span>
+                          <% end %>
+                        <% end %>
+                        <% if @relation.profile.is_verified == "blocked" %>
+                        <span class="icons" style="margin-top: 2px; margin-left: 2px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-purple)" fill-rule="evenodd" d="M9.592 3.2a5.574 5.574 0 0 1-.495.399c-.298.2-.633.338-.985.408c-.153.03-.313.043-.632.068c-.801.064-1.202.096-1.536.214a2.713 2.713 0 0 0-1.655 1.655c-.118.334-.15.735-.214 1.536a5.707 5.707 0 0 1-.068.632c-.07.352-.208.687-.408.985c-.087.13-.191.252-.399.495c-.521.612-.782.918-.935 1.238c-.353.74-.353 1.6 0 2.34c.153.32.414.626.935 1.238c.208.243.312.365.399.495c.2.298.338.633.408.985c.03.153.043.313.068.632c.064.801.096 1.202.214 1.536a2.713 2.713 0 0 0 1.655 1.655c.334.118.735.15 1.536.214c.319.025.479.038.632.068c.352.07.687.209.985.408c.13.087.252.191.495.399c.612.521.918.782 1.238.935c.74.353 1.6.353 2.34 0c.32-.153.626-.414 1.238-.935c.243-.208.365-.312.495-.399c.298-.2.633-.338.985-.408c.153-.03.313-.043.632-.068c.801-.064 1.202-.096 1.536-.214a2.713 2.713 0 0 0 1.655-1.655c.118-.334.15-.735.214-1.536c.025-.319.038-.479.068-.632c.07-.352.209-.687.408-.985c.087-.13.191-.252.399-.495c.521-.612.782-.918.935-1.238c.353-.74.353-1.6 0-2.34c-.153-.32-.414-.626-.935-1.238a5.574 5.574 0 0 1-.399-.495a2.713 2.713 0 0 1-.408-.985a5.72 5.72 0 0 1-.068-.632c-.064-.801-.096-1.202-.214-1.536a2.713 2.713 0 0 0-1.655-1.655c-.334-.118-.735-.15-1.536-.214a5.707 5.707 0 0 1-.632-.068a2.713 2.713 0 0 1-.985-.408a5.73 5.73 0 0 1-.495-.399c-.612-.521-.918-.782-1.238-.935a2.713 2.713 0 0 0-2.34 0c-.32.153-.626.414-1.238.935Zm6.781 6.663a.814.814 0 0 0-1.15-1.15l-4.85 4.85l-1.596-1.595a.814.814 0 0 0-1.15 1.15l2.17 2.17a.814.814 0 0 0 1.15 0l5.427-5.425Z" clip-rule="evenodd"/></svg>
+      
+                        </span>
+                        <% end %>
+                        <% if @relation.profile.is_verified == "blocked" %>
+                        <span class="icons" style="margin-top: 2px; margin-left: 2px">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path fill="var(--color-primary)" fill-rule="evenodd" d="M10.594 2.319a3.261 3.261 0 0 1 2.812 0c.387.185.74.487 1.231.905l.078.066c.238.203.313.265.389.316c.193.13.41.219.637.264c.09.018.187.027.499.051l.101.008c.642.051 1.106.088 1.51.23a3.27 3.27 0 0 1 1.99 1.99c.142.404.178.868.23 1.51l.008.101c.024.312.033.41.051.499c.045.228.135.445.264.638c.051.075.113.15.316.388l.066.078c.419.49.72.844.905 1.23c.425.89.425 1.924 0 2.813c-.184.387-.486.74-.905 1.231l-.066.078a4.758 4.758 0 0 0-.316.389c-.13.193-.219.41-.264.637c-.018.09-.026.187-.051.499l-.009.101c-.05.642-.087 1.106-.23 1.51a3.26 3.26 0 0 1-1.989 1.99c-.404.142-.868.178-1.51.23l-.101.008a4.757 4.757 0 0 0-.499.051a1.755 1.755 0 0 0-.637.264a4.83 4.83 0 0 0-.39.316l-.077.066c-.49.419-.844.72-1.23.905a3.261 3.261 0 0 1-2.813 0c-.387-.184-.74-.486-1.231-.905a95.175 95.175 0 0 0-.078-.066a4.779 4.779 0 0 0-.388-.316a1.746 1.746 0 0 0-.638-.264a4.759 4.759 0 0 0-.499-.051l-.101-.009c-.642-.05-1.106-.087-1.51-.23a3.261 3.261 0 0 1-1.99-1.989c-.142-.404-.179-.868-.23-1.51l-.008-.101a4.76 4.76 0 0 0-.051-.499a1.756 1.756 0 0 0-.264-.637a4.74 4.74 0 0 0-.316-.39l-.066-.077c-.418-.49-.72-.844-.905-1.23a3.261 3.261 0 0 1 0-2.813c.185-.387.487-.74.905-1.231l.066-.078a4.76 4.76 0 0 0 .316-.388c.13-.193.219-.41.264-.638c.018-.09.027-.187.051-.499l.008-.101c.051-.642.088-1.106.23-1.51a3.261 3.261 0 0 1 1.99-1.99c.404-.142.868-.179 1.51-.23l.101-.008a4.47 4.47 0 0 0 .499-.051c.228-.045.445-.135.638-.264c.075-.051.15-.113.388-.316l.078-.066c.49-.418.844-.72 1.23-.905Zm2.163 1.358a1.756 1.756 0 0 0-1.514 0c-.185.088-.38.247-.981.758l-.03.025c-.197.168-.34.291-.497.396c-.359.24-.761.407-1.185.49c-.185.037-.373.052-.632.073l-.038.003c-.787.063-1.036.089-1.23.157c-.5.177-.894.57-1.07 1.071c-.07.194-.095.443-.158 1.23l-.003.038c-.02.259-.036.447-.072.632c-.084.424-.25.826-.49 1.185c-.106.157-.229.3-.397.498l-.025.029c-.511.6-.67.796-.758.98a1.756 1.756 0 0 0 0 1.515c.088.185.247.38.758.981l.025.03c.168.197.291.34.396.497c.24.359.407.761.49 1.184c.037.186.052.374.073.633l.003.038c.063.787.089 1.036.157 1.23c.177.5.57.894 1.071 1.07c.194.07.443.095 1.23.158l.038.003c.259.02.447.036.632.072c.424.084.826.25 1.185.49c.157.106.3.229.498.397l.029.025c.6.511.796.67.98.758a1.756 1.756 0 0 0 1.515 0c.185-.088.38-.247.981-.758l.03-.025c.197-.168.34-.291.497-.396a3.26 3.26 0 0 1 1.184-.49a5.53 5.53 0 0 1 .633-.073l.038-.003c.787-.063 1.036-.089 1.23-.157c.5-.177.894-.57 1.07-1.071c.07-.194.095-.444.158-1.23l.003-.038a5.53 5.53 0 0 1 .072-.633c.084-.423.25-.825.49-1.184c.106-.157.229-.3.397-.498l.025-.029c.511-.6.67-.796.758-.98a1.756 1.756 0 0 0 0-1.515c-.088-.185-.247-.38-.758-.981l-.025-.03c-.168-.197-.291-.34-.396-.497a3.262 3.262 0 0 1-.49-1.185a5.531 5.531 0 0 1-.073-.632l-.003-.038c-.063-.787-.089-1.036-.157-1.23c-.177-.5-.57-.894-1.071-1.07c-.194-.07-.444-.095-1.23-.158l-.038-.003a5.568 5.568 0 0 1-.633-.072a3.262 3.262 0 0 1-1.184-.49c-.157-.106-.3-.229-.498-.397l-.029-.025c-.6-.511-.796-.67-.98-.758Zm3.287 5.282a.752.752 0 0 1 0 1.065l-5.017 5.017a.753.753 0 0 1-1.064 0l-2.007-2.007A.753.753 0 1 1 9.02 11.97l1.475 1.474L14.98 8.96a.753.753 0 0 1 1.064 0Z" clip-rule="evenodd"/></svg>
+                        </span>
+                        <% end %>
+                      </div>
+                      <div style="opacity: .6; color:var(--color-text-body-high);font-size: 12px; font-weight: 400">
+                        <p style="margin-top:-3px">Suivi(e) par Peter Oscar...</p>
+                      </div>
+                    </div>
                   </div>
-                  <div style="opacity: .6; color:var(--color-text-body-high);font-size: 12px; font-weight: 400">
-                    <p style="margin-top:-3px">Suivi(e) par Peter Oscar...</p>
+                  <div style="display: flex; align-items: center; justify-content: end">
+
+                    <p style=""><%= button_to 'Suivre', follow_profile_path(@relation), class:"m-buttonFollow__suggestion" %></p>
                   </div>
                 </div>
-              </div>
-              <div style="display: flex; align-items: center; justify-content: end">
-                
-                <p style="color:var(--color-primary); font-weight: 500; font-size: 14px; padding: 5px 14px; border-radius: 21px;">Suivre</p>
-<!--                <p style="color:white; font-weight: 500; font-size: 14px;padding: 5px 14px; border-radius: 21px; background-color: black">Suivre</p>-->
-              </div>
-            </div>
-          </li>
-          <li>looooool</li>
+              </li>
+            <%  end %>
+          <% else %>
+            <div>Nous n'avons pas de propositions</div>
+          <% end %>
         </ul>
       </div>
       <div style="margin:21px 0; padding: 21px">
@@ -319,7 +322,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -332,7 +335,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -345,7 +348,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -358,7 +361,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -371,7 +374,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -384,7 +387,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>
@@ -397,7 +400,7 @@
                 </p>
                 <p style="font-size: .87rem; opacity: .9"><span><%= rand(3500) %></span> kandies</p>
               </div>
-              <div style="display: flex; align-items: center; justify-content: end; padding: 5px 14px; color: var(--color-primary)">
+              <div class="a-arrowDown__alaune">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057Z" clip-rule="evenodd"/></svg>
               </div>
             </div>

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 class ProfilesController < ApplicationController
   before_action :charge_profile
-  before_action :user_authenticate, only: %i[edit update]
-  before_action lambda {
-                  rodauth.require_authentication
-                }, except: %i[show avatar_thumb charge_profile profile_params]
+  before_action -> { rodauth.require_authentication },
+                only: %i[edit update follow_profile unfollow_profile blocking_profile unblocking_profile accept_following
+                         cancel_following]
+  before_action -> { rodauth.require_authentication },
+                except: %i[show avatar_thumb charge_profile profile_params]
   after_action :set_skills, only: %i[update]
 
   ActsAsTaggableOn.remove_unused_tags = true
