@@ -17,12 +17,13 @@ class CandiesController < ApplicationController
     @relations = if rodauth.logged_in?
                    @relationships = ours_relations current_account, 5
                    if @relationships.count === 0
-                     Account.where("accounts.id != #{current_account.id}").limit(5).order(activity_rate: :desc, id: :desc)
+                     Account.where("accounts.id != #{current_account.id}").limit(5).order(activity_rate: :desc,
+                                                                                          id: :asc)
                    else
                      @relationships
                    end
                  else
-                   Account.where("accounts.id != #{current_account.id}").limit(21).order(activity_rate: :desc, id: :desc)
+                   Account.all.limit(21).order(activity_rate: :desc, id: :asc)
                  end
   end
 

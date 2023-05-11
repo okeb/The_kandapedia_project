@@ -47,12 +47,12 @@ module AccountRelations
   def ours_relations(liker, quantity = 0)
     @current_account_id = liker.id
     @relations = if quantity === 0
-                   Account.joins("LEFT JOIN followability_relationships ON followability_relationships.followable_id = accounts.id AND followability_relationships.followable_type = 'Account' AND followability_relationships.followerable_id = @current_account_id")
-                            .joins("LEFT JOIN relationships ON relationships.liked_id = accounts.id AND relationships.liker_id = @current_account_id")
+                   Account.joins("LEFT JOIN followability_relationships ON followability_relationships.followable_id = accounts.id AND followability_relationships.followable_type = 'Account' AND followability_relationships.followerable_id = #{@current_account_id}")
+                            .joins("LEFT JOIN relationships ON relationships.liked_id = accounts.id AND relationships.liker_id = #{@current_account_id}").order(relation_strength: :desc)
                             .where("relationships.id IS NOT NULL AND followability_relationships.id IS NULL").limit(45).order(activity_rate: :desc, id: :desc)
                  else
-                   Account.joins("LEFT JOIN followability_relationships ON followability_relationships.followable_id = accounts.id AND followability_relationships.followable_type = 'Account' AND followability_relationships.followerable_id = @current_account_id")
-                          .joins("LEFT JOIN relationships ON relationships.liked_id = accounts.id AND relationships.liker_id = @current_account_id")
+                   Account.joins("LEFT JOIN followability_relationships ON followability_relationships.followable_id = accounts.id AND followability_relationships.followable_type = 'Account' AND followability_relationships.followerable_id = #{@current_account_id}")
+                          .joins("LEFT JOIN relationships ON relationships.liked_id = accounts.id AND relationships.liker_id = #{@current_account_id}").order(relation_strength: :desc)
                           .where("relationships.id IS NOT NULL AND followability_relationships.id IS NULL").limit(quantity).order(activity_rate: :desc, id: :desc)
                  end
   end
