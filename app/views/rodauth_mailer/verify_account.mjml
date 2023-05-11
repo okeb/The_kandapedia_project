@@ -12,7 +12,7 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-family="DM sans" font-size="28px">Connexion à Kandapedia.</mj-text>
+        <mj-text font-family="DM sans" font-size="28px">Confirmation de compte sur Kandapedia.</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
@@ -22,15 +22,15 @@
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Quelqu'un a demandé un lien de connexion pour le compte avec cette adresse e-mail.</mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Quelqu'un a créé un compte avec cette adresse e-mail.</mj-text>
         <mj-spacer height="10px"></mj-spacer>
-        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">Ce lien est utilisable qu'une fois et expirera dans une heure.</mj-text>
+        <mj-text line-height="1.5" font-family="DM sans" font-size="21px">cliquez sur le bouton-cidessous, pour confirmer la création de votre compte.</mj-text>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column>
         <mj-text font-family="DM sans" background-color="#0063E6" color="white" align="left" font-size="17px">
-          <a href="<%= @email_link %" style="background-color:#0063E6; border-radius:14px; font-family:'DM sans'; padding:17px 21px; color:white; text-decoration: none">Se connecter</a>
+          <a href="<%= @email_link %>" style="background-color:#0063E6; border-radius:14px; font-family:'DM sans'; padding:17px 21px; color:white; text-decoration: none">Confirmer</a>
         </mj-text>
       </mj-column>
     </mj-section>

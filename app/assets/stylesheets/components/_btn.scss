@@ -32,15 +32,15 @@
   }
 
   &--black {
-    background-color: var(--btn_dark-bg-color);
-    color: var(--btn_dark-text-color);
-    border: var(--btn_dark-border);
+    background-color: #212121;
+    box-shadow: 0 3px 3px 5px rgba(0,0,0,0.07);
+    color: white;
 
     &:hover,
     &:focus-within {
-      background-color: var(--btn_dark-bg-hover-color);
+      background-color: #292929;
       transition: filter 250ms, color 200ms, background-color 300ms;
-      border-color:var(--color-white);
+      border-color:#1d1d1d;
     }
   }
 

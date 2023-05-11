@@ -9,12 +9,14 @@ module CurrentProfile
   private
 
   def set_current_profile
-    @current_profile ||= if rodauth.prefix === '/user'
-                           Profile.find_by(profileable_id: current_account.id, profileable_type: 'Account')
-                         else
-                           Profile.find_by(profileable_id: current_account.id, profileable_type: 'AdminAccount')
-                         end
-    session[:current_profile_id] = @current_profile.id if @current_profile
+    if rodauth.logged_in?
+      @current_profile ||= if rodauth.prefix === '/user'
+                             Profile.find_by(profileable_id: current_account.id, profileable_type: 'Account')
+                           else
+                             Profile.find_by(profileable_id: current_account.id, profileable_type: 'AdminAccount')
+                           end
+      session[:current_profile_id] = @current_profile.id if @current_profile
+    end
   end
 
   def current_profile

@@ -6,6 +6,11 @@ class Account < ApplicationRecord
   has_many :questions, counter_cache: true, dependent: :destroy
   has_many :candies, counter_cache: true, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
+
+  has_many :outgoing_relations, foreign_key: :liker_id, class_name: 'Relationship'
+  has_many :incoming_relations, foreign_key: :liked_id, class_name: 'Relationship'
+  has_many :connected_accounts, through: :outgoing_relations, source: :liked
+
   has_one :profile, as: :profileable
   acts_as_voter
   acts_as_tagger
